@@ -11,7 +11,8 @@ public class Parede_quebrada : MonoBehaviour
     [Space]
 
     public float tempoParaQuebrar;
-    
+    public float tempoParaSumir;
+
     [Space]
     [Space]
 
@@ -30,14 +31,15 @@ public class Parede_quebrada : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 
+    
 
     
     private void OnCollisionStay(Collision collision)
     {
-        if(collision.gameObject.tag == "Player_1" && PlayerControl.interact == true)
+        if(collision.gameObject.tag == "Player_1" && ScriptPlayer1.interactP1 == true)
         {
             print("é ele");
             StartCoroutine(QuebrarParede());
@@ -58,6 +60,8 @@ public class Parede_quebrada : MonoBehaviour
             child.GetComponent<Rigidbody>().AddExplosionForce(forcaExplosao, centroExplosao.position, explosaoRadio);
 
         }
+
+        Destroy(paredeQuebrada, tempoParaSumir);
 
     }
 }
