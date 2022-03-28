@@ -53,18 +53,27 @@ public class PlayerControl : MonoBehaviour
         {
             if(Physics.CheckSphere(feet.position, 0.1f, floorMask))
             {
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                rb.velocity = Vector3.up * jumpForce;
+                
             }
         }
     }
 
-    
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if(collision.gameObject.tag == "ParedeQuebrada")
+        {
+
+        }
+    }
 
 
     // inputs 
     public void OnMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
+        
     }
 
     public void OnJump(InputAction.CallbackContext context)
