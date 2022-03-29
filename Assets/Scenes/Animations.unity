@@ -293,7 +293,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 311349976}
   m_LocalRotation: {x: -0.017037135, y: 0.9829629, z: -0.12940975, w: -0.12940963}
-  m_LocalPosition: {x: 5.4, y: 33.2, z: 77.8}
+  m_LocalPosition: {x: 5.4, y: 6.5, z: 22.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -577,13 +577,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 10.33
+  m_Radius: 2.52
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 5.31, z: 0}
 --- !u!114 &918587416
 MonoBehaviour:
   m_ObjectHideFlags: 0

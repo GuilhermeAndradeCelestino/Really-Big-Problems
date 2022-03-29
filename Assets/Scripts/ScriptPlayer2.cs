@@ -8,7 +8,9 @@ public class ScriptPlayer2 : MonoBehaviour
     GameObject go;
     public Transform feet;
     public LayerMask floorMask;
-
+    public Animation _animation;
+    
+    
     public int speed;
     public int jumpForce;
     public int rotationSpeed;
@@ -18,6 +20,9 @@ public class ScriptPlayer2 : MonoBehaviour
     public static bool interactP2 = false;
 
 
+    bool isMoving;
+    bool isJumping;
+    
 
 
     Vector3 playerMovement;
@@ -27,6 +32,7 @@ public class ScriptPlayer2 : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         go = GetComponent<GameObject>();
+        
     }
 
 
@@ -46,21 +52,54 @@ public class ScriptPlayer2 : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
 
+        if (Physics.CheckSphere(feet.position, 0.1f, floorMask))
+        {
+            print("pisou2");
+
+        }
 
         //Pulo
         if (jumped)
         {
             if (Physics.CheckSphere(feet.position, 0.1f, floorMask))
             {
+                print("pisou2");
                 rb.velocity = Vector3.up * jumpForce;
 
             }
+        }
+
+
+        //animations
+
+        Actions();
+
+        if (!isMoving)
+        {
+            _animation.CrossFade("Offensive Idle");
+        }
+        else if(isMoving)
+        {
+            _animation.CrossFade("Running");
         }
     }
 
 
     
-    
+    void Actions()
+    {
+        if (playerMovement == new Vector3(0f, 0f, 0f))
+        {
+            isMoving = false;
+        }
+        else
+        {
+            isMoving = true;
+        }
+
+        isJumping = jumped;
+
+    }
 
 
     // inputs 
@@ -73,6 +112,7 @@ public class ScriptPlayer2 : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         jumped = context.action.triggered;
+        print("apertou2");
     }
 
     public void OnInteract(InputAction.CallbackContext context)

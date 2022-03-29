@@ -9,6 +9,7 @@ public class ScriptPlayer1 : MonoBehaviour
     GameObject go;
     public Transform feet;
     public LayerMask floorMask;
+    public Animation _animation;
 
     public int speed;
     public int jumpForce;
@@ -18,6 +19,8 @@ public class ScriptPlayer1 : MonoBehaviour
     bool jumped = false;
     public static bool interactP1 = false;
 
+    bool isMoving;
+    bool isJumping;
 
 
 
@@ -47,20 +50,56 @@ public class ScriptPlayer1 : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
 
+        if (Physics.CheckSphere(feet.position, 0.5f, floorMask))
+        {
+            print("pisou1");
+
+        }
+
 
         //Pulo
         if (jumped)
         {
             if (Physics.CheckSphere(feet.position, 0.1f, floorMask))
             {
+                print("pisou1");
                 rb.velocity = Vector3.up * jumpForce;
 
             }
         }
+
+
+        //animations
+        Actions();
+
+        if (!isMoving)
+        {
+            _animation.CrossFade("Breathing Idle");
+        }
+        else if (isMoving)
+        {
+            _animation.CrossFade("Running");
+        }
+
     }
 
 
-     
+
+
+    void Actions()
+    {
+        if (playerMovement == new Vector3(0f, 0f, 0f))
+        {
+            isMoving = false;
+        }
+        else
+        {
+            isMoving = true;
+        }
+
+        isJumping = jumped;
+
+    }
 
 
     // inputs 
@@ -73,10 +112,12 @@ public class ScriptPlayer1 : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         jumped = context.action.triggered;
+        print("apertou1");
     }
 
     public void OnInteract(InputAction.CallbackContext context)
     {
         interactP1 = context.action.triggered;
+        
     }
 }

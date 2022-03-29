@@ -7,6 +7,8 @@ TagManager:
   - ParedeQuebrada
   - Player_1
   - Player_2
+  - Ground
+  - Wall
   layers:
   - Default
   - TransparentFX

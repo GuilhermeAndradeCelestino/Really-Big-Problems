@@ -6,7 +6,8 @@ public class Parede_quebrada : MonoBehaviour
 {
     public GameObject parede;
     public GameObject paredeQuebrada;
-    
+    public Collider _collider;
+
     [Space]
     [Space]
 
@@ -19,6 +20,7 @@ public class Parede_quebrada : MonoBehaviour
     public Transform centroExplosao;
     public float forcaExplosao;
     public float explosaoRadio;
+
     
 
 
@@ -39,7 +41,9 @@ public class Parede_quebrada : MonoBehaviour
     
     private void OnCollisionStay(Collision collision)
     {
-        if(collision.gameObject.tag == "Player_1" && ScriptPlayer1.interactP1 == true)
+        
+
+        if (collision.gameObject.tag == "Player_1" && ScriptPlayer1.interactP1 == true)
         {
             print("é ele");
             StartCoroutine(QuebrarParede());
@@ -60,6 +64,9 @@ public class Parede_quebrada : MonoBehaviour
             child.GetComponent<Rigidbody>().AddExplosionForce(forcaExplosao, centroExplosao.position, explosaoRadio);
 
         }
+
+        _collider.enabled = false;
+
 
         Destroy(paredeQuebrada, tempoParaSumir);
 
