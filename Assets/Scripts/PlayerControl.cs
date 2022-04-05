@@ -47,7 +47,7 @@ public class PlayerControl : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
         
-
+        
         //Pulo
         if (jumped) 
         {
