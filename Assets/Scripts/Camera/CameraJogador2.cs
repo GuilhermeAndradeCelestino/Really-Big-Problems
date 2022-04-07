@@ -5,16 +5,28 @@ using UnityEngine;
 public class CameraJogador2 : MonoBehaviour
 {
     public Transform target;
+    
+    [Space]
+
     public float speed;
+    public float rotationSpeed;
+    public float delayEntreTroca;
+
+    [Space]
 
     public Vector3 offsetPosition;
     public Vector3 offsetRotation;
 
-
-    Vector3 velocity = Vector3.zero;
-
+    [Space]
+    
     public static int posicaoJogador2;
-    bool comecou = true;
+
+    [Space]
+    
+    Quaternion offsetRotationQuar;
+    Vector3 velocity = Vector3.zero;
+ 
+    
 
     /*
      posiçoes camera
@@ -36,38 +48,39 @@ public class CameraJogador2 : MonoBehaviour
     void Update()
     {
         //Posiciona e rotaciona a camera na posição certa, faz ela seguir o jogador
+
         transform.position = Vector3.SmoothDamp(transform.position, target.position + offsetPosition, ref velocity, speed);
-        transform.rotation = Quaternion.Euler(offsetRotation);
+
+        offsetRotationQuar = Quaternion.Euler(offsetRotation);
+
+        transform.rotation = Quaternion.Lerp(transform.rotation, offsetRotationQuar, rotationSpeed);
 
 
         //Checa qual a posição baseado na variavel posicaoJogador1 e muda o valor de offset
         if (posicaoJogador2 == 1)
         {
-            
-            offsetPosition = new Vector3(0f, 3.6f, -2.52f);
-            offsetRotation = new Vector3(45f, 0f, 0f);
+            StartCoroutine(MudarPosicao(new Vector3(0f, 3.6f, -2.52f), new Vector3(45f, 0f, 0f)));
         }
         else if (posicaoJogador2 == 2)
         {
-            
-            offsetPosition = new Vector3(-2.52f, 3.6f, 0f);
-            offsetRotation = new Vector3(45f, 90f, 0f);
+            StartCoroutine(MudarPosicao(new Vector3(-2.52f, 3.6f, 0f), new Vector3(45f, 90f, 0f)));
         }
         else if (posicaoJogador2 == 3)
         {
-            
-            offsetPosition = new Vector3(0f, 3.6f, 2.52f);
-            offsetRotation = new Vector3(45f, 180f, 0f);
+            StartCoroutine(MudarPosicao(new Vector3(0f, 3.6f, 2.52f), new Vector3(45f, 180f, 0f)));
         }
         else if (posicaoJogador2 == 4)
         {
-            
-            offsetPosition = new Vector3(2.52f, 3.6f, 0f);
-            offsetRotation = new Vector3(45f, -90f, 0f);
+            StartCoroutine(MudarPosicao(new Vector3(2.52f, 3.6f, 0f), new Vector3(45f, -90f, 0f)));
         }
     }
 
+    IEnumerator MudarPosicao(Vector3 position, Vector3 rotation)
+    {
+        offsetPosition = position;
+        yield return new WaitForSeconds(delayEntreTroca);
+        offsetRotation = rotation;
+    }
 
-    
 
 }
