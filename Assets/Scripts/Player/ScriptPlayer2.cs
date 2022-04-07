@@ -18,6 +18,8 @@ public class ScriptPlayer2 : MonoBehaviour
     Vector2 movementInput;
     bool jumped = false;
     public static bool interactP2 = false;
+    bool rotateLeft = false;
+    bool rotateRight = false;
 
 
     bool isMoving;
@@ -25,7 +27,13 @@ public class ScriptPlayer2 : MonoBehaviour
     
 
 
+
+
     Vector3 playerMovement;
+
+
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -41,33 +49,7 @@ public class ScriptPlayer2 : MonoBehaviour
     void Update()
     {
 
-        //movimento
-        playerMovement = new Vector3(movementInput.x, 0.0f, movementInput.y) * speed;
-        rb.velocity = new Vector3(playerMovement.x, rb.velocity.y, playerMovement.z);
-
-        //rotação
-        if (playerMovement != Vector3.zero)
-        {
-            Quaternion toRotation = Quaternion.LookRotation(playerMovement, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
-        }
-
-        if (Physics.CheckSphere(feet.position, 0.1f, floorMask))
-        {
-            print("pisou2");
-
-        }
-
-        //Pulo
-        if (jumped)
-        {
-            if (Physics.CheckSphere(feet.position, 0.1f, floorMask))
-            {
-                print("pisou2");
-                rb.velocity = Vector3.up * jumpForce;
-
-            }
-        }
+        
 
 
         //animations
@@ -84,8 +66,60 @@ public class ScriptPlayer2 : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        //movimento
 
-    
+        //Mudança da orientação do movimento basiado na posição da camera
+        if (CameraJogador2.posicaoJogador2 == 1)
+        {
+            playerMovement = new Vector3(movementInput.x, 0.0f, movementInput.y) /* * speed */;
+        }
+        else if (CameraJogador2.posicaoJogador2 == 2)
+        {
+            playerMovement = new Vector3(movementInput.y, 0.0f, movementInput.x * -1) /* * speed */;
+        }
+        else if (CameraJogador2.posicaoJogador2 == 3)
+        {
+            playerMovement = new Vector3(movementInput.x * -1, 0.0f, movementInput.y * -1)  /* * speed */;
+        }
+        else if (CameraJogador2.posicaoJogador2 == 4)
+        {
+            playerMovement = new Vector3(movementInput.y * -1, 0.0f, movementInput.x)  /* * speed */;
+        }
+
+
+        //playerMovement = new Vector3(movementInput.x, 0.0f, movementInput.y).normalized /* * speed */;
+        //rb.velocity = new Vector3(playerMovement.x, rb.velocity.y, playerMovement.z);
+        rb.MovePosition(rb.position + playerMovement * speed * Time.fixedDeltaTime);
+
+
+        //Pulo
+        if (jumped)
+        {
+            if (Physics.CheckSphere(feet.position, 0.1f, floorMask))
+            {
+                print("pisou2");
+                rb.velocity = Vector3.up * jumpForce;
+
+            }
+        }
+
+        //rotação
+        if (playerMovement != Vector3.zero)
+        {
+            //Quaternion toRotation = Quaternion.LookRotation(playerMovement, Vector3.up);
+            //transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            Quaternion targetRotation = Quaternion.LookRotation(playerMovement);
+            targetRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+            rb.MoveRotation(targetRotation);
+        }
+        
+        
+
+       
+    }
+
     void Actions()
     {
         if (playerMovement == new Vector3(0f, 0f, 0f))
@@ -119,4 +153,38 @@ public class ScriptPlayer2 : MonoBehaviour
     {
         interactP2 = context.action.triggered;
     }
+
+    public void OnRotateLeft(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (CameraJogador2.posicaoJogador2 < 4)
+            {
+                CameraJogador2.posicaoJogador2++;
+            }
+            else if (CameraJogador2.posicaoJogador2 == 4)
+            {
+                CameraJogador2.posicaoJogador2 = 1;
+            }
+        }
+    }
+
+    public void OnRotateRight(InputAction.CallbackContext context)
+    {
+
+        if (context.performed)
+        {
+            if (CameraJogador2.posicaoJogador2 > 1)
+            {
+                CameraJogador2.posicaoJogador2--;
+            }
+            else if (CameraJogador2.posicaoJogador2 == 1)
+            {
+                CameraJogador2.posicaoJogador2 = 4;
+            }
+        }
+
+        //rotateRight = context.action.triggered;
+    }
 }
+
