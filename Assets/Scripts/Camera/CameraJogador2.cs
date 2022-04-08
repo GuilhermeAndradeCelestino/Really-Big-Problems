@@ -20,12 +20,12 @@ public class CameraJogador2 : MonoBehaviour
     [Space]
     
     public static int posicaoJogador2;
-
+    public LayerMask wallLayer;
     [Space]
     
     Quaternion offsetRotationQuar;
     Vector3 velocity = Vector3.zero;
- 
+    
     
 
     /*
@@ -74,6 +74,66 @@ public class CameraJogador2 : MonoBehaviour
             StartCoroutine(MudarPosicao(new Vector3(2.52f, 3.6f, 0f), new Vector3(45f, -90f, 0f)));
         }
     }
+
+    private void LateUpdate()
+    {
+        CheckWall();
+    }
+
+    void CheckWall()
+    {
+        //.https://onedrive.live.com/view.aspx?resid=5E38BA84B19225F0!296&ithint=file%2cpptx&authkey=!AO232s3m-pnKz-4 link para explicação do codio
+        RaycastHit hit;
+
+        Vector3 start = target.position;
+        Vector3 dir = transform.position - target.position;
+        float dist;
+
+        if (posicaoJogador2 == 1)
+        {
+            dist = offsetPosition.z * -1;
+            if (Physics.Raycast(target.position, dir, out hit, dist, wallLayer))
+            {
+                float hitDist = hit.distance;
+                Vector3 sphereCastCenter = target.position + (dir.normalized * hitDist);
+                transform.position = sphereCastCenter;
+            }
+        }
+        else if (posicaoJogador2 == 2)
+        {
+            dist = offsetPosition.x * -1;
+            if (Physics.Raycast(target.position, dir, out hit, dist, wallLayer))
+            {
+                float hitDist = hit.distance;
+                Vector3 sphereCastCenter = target.position + (dir.normalized * hitDist);
+                transform.position = sphereCastCenter;
+            }
+        }
+        else if (posicaoJogador2 == 3)
+        {
+            dist = offsetPosition.z * 1;
+            if (Physics.Raycast(target.position, dir, out hit, dist, wallLayer))
+            {
+                float hitDist = hit.distance;
+                Vector3 sphereCastCenter = target.position + (dir.normalized * hitDist);
+                transform.position = sphereCastCenter;
+            }
+        }
+        else if (posicaoJogador2 == 4)
+        {
+            dist = offsetPosition.x * 1;
+            if (Physics.Raycast(target.position, dir, out hit, dist, wallLayer))
+            {
+                float hitDist = hit.distance;
+                Vector3 sphereCastCenter = target.position + (dir.normalized * hitDist);
+                transform.position = sphereCastCenter;
+            }
+        }
+
+        Debug.DrawRay(target.position, dir, Color.red);
+
+    }
+
 
     IEnumerator MudarPosicao(Vector3 position, Vector3 rotation)
     {
