@@ -11,7 +11,7 @@ public class ScriptPlayer1 : MonoBehaviour
     public LayerMask floorMask;
     public Animation _animation;
 
-    public int speed;
+    public float speed;
     public int jumpForce;
     public int rotationSpeed;
 
@@ -20,9 +20,11 @@ public class ScriptPlayer1 : MonoBehaviour
     public static bool interactP1 = false;
     bool rotateLeft = false;
     bool rotateRight = false;
+    float originalSpeed;
 
     bool isMoving;
     bool isJumping;
+    bool isMovingBox;
 
 
 
@@ -33,6 +35,7 @@ public class ScriptPlayer1 : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         go = GetComponent<GameObject>();
+        originalSpeed = speed;
     }
 
 
@@ -40,14 +43,16 @@ public class ScriptPlayer1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
-        /*if (Physics.CheckSphere(feet.position, 0.5f, floorMask))
+        // muda a velocidade para o valor padrão caso o jogdor não esteja movendo a caixa 
+        if (!isMovingBox)
         {
-            print("pisou1");
-
+            speed = originalSpeed;
         }
-        */
+
+
+
+
+        
         print(rotateRight + " a");
         print(rotateLeft + " b");
 
@@ -90,6 +95,30 @@ public class ScriptPlayer1 : MonoBehaviour
             {
                 CameraJogador1.posicaoJogador1 = 4;
             }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //checa se esta colidindo com uma caixa que pode ser movida
+        if (collision.gameObject.tag == "CaixaInteragivel")
+        {
+            //diminui a velocidade do jogador e aplica velocidade na caixa 
+            float speedDiminuida = 1f;
+            isMovingBox = true;
+            speed = speedDiminuida;
+            var pushDir = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            collision.collider.attachedRigidbody.velocity = pushDir;
+            print("bateu;");
+        }
+
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "CaixaInteragivel")
+        {
+            //indica que o jogdor paou de mover a caixa
+            isMovingBox = false;
         }
     }
 
