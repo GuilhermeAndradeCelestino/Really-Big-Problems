@@ -53,11 +53,7 @@ public class CameraJogador1 : MonoBehaviour
         //Posiciona e rotaciona a camera na posição certa, faz ela seguir o jogador
         
         transform.position = Vector3.SmoothDamp(transform.position, target.position + offsetPosition, ref velocity, speed);
-        
-        
-
         offsetRotationQuar = Quaternion.Euler(offsetRotation);
-
         transform.rotation = Quaternion.Lerp(transform.rotation, offsetRotationQuar, rotationSpeed);
 
         //transform.rotation = Quaternion.Euler(offsetRotation);

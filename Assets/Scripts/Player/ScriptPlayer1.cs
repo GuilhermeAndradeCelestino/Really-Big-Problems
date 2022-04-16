@@ -7,9 +7,21 @@ public class ScriptPlayer1 : MonoBehaviour
 {
     Rigidbody rb;
     GameObject go;
+
     public Transform feet;
+    public Transform olhandoDirecao;
+    public Transform olhos;
+
+    [Space]
+
     public LayerMask floorMask;
+    public LayerMask wallLayer;
+
+    [Space]
+
     public Animation _animation;
+
+    [Space]
 
     public float speed;
     public int jumpForce;
@@ -25,9 +37,10 @@ public class ScriptPlayer1 : MonoBehaviour
     bool isMoving;
     bool isJumping;
     bool isMovingBox;
+    bool isPunching = false;
 
 
-
+    
     Vector3 playerMovement;
 
     // Start is called before the first frame update
@@ -36,6 +49,8 @@ public class ScriptPlayer1 : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         go = GetComponent<GameObject>();
         originalSpeed = speed;
+
+        _animation["Punch"].wrapMode = WrapMode.Once;
     }
 
 
@@ -48,54 +63,64 @@ public class ScriptPlayer1 : MonoBehaviour
         {
             speed = originalSpeed;
         }
-
-
-
-
         
-        print(rotateRight + " a");
-        print(rotateLeft + " b");
-
-        print(CameraJogador1.posicaoJogador1);
+        
 
         //animations
         Actions();
 
-        if (!isMoving)
+        if (!isMoving && !isJumping)
         {
             _animation.CrossFade("Breathing Idle");
         }
-        else if (isMoving)
+        else if (isMoving && !isJumping)
         {
             _animation.CrossFade("Running");
         }
+        
+        if (isPunching)
+        {
+            StartCoroutine(Punch());
+        }
+        
+        if (Physics.CheckSphere(feet.position, 0.1f, floorMask) == false)
+        {
+            isJumping = true;
+            _animation.CrossFade("Jump");
+        }
+        else
+        {
+            isJumping = false;
+        }
 
         //rotaçiona a camera (sentido horario)
-        if(rotateLeft == true)
-        {
-            if(CameraJogador1.posicaoJogador1 < 4)
+        if (rotateLeft == true)
             {
-                CameraJogador1.posicaoJogador1++;
-            }
-            else if(CameraJogador1.posicaoJogador1 == 4)
-            {
-                CameraJogador1.posicaoJogador1 = 1;
-            }
-            
-        }
+                if (CameraJogador1.posicaoJogador1 < 4)
+                {
+                    CameraJogador1.posicaoJogador1++;
+                }
+                else if (CameraJogador1.posicaoJogador1 == 4)
+                {
+                    CameraJogador1.posicaoJogador1 = 1;
+                }
 
-        //(rotaçiona a camera (sentido anti-horario))
-        if (rotateRight == true)
-        {
-            if (CameraJogador1.posicaoJogador1 > 1)
-            {
-                CameraJogador1.posicaoJogador1--;
             }
-            else if (CameraJogador1.posicaoJogador1 == 1)
+
+            //(rotaçiona a camera (sentido anti-horario))
+            if (rotateRight == true)
             {
-                CameraJogador1.posicaoJogador1 = 4;
+                if (CameraJogador1.posicaoJogador1 > 1)
+                {
+                    CameraJogador1.posicaoJogador1--;
+                }
+                else if (CameraJogador1.posicaoJogador1 == 1)
+                {
+                    CameraJogador1.posicaoJogador1 = 4;
+                }
             }
-        }
+        
+       
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -109,10 +134,21 @@ public class ScriptPlayer1 : MonoBehaviour
             speed = speedDiminuida;
             var pushDir = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             collision.collider.attachedRigidbody.velocity = pushDir;
-            print("bateu;");
         }
 
     }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if(collision.gameObject.tag == "ParedeQuebrada")
+        {
+            if (interactP1 && Physics.Linecast(olhos.position, olhandoDirecao.position, wallLayer))
+            {
+                isPunching = true;
+            }
+        }
+    }
+
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.tag == "CaixaInteragivel")
@@ -156,7 +192,7 @@ public class ScriptPlayer1 : MonoBehaviour
         {
             if (Physics.CheckSphere(feet.position, 0.1f, floorMask))
             {
-                print("pisou2");
+                
                 rb.velocity = Vector3.up * jumpForce;
 
             }
@@ -175,9 +211,22 @@ public class ScriptPlayer1 : MonoBehaviour
     }
 
 
+    IEnumerator Punch()
+    {
+        //Indica para o scrit da parede que ele deve ser começado
+        Parede_quebrada.comecaQuebrar = true;
+        //inicia a animação
+        _animation.CrossFade("Punch");
+        
+        yield return new WaitForSeconds(1.3f);
+
+        //indica que o personagem parou de bater
+        isPunching = false;
+    }
 
     void Actions()
     {
+        
         if (playerMovement == new Vector3(0f, 0f, 0f))
         {
             isMoving = false;
@@ -188,21 +237,30 @@ public class ScriptPlayer1 : MonoBehaviour
         }
 
         isJumping = jumped;
-
+        
     }
 
 
     // inputs 
     public void OnMove(InputAction.CallbackContext context)
     {
-        movementInput = context.ReadValue<Vector2>();
+        //trava os controle caso o jogador esteja socando
+        if (isPunching == false)
+        {
+            movementInput = context.ReadValue<Vector2>();
+        }
+        
 
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        jumped = context.action.triggered;
-        print("apertou1");
+        //trava os controle caso o jogador esteja socando
+        if (isPunching == false)
+        {
+            jumped = context.action.triggered;
+        }
+        
     }
 
     public void OnInteract(InputAction.CallbackContext context)
@@ -213,7 +271,8 @@ public class ScriptPlayer1 : MonoBehaviour
 
     public void OnRotateLeft(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        //trava os controle caso o jogador esteja socando
+        if (context.performed && isPunching == false)
         {
             if (CameraJogador1.posicaoJogador1 < 4)
             {
@@ -231,7 +290,8 @@ public class ScriptPlayer1 : MonoBehaviour
 
     public void OnRotateRight(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        //trava os controle caso o jogador esteja socando
+        if (context.performed && isPunching == false)
         {
             if (CameraJogador1.posicaoJogador1 > 1)
             {

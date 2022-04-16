@@ -4,18 +4,15 @@ using UnityEngine;
 
 
 
-namespace cakeslice
-{
+
     public class Parede_quebrada : MonoBehaviour
     {
         public GameObject parede;
         public GameObject paredeQuebrada;
+        public GameObject particulaPoera;
         public Collider _collider;
-
-
-
-        public Outline outlineParede1;
-        public Outline outlineParede2;
+        //public Outline outlineParede1;
+        //public Outline outlineParede2;
 
         [Space]
         [Space]
@@ -31,7 +28,9 @@ namespace cakeslice
         public float explosaoRadio;
 
         public static string nome;
+        public static bool comecaQuebrar = false;
 
+        int contador = 2;
 
         // Start is called before the first frame update
         void Start()
@@ -52,23 +51,32 @@ namespace cakeslice
         {
 
             
-            if (collision.gameObject.tag == "Player_1" && ScriptPlayer1.interactP1 == true)
+            if (collision.gameObject.tag == "Player_1" && comecaQuebrar == true)
             {
                 print("é ele");
                 StartCoroutine(QuebrarParede());
+                comecaQuebrar = false;
+
+
             }
         }
 
 
         IEnumerator QuebrarParede()
         {
+            
+            if (contador > 0)
+             {
+                Instantiate(particulaPoera, new Vector3(-0.05f, 3f, -1.67f), Quaternion.Euler(0f, 180, 0f));
+                contador--;
+             }
+
             yield return new WaitForSeconds(tempoParaQuebrar);
 
-            outlineParede1.eraseRenderer = true;
-            outlineParede2.eraseRenderer = true;
+            //outlineParede1.eraseRenderer = true;
+            //outlineParede2.eraseRenderer = true;
 
-
-
+            
             parede.SetActive(false);
             paredeQuebrada.SetActive(true);
 
@@ -88,4 +96,3 @@ namespace cakeslice
         }
     }
 
-}
