@@ -21,6 +21,7 @@ public class CameraJogador2 : MonoBehaviour
     
     public static int posicaoJogador2;
     public LayerMask wallLayer;
+    public float distanciaCollisao;
     [Space]
     
     Quaternion offsetRotationQuar;
@@ -92,6 +93,7 @@ public class CameraJogador2 : MonoBehaviour
         if (posicaoJogador2 == 1)
         {
             dist = offsetPosition.z * -1;
+            dist += distanciaCollisao;
             if (Physics.Raycast(target.position, dir, out hit, dist, wallLayer))
             {
                 float hitDist = hit.distance;
@@ -102,6 +104,7 @@ public class CameraJogador2 : MonoBehaviour
         else if (posicaoJogador2 == 2)
         {
             dist = offsetPosition.x * -1;
+            dist += distanciaCollisao;
             if (Physics.Raycast(target.position, dir, out hit, dist, wallLayer))
             {
                 float hitDist = hit.distance;
@@ -112,6 +115,7 @@ public class CameraJogador2 : MonoBehaviour
         else if (posicaoJogador2 == 3)
         {
             dist = offsetPosition.z * 1;
+            dist += distanciaCollisao;
             if (Physics.Raycast(target.position, dir, out hit, dist, wallLayer))
             {
                 float hitDist = hit.distance;
@@ -122,6 +126,7 @@ public class CameraJogador2 : MonoBehaviour
         else if (posicaoJogador2 == 4)
         {
             dist = offsetPosition.x * 1;
+            dist += distanciaCollisao;
             if (Physics.Raycast(target.position, dir, out hit, dist, wallLayer))
             {
                 float hitDist = hit.distance;

@@ -5,7 +5,6 @@ using UnityEngine;
 public class CameraJogador1 : MonoBehaviour
 {
     public Transform target;
-    
 
     [Space]
 
@@ -20,8 +19,11 @@ public class CameraJogador1 : MonoBehaviour
 
     [Space]
 
+
     public static int posicaoJogador1;
     public LayerMask wallLayer;
+    public float distanciaCollisao;
+
     Quaternion offsetRotationQuar;
     Vector3 velocity = Vector3.zero;
 
@@ -42,7 +44,7 @@ public class CameraJogador1 : MonoBehaviour
     void Start()
     {
         posicaoJogador1 = 1;
-        transform.position = Vector3.SmoothDamp(transform.position, target.position + offsetPosition, ref velocity, speed);
+       transform.position = Vector3.SmoothDamp(transform.position, target.position + offsetPosition, ref velocity, speed);
         
         
     }
@@ -97,6 +99,7 @@ public class CameraJogador1 : MonoBehaviour
         if (posicaoJogador1 == 1)
         {
             dist = offsetPosition.z * -1;
+            dist += distanciaCollisao;
             if (Physics.Raycast(target.position, dir, out hit, dist, wallLayer))
             {
                 float hitDist = hit.distance;
@@ -107,6 +110,7 @@ public class CameraJogador1 : MonoBehaviour
         else if (posicaoJogador1 == 2)
         {
             dist = offsetPosition.x * -1;
+            dist += distanciaCollisao;
             if (Physics.Raycast(target.position, dir, out hit, dist, wallLayer))
             {
                 float hitDist = hit.distance;
@@ -116,7 +120,9 @@ public class CameraJogador1 : MonoBehaviour
         }
         else if (posicaoJogador1 == 3)
         {
+            
             dist = offsetPosition.z * 1;
+            dist += distanciaCollisao;
             if (Physics.Raycast(target.position, dir, out hit, dist, wallLayer))
             {
                 float hitDist = hit.distance;
@@ -127,6 +133,7 @@ public class CameraJogador1 : MonoBehaviour
         else if (posicaoJogador1 == 4)
         {
             dist = offsetPosition.x * 1;
+            dist += distanciaCollisao;
             if (Physics.Raycast(target.position, dir, out hit, dist, wallLayer))
             {
                 float hitDist = hit.distance;
