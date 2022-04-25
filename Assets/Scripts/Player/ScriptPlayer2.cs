@@ -18,9 +18,7 @@ public class ScriptPlayer2 : MonoBehaviour
     Vector2 movementInput;
     bool jumped = false;
     public static bool interactP2 = false;
-    bool rotateLeft = false;
-    bool rotateRight = false;
-
+    
 
     bool isMoving;
     bool isJumping;
@@ -118,6 +116,23 @@ public class ScriptPlayer2 : MonoBehaviour
         
 
        
+    }
+
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.tag == "CaixaInteragivel")
+        {
+            other.gameObject.GetComponentInParent<Rigidbody>().isKinematic = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "CaixaInteragivel")
+        {
+            other.gameObject.GetComponentInParent<Rigidbody>().isKinematic = false;
+        }
     }
 
     void Actions()

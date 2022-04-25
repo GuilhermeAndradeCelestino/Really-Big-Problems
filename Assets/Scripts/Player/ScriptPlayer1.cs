@@ -11,6 +11,7 @@ public class ScriptPlayer1 : MonoBehaviour
     public Transform feet;
     public Transform olhandoDirecao;
     public Transform olhos;
+    public Transform maoSoco;
 
     [Space]
 
@@ -20,6 +21,7 @@ public class ScriptPlayer1 : MonoBehaviour
     [Space]
 
     public Animation _animation;
+    public GameObject particulaSoco;
 
     [Space]
 
@@ -30,16 +32,17 @@ public class ScriptPlayer1 : MonoBehaviour
     Vector2 movementInput;
     bool jumped = false;
     public static bool interactP1 = false;
-    bool rotateLeft = false;
-    bool rotateRight = false;
+    
     float originalSpeed;
 
     bool isMoving;
     bool isJumping;
     bool isMovingBox;
     bool isPunching = false;
-
-
+    
+    
+    bool podeQuebrarParece = false;
+    
     
     Vector3 playerMovement;
 
@@ -69,7 +72,7 @@ public class ScriptPlayer1 : MonoBehaviour
         //animations
         Actions();
 
-        if (!isMoving && !isJumping)
+        if (!isMoving && !isJumping && !isPunching)
         {
             _animation.CrossFade("Breathing Idle");
         }
@@ -78,10 +81,7 @@ public class ScriptPlayer1 : MonoBehaviour
             _animation.CrossFade("Running");
         }
         
-        if (isPunching)
-        {
-            StartCoroutine(Punch());
-        }
+        
         
         if (Physics.CheckSphere(feet.position, 0.1f, floorMask) == false)
         {
@@ -92,59 +92,35 @@ public class ScriptPlayer1 : MonoBehaviour
         {
             isJumping = false;
         }
-
-        //rotaçiona a camera (sentido horario)
-        if (rotateLeft == true)
-            {
-                if (CameraJogador1.posicaoJogador1 < 4)
-                {
-                    CameraJogador1.posicaoJogador1++;
-                }
-                else if (CameraJogador1.posicaoJogador1 == 4)
-                {
-                    CameraJogador1.posicaoJogador1 = 1;
-                }
-
-            }
-
-            //(rotaçiona a camera (sentido anti-horario))
-            if (rotateRight == true)
-            {
-                if (CameraJogador1.posicaoJogador1 > 1)
-                {
-                    CameraJogador1.posicaoJogador1--;
-                }
-                else if (CameraJogador1.posicaoJogador1 == 1)
-                {
-                    CameraJogador1.posicaoJogador1 = 4;
-                }
-            }
         
-       
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        
         //checa se esta colidindo com uma caixa que pode ser movida
         if (collision.gameObject.tag == "CaixaInteragivel")
         {
-            //diminui a velocidade do jogador e aplica velocidade na caixa 
-            float speedDiminuida = 1f;
-            isMovingBox = true;
-            speed = speedDiminuida;
-            var pushDir = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-            collision.collider.attachedRigidbody.velocity = pushDir;
-        }
 
+                float speedDiminuida = 1f;
+                isMovingBox = true;
+                speed = speedDiminuida;
+                var pushDir = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                //collision.collider.attachedRigidbody.velocity = pushDir;
+                collision.gameObject.transform.Translate(pushDir);
+
+
+        }
+        
     }
 
     private void OnCollisionStay(Collision collision)
     {
         if(collision.gameObject.tag == "ParedeQuebrada")
         {
-            if (interactP1 && Physics.Linecast(olhos.position, olhandoDirecao.position, wallLayer))
+            if (Physics.Linecast(olhos.position, olhandoDirecao.position, wallLayer))
             {
-                isPunching = true;
+                podeQuebrarParece = true;
             }
         }
     }
@@ -153,10 +129,20 @@ public class ScriptPlayer1 : MonoBehaviour
     {
         if (collision.gameObject.tag == "CaixaInteragivel")
         {
-            //indica que o jogdor paou de mover a caixa
+            //indica que o jogador paou de mover a caixa
             isMovingBox = false;
+            
+            //podeEmpurrarCaixa = false;
+        }
+
+        if(collision.gameObject.tag == "ParedeQuebrada")
+        {
+            podeQuebrarParece = false;
         }
     }
+
+   
+
 
     private void FixedUpdate()
     {
@@ -213,15 +199,26 @@ public class ScriptPlayer1 : MonoBehaviour
 
     IEnumerator Punch()
     {
+        isPunching = true;
+        
         //Indica para o scrit da parede que ele deve ser começado
         Parede_quebrada.comecaQuebrar = true;
         //inicia a animação
         _animation.CrossFade("Punch");
         
         yield return new WaitForSeconds(1.3f);
-
+        /* int numero = 1;
+        if(numero == 1)
+        {
+            Instantiate(particulaSoco, maoSoco.position, maoSoco.rotation);
+            numero--;
+        }
+        */
+        
         //indica que o personagem parou de bater
         isPunching = false;
+        print("1");
+        Instantiate(particulaSoco, maoSoco.position, maoSoco.rotation);
     }
 
     void Actions()
@@ -265,7 +262,21 @@ public class ScriptPlayer1 : MonoBehaviour
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        interactP1 = context.action.triggered;
+        if (context.performed == true)
+        {
+            interactP1 = true;
+        }
+        else if(context.performed == false)
+        {
+            interactP1 = false;
+        }
+        
+        if(podeQuebrarParece && context.started)
+        {
+            StartCoroutine(Punch());
+        }
+        
+        
         
     }
 
