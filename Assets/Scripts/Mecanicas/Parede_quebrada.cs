@@ -41,17 +41,7 @@ using UnityEngine;
         // Update is called once per frame
         void Update()
         {
-
-        }
-
-
-
-
-        private void OnCollisionStay(Collision collision)
-        {
-
-            
-            if (collision.gameObject.tag == "Player_1" && comecaQuebrar == true)
+            if (comecaQuebrar == true)
             {
                 print("é ele");
                 StartCoroutine(QuebrarParede());
@@ -60,6 +50,11 @@ using UnityEngine;
 
             }
         }
+
+
+
+
+        
 
 
         IEnumerator QuebrarParede()

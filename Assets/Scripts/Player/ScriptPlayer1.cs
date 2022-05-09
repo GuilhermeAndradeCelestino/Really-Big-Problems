@@ -20,9 +20,10 @@ public class ScriptPlayer1 : MonoBehaviour
 
     [Space]
 
-    public Animation _animation;
+    //public Animation _animation;
+    public Animator _animator;
     public GameObject particulaSoco;
-
+    public GameObject teste;
     [Space]
 
     public float speed;
@@ -53,7 +54,7 @@ public class ScriptPlayer1 : MonoBehaviour
         go = GetComponent<GameObject>();
         originalSpeed = speed;
 
-        _animation["Punch"].wrapMode = WrapMode.Once;
+        //_animation["Punch"].wrapMode = WrapMode.Once;
     }
 
 
@@ -68,25 +69,28 @@ public class ScriptPlayer1 : MonoBehaviour
         }
         
         
-
+        
         //animations
         Actions();
 
         if (!isMoving && !isJumping && !isPunching)
         {
-            _animation.CrossFade("Breathing Idle");
+            //_animation.CrossFade("Breathing Idle");
+
         }
         else if (isMoving && !isJumping)
         {
-            _animation.CrossFade("Running");
+           
         }
+
+        _animator.SetBool("isRunning", isMoving);
+        //teste.transform.position = feet.position;
         
-        
-        
+
         if (Physics.CheckSphere(feet.position, 0.1f, floorMask) == false)
         {
             isJumping = true;
-            _animation.CrossFade("Jump");
+            
         }
         else
         {
@@ -192,6 +196,8 @@ public class ScriptPlayer1 : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(playerMovement);
             targetRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
             rb.MoveRotation(targetRotation);
+
+            
         }
 
     }
@@ -204,7 +210,7 @@ public class ScriptPlayer1 : MonoBehaviour
         //Indica para o scrit da parede que ele deve ser começado
         Parede_quebrada.comecaQuebrar = true;
         //inicia a animação
-        _animation.CrossFade("Punch");
+        //_animation.CrossFade("Punch");
         
         yield return new WaitForSeconds(1.3f);
         /* int numero = 1;
@@ -241,13 +247,15 @@ public class ScriptPlayer1 : MonoBehaviour
     // inputs 
     public void OnMove(InputAction.CallbackContext context)
     {
+
+        isMoving = context.action.triggered;
         //trava os controle caso o jogador esteja socando
         if (isPunching == false)
         {
             movementInput = context.ReadValue<Vector2>();
         }
-        
 
+       
     }
 
     public void OnJump(InputAction.CallbackContext context)
