@@ -74,9 +74,14 @@ public class Player_1_Script : MonoBehaviour
         Movimentacao();
 
         //animaçoes
-        Animacoes();
+        //Animacoes();
 
         print(playerMovement.y);
+    }
+
+    private void FixedUpdate()
+    {
+        Animacoes();
     }
 
     private void OnTriggerStay(Collider other)
@@ -156,13 +161,13 @@ public class Player_1_Script : MonoBehaviour
     void Gravidade()
     {
 
-        moveCharacterY -= gravity;
+        moveCharacterY -= gravity * Time.deltaTime;
         //playerMovement.y -= gravity;
         playerMovement.y = moveCharacterY;
 
-        if(moveCharacterY < -1)
+        if(moveCharacterY < -gravity)
         {
-            moveCharacterY = -1;
+            moveCharacterY = -gravity;
         }
     }
 

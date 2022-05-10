@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.0039957035, g: 0.00021792635, b: 0.000000051515347, a: 1}
+  m_IndirectSpecularColor: {r: 0.003995701, g: 0.0002179261, b: 0.000000051515347, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -29359,8 +29359,8 @@ MonoBehaviour:
   _animator: {fileID: 1819082180}
   particulaSoco: {fileID: 1507132485382399321, guid: c3cebd8bb8771754899d3b6aaf36bf7e, type: 3}
   speed: 5
-  jumpForce: 7
-  gravity: 0.1
+  jumpForce: 10
+  gravity: 17
   rotationSpeed: 0.1
 --- !u!114 &1819082179
 MonoBehaviour:
@@ -29485,7 +29485,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: ef846f19eb923af43a573cefc1113449, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
