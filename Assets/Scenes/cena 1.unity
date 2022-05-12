@@ -1250,7 +1250,7 @@ MonoBehaviour:
     m_ActionId: d83ad2e7-3fc1-4eba-a68e-cf11cb177de5
     m_ActionName: Player/RotateCameraRight[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard
+  m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -1281,7 +1281,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 56999281}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.761, y: 0.4433134, z: -3.12}
+  m_LocalPosition: {x: 1.159, y: 0.4433134, z: -3.12}
   m_LocalScale: {x: 0.11367323, y: 0.11367323, z: 0.11367323}
   m_Children:
   - {fileID: 1095872856}
@@ -31945,7 +31945,7 @@ MonoBehaviour:
     m_ActionId: d83ad2e7-3fc1-4eba-a68e-cf11cb177de5
     m_ActionName: Player/RotateCameraRight[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Gamepad
+  m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
