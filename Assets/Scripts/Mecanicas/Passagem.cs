@@ -6,9 +6,14 @@ public class Passagem : MonoBehaviour
 {
 
     public static bool estaPassando;
+    public static bool comecarPassagem = false;
+    public static bool a_To_b;
+    public static bool b_To_A;
     public Transform pointA;
     public Transform pointB;
     public GameObject player;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -19,24 +24,25 @@ public class Passagem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (a_To_b && comecarPassagem)
+        {
+
+            StartCoroutine(Teleporta(pointB));
+            comecarPassagem = false;
+            a_To_b = false;
+        }
+        
+        if (b_To_A && comecarPassagem)
+        {
+
+            StartCoroutine(Teleporta(pointA));
+            comecarPassagem = false;
+            b_To_A = false;
+        }
         
     }
 
-    private void OnCollisionStay(Collision collision)
-    {
-        if(gameObject.name == "Portal_A" && ScriptPlayer2.interactP2)
-        {
-            
-            StartCoroutine(Teleporta(pointB));
-            
-        }
-        else if (gameObject.name == "Portal_B" && ScriptPlayer2.interactP2)
-        {
-            
-            StartCoroutine(Teleporta(pointA));
-
-        }
-    }
+    
 
 
     IEnumerator Teleporta (Transform paraOnde)
@@ -44,5 +50,6 @@ public class Passagem : MonoBehaviour
         estaPassando = true;
         yield return new WaitForSeconds(1f);
         player.transform.position = paraOnde.transform.position;
+        comecarPassagem = false;
     }
 }

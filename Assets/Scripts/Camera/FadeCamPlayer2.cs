@@ -6,7 +6,7 @@ public class FadeCamPlayer2 : MonoBehaviour
 {
 
     
-    public Transform target;
+    
 
     Animator _animator;
     

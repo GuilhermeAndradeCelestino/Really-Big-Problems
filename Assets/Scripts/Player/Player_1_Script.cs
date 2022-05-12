@@ -5,9 +5,6 @@ using UnityEngine.InputSystem;
 
 public class Player_1_Script : MonoBehaviour
 {
-
-    
-
     public Transform olhandoDirecao;
     public Transform olhos;
     public Transform maoSoco;
@@ -16,6 +13,7 @@ public class Player_1_Script : MonoBehaviour
 
     public LayerMask floorMask;
     public LayerMask wallLayer;
+    public LayerMask boxLayer;
 
     [Space]
 
@@ -26,6 +24,7 @@ public class Player_1_Script : MonoBehaviour
     [Space]
 
     CharacterController cc;
+    GameObject _gameObject;
 
     public float speed;
     public float jumpForce;
@@ -43,11 +42,19 @@ public class Player_1_Script : MonoBehaviour
 
     bool isMoving;
     bool isJumping;
-    bool isMovingBox;
+   
+    //soco
     bool isPunching = false;
-
-
+    bool paredeQuebravel;
     bool podeQuebrarParece = false;
+
+    //empurrar caixa
+    bool isMovingBox = false;
+    bool canMoveBox;
+    bool estouPuxando;
+    Transform tempTransform;
+
+    
 
 
     Vector3 playerMovement;
@@ -58,14 +65,15 @@ public class Player_1_Script : MonoBehaviour
     void Start()
     {
         cc = GetComponent<CharacterController>();
+        _gameObject = GetComponent<GameObject>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
         //Mudança da orientação do movimento baseado na posição da camera
-        Orientacao();
+        Orientacao_Inputs();
 
         //Gravidade
         Gravidade();
@@ -76,7 +84,14 @@ public class Player_1_Script : MonoBehaviour
         //animaçoes
         //Animacoes();
 
-        print(playerMovement.y);
+        //print(playerMovement.y);
+        //print(interactP1);
+        //print("Caixa: " + canMoveBox);
+
+        //Checa se o jogador esta observando uma parede (so funciona se vc estiver perto de uma)
+        ChecarParede();
+
+        
     }
 
     private void FixedUpdate()
@@ -88,27 +103,45 @@ public class Player_1_Script : MonoBehaviour
     {
         if (other.gameObject.tag == "ParedeQuebrada")
         {
-            if (Physics.Linecast(olhos.position, olhandoDirecao.position, wallLayer))
+            //print("é uma parede quebravel");
+            paredeQuebravel = true;
+        }
+
+        if(other.gameObject.tag == "CaixaInteragivel")
+        {
+            canMoveBox = true;
+            if (!isMovingBox)
             {
-                podeQuebrarParece = true;
-                print("é uma parede quebravel");
+                StartCoroutine(EmpurrandoCaixa(other));
+                tempTransform = other.gameObject.transform.parent.parent;
+                print("empurrando");
             }
+            else if (isMovingBox)
+            {
+                StartCoroutine(ParandoDeEmpurrarCaixa(other, tempTransform));
+                print("posso deixar de empurrar");
+                CameraJogador1.posicaoJogador1 = int.Parse(other.gameObject.name);
+            }
+           //print("Caixa");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "ParedeQuebrada")
+        {
+            //print("é uma parede quebravel");
+            paredeQuebravel = false;
+        }
+
+        if (other.gameObject.tag == "CaixaInteragivel")
+        {
+            canMoveBox = false;
+            //print("nCaixa");
         }
     }
 
     
-
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.tag == "ParedeQuebrada")
-        {
-            if (Physics.Linecast(olhos.position, olhandoDirecao.position, wallLayer))
-            {
-                podeQuebrarParece = true;
-                print("é uma parede quebravel");
-            }
-        }
-    }
 
     IEnumerator Punch()
     {
@@ -136,24 +169,89 @@ public class Player_1_Script : MonoBehaviour
     }
     
     
-    void Orientacao()
+    void Orientacao_Inputs()
     {
         //Checa para ver qual é a posição da camenra no momento e ajusta o playerMovement conforme a camera.
         if (CameraJogador1.posicaoJogador1 == 1)
         {
-            playerMovement = new Vector3(movementInput.x, 0, movementInput.y) /* * speed */;
+            if (isMovingBox)
+            {
+                playerMovement = new Vector3(0, 0, movementInput.y) /* * speed */;
+
+                if(playerMovement.z < 0)
+                {
+                    estouPuxando = true;
+                }
+                else
+                {
+                    estouPuxando = false;
+                }
+                
+            }
+            else
+            {
+                playerMovement = new Vector3(movementInput.x, 0, movementInput.y) /* * speed */;
+            }
         }
         else if (CameraJogador1.posicaoJogador1 == 2)
         {
-            playerMovement = new Vector3(movementInput.y, 0, movementInput.x * -1) /* * speed */;
+            if (isMovingBox)
+            {
+                playerMovement = new Vector3(movementInput.y, 0, 0) /* * speed */;
+
+                if (playerMovement.x < 0)
+                {
+                    estouPuxando = true;
+                }
+                else
+                {
+                    estouPuxando = false;
+                }
+            }
+            else
+            {
+                playerMovement = new Vector3(movementInput.y, 0, movementInput.x * -1) /* * speed */;
+            }
         }
         else if (CameraJogador1.posicaoJogador1 == 3)
         {
-            playerMovement = new Vector3(movementInput.x * -1, 0, movementInput.y * -1)  /* * speed */;
+            if (isMovingBox)
+            {
+                playerMovement = new Vector3(0 , 0, movementInput.y * -1)  /* * speed */;
+
+                if (playerMovement.z > 0)
+                {
+                    estouPuxando = true;
+                }
+                else
+                {
+                    estouPuxando = false;
+                }
+            }
+            else
+            {
+                playerMovement = new Vector3(movementInput.x * -1, 0, movementInput.y * -1)  /* * speed */;
+            }
         }
         else if (CameraJogador1.posicaoJogador1 == 4)
         {
-            playerMovement = new Vector3(movementInput.y * -1, 0, movementInput.x)  /* * speed */;
+            if (isMovingBox)
+            {
+                playerMovement = new Vector3(movementInput.y * -1, 0, 0)  /* * speed */;
+
+                if (playerMovement.z > 0)
+                {
+                    estouPuxando = true;
+                }
+                else
+                {
+                    estouPuxando = false;
+                }
+            }
+            else
+            {
+                playerMovement = new Vector3(movementInput.y * -1, 0, movementInput.x)  /* * speed */;
+            }
         }
 
     }
@@ -176,10 +274,19 @@ public class Player_1_Script : MonoBehaviour
 
         //Movimento
         //cc.Move(playerMovement * speed * Time.deltaTime);
-        cc.Move(new Vector3(playerMovement.x * speed, playerMovement.y , playerMovement.z * speed) * Time.deltaTime);
+        if (isMovingBox)
+        {
+            float halfSpeed = speed * 0.5f;
+            cc.Move(new Vector3(playerMovement.x * halfSpeed, playerMovement.y, playerMovement.z * halfSpeed) * Time.deltaTime);
+        }
+        else
+        {
+            cc.Move(new Vector3(playerMovement.x * speed, playerMovement.y, playerMovement.z * speed) * Time.deltaTime);
+        }
+
 
         //Rotação
-        if (playerMovement.x != 0 || playerMovement.z != 0)
+        if ((playerMovement.x != 0 || playerMovement.z != 0) && !isMovingBox)
         {
             float targetAngle = Mathf.Atan2(playerMovement.x, playerMovement.z) * Mathf.Rad2Deg;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref rotationVelocity, rotationSpeed);
@@ -192,43 +299,25 @@ public class Player_1_Script : MonoBehaviour
         //Indica para o animator qual animação deve ser tocada 
 
         //Animação de movimento
-        _animator.SetBool("IsRunning", isMoving);
+        if(Mathf.Abs(playerMovement.x) > 0 || Mathf.Abs(playerMovement.z) > 0)
+        {
+            _animator.SetFloat("MoveSpeed", 1);
+        }
+        else if(Mathf.Abs(playerMovement.x) == 0 || Mathf.Abs(playerMovement.z) == 0)
+        {
+            _animator.SetFloat("MoveSpeed", 0);
+        }
+
 
         //soco
         _animator.SetBool("IsPunching", isPunching);
 
+        //Movendo Caixa
+        _animator.SetBool("IsPushing", isMovingBox);
+        _animator.SetBool("EstouPuxando", estouPuxando);
+
+
         //Pulo
-
-        //Controles da mina
-        /*
-        if (isJumping) 
-        {
-            _animator.SetBool("IsJumping", true);
-        }
-
-
-        if (cc.isGrounded)
-        {
-            _animator.SetBool("IsGrounded", true);
-            
-            _animator.SetBool("IsJumping", false);
-            isJumping = false;
-
-            _animator.SetBool("IsFalling", false);
-        }
-        else
-        {
-            _animator.SetBool("IsGrounded", false);
-
-            if ((isJumping && playerMovement.y < 7) || playerMovement.y < 0) 
-            {
-                _animator.SetBool("IsFalling", true);
-            }
-        }
-        */
-
-        //minha verção
-
         //checa se estou pulando
         _animator.SetBool("IsGrounded", cc.isGrounded);
 
@@ -258,14 +347,51 @@ public class Player_1_Script : MonoBehaviour
 
     }
 
+    IEnumerator EmpurrandoCaixa(Collider caixa)
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (Physics.Linecast(olhos.position, olhandoDirecao.position, boxLayer))
+        {
+            Transform tempTransform = caixa.gameObject.transform.parent.parent; 
+            if (canMoveBox && interactP1 && !isMovingBox)
+            {
+                caixa.gameObject.transform.parent.parent = transform;
+                isMovingBox = true;
+            }   
+        } 
+    }
    
-    
+    IEnumerator ParandoDeEmpurrarCaixa(Collider caixa , Transform temp)
+    {
+        yield return new WaitForSeconds(1);
+        if (interactP1)
+        {
+            print("parei de empurrar");
+            print(caixa.gameObject.transform.parent.gameObject.name);
+            caixa.gameObject.transform.parent.SetParent(null);
+            isMovingBox = false;
+        }
+    }
+
+    void ChecarParede()
+    {
+        if (Physics.Linecast(olhos.position, olhandoDirecao.position, wallLayer))
+        {
+            podeQuebrarParece = true;
+            //print("é uma parede");
+        }
+        else
+        {
+            podeQuebrarParece = false;
+            //print("Não é uma parede");
+        }
+    }
 
     // inputs 
     public void OnMove(InputAction.CallbackContext context)
     {
 
-        isMoving = context.action.triggered;
+        
         //movementInput = context.ReadValue<Vector2>();
         //trava os controle caso o jogador esteja socando
         
@@ -288,12 +414,12 @@ public class Player_1_Script : MonoBehaviour
        */
 
         //Jump
-        if (cc.isGrounded && isPunching == false)
+        if (cc.isGrounded && isPunching == false && isMovingBox == false)
         {
 
             isJumping = true;
             moveCharacterY = jumpForce;
-            print("foi");
+            //print("foi");
         }
 
     }
@@ -309,7 +435,7 @@ public class Player_1_Script : MonoBehaviour
             interactP1 = false;
         }
 
-        if (podeQuebrarParece && context.started)
+        if (podeQuebrarParece && paredeQuebravel && context.started)
         {
             StartCoroutine(Punch());
         }

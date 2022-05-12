@@ -112,10 +112,6 @@ public class ScriptPlayer2 : MonoBehaviour
             targetRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
             rb.MoveRotation(targetRotation);
         }
-        
-        
-
-       
     }
 
 
