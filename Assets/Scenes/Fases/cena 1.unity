@@ -1249,9 +1249,33 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d83ad2e7-3fc1-4eba-a68e-cf11cb177de5
     m_ActionName: Player/RotateCameraRight[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: aee3499b-7b00-49e8-879b-f3881365540c
+    m_ActionName: One Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: afd90ec9-e510-42d7-94e6-14f46ee74b6d
+    m_ActionName: One Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7705da60-98f2-43ce-bf29-f0df531e4f0d
+    m_ActionName: One Player/Action[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c23fa004-6c42-4bd2-b1f9-6084893fcfac
+    m_ActionName: One Player/RotateCameraLeft[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6a84f553-e2b6-4983-a3a8-6c056cb74590
+    m_ActionName: One Player/RotateCameraRight[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eafbdd4c-1294-454d-bd81-6be0faa5a1ab
+    m_ActionName: One Player/Change Character[/Keyboard/tab]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: Two Players
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!95 &56999284
@@ -31944,9 +31968,33 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d83ad2e7-3fc1-4eba-a68e-cf11cb177de5
     m_ActionName: Player/RotateCameraRight[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: aee3499b-7b00-49e8-879b-f3881365540c
+    m_ActionName: One Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: afd90ec9-e510-42d7-94e6-14f46ee74b6d
+    m_ActionName: One Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7705da60-98f2-43ce-bf29-f0df531e4f0d
+    m_ActionName: One Player/Action[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c23fa004-6c42-4bd2-b1f9-6084893fcfac
+    m_ActionName: One Player/RotateCameraLeft[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6a84f553-e2b6-4983-a3a8-6c056cb74590
+    m_ActionName: One Player/RotateCameraRight[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eafbdd4c-1294-454d-bd81-6be0faa5a1ab
+    m_ActionName: One Player/Change Character[/Keyboard/tab]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: Two Players
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!95 &1819082180

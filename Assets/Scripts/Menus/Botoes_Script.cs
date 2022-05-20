@@ -20,12 +20,12 @@ public class Botoes_Script : MonoBehaviour
 
     public void Menu_BotaoIniciar()
     {
-        
+        ControladorTelas.id = 2;
     }
 
     public void Menu_BotaoOpcoes()
     {
-        print("a");
+        //ControladorTelas.id = 1;
     }
 
     public void Menu_BotaoSair()

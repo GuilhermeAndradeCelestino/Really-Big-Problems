@@ -54,7 +54,7 @@ public class Player_1_Script : MonoBehaviour
     bool estouPuxando;
     Transform tempTransform;
 
-    
+    PlayerInput pa;
 
 
     Vector3 playerMovement;
@@ -66,12 +66,13 @@ public class Player_1_Script : MonoBehaviour
     {
         cc = GetComponent<CharacterController>();
         _gameObject = GetComponent<GameObject>();
+        pa = GetComponent<PlayerInput>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        //print(pa.CharacterControls);
         //Mudança da orientação do movimento baseado na posição da camera
         Orientacao_Inputs();
 
