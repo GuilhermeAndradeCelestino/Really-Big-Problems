@@ -32,4 +32,15 @@ public class Botoes_Script : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void Modo_Umjogador()
+    {
+        ModoDeJogo.isMultiplayer = false;
+        SceneManager.LoadScene("Cena 1");
+    }
+    public void Modo_Doisjogadores()
+    {
+        ModoDeJogo.isMultiplayer = true;
+        SceneManager.LoadScene("Cena 1");
+    }
 }

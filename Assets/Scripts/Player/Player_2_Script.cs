@@ -304,4 +304,14 @@ public class Player_2_Script : MonoBehaviour
         //rotateRight = context.action.triggered;
         //rotateRight = context.started;
     }
+
+    public void ChangeCharacter(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            print("foi");
+            ModoDeJogo.mudanca = true;
+            ModoDeJogo.qualOjogador = 1;
+        }
+    }
 }

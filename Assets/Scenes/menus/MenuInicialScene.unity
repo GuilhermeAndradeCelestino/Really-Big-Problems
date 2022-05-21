@@ -478,7 +478,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1718183766}
         m_TargetAssemblyTypeName: Botoes_Script, Assembly-CSharp
-        m_MethodName: Menu_BotaoOpcoes
+        m_MethodName: Modo_Doisjogadores
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2614,7 +2614,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1718183766}
         m_TargetAssemblyTypeName: Botoes_Script, Assembly-CSharp
-        m_MethodName: Menu_BotaoIniciar
+        m_MethodName: Modo_Umjogador
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

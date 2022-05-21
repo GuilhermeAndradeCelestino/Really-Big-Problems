@@ -2,7 +2,7 @@
     "name": "PlayerControl",
     "maps": [
         {
-            "name": "Two Players",
+            "name": "TwoPlayers",
             "id": "950557ed-c41f-4fcb-b2b2-8ba80e8c76fe",
             "actions": [
                 {
@@ -209,7 +209,7 @@
             ]
         },
         {
-            "name": "One Player",
+            "name": "OnePlayer",
             "id": "5e28e73a-533a-4bff-b8a8-738c751968fc",
             "actions": [
                 {

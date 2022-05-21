@@ -1151,7 +1151,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 56999281}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
@@ -1250,32 +1250,104 @@ MonoBehaviour:
     m_ActionId: d83ad2e7-3fc1-4eba-a68e-cf11cb177de5
     m_ActionName: Player/RotateCameraRight[/Keyboard/e]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 56999286}
+        m_TargetAssemblyTypeName: Player_2_Script, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: aee3499b-7b00-49e8-879b-f3881365540c
     m_ActionName: One Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 56999286}
+        m_TargetAssemblyTypeName: Player_2_Script, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: afd90ec9-e510-42d7-94e6-14f46ee74b6d
     m_ActionName: One Player/Jump[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 56999286}
+        m_TargetAssemblyTypeName: Player_2_Script, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 7705da60-98f2-43ce-bf29-f0df531e4f0d
     m_ActionName: One Player/Action[/Keyboard/r]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 56999286}
+        m_TargetAssemblyTypeName: Player_2_Script, Assembly-CSharp
+        m_MethodName: OnRotateLeft
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: c23fa004-6c42-4bd2-b1f9-6084893fcfac
     m_ActionName: One Player/RotateCameraLeft[/Keyboard/q]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 56999286}
+        m_TargetAssemblyTypeName: Player_2_Script, Assembly-CSharp
+        m_MethodName: OnRotateRight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 6a84f553-e2b6-4983-a3a8-6c056cb74590
     m_ActionName: One Player/RotateCameraRight[/Keyboard/e]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 56999286}
+        m_TargetAssemblyTypeName: Player_2_Script, Assembly-CSharp
+        m_MethodName: ChangeCharacter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: eafbdd4c-1294-454d-bd81-6be0faa5a1ab
     m_ActionName: One Player/Change Character[/Keyboard/tab]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Gamepad
-  m_DefaultActionMap: Two Players
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: TwoPlayers
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!95 &56999284
@@ -27424,12 +27496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1: {fileID: 1819082176}
   player2: {fileID: 56999281}
-  one:
-    m_Name: One
-    m_Id: 170f062b-efdc-42fc-8a31-970adb4fd6b7
-    m_Asset: {fileID: 0}
-    m_Actions: []
-    m_Bindings: []
+  a: 0
 --- !u!4 &1492509974
 Transform:
   m_ObjectHideFlags: 0
@@ -31921,7 +31988,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1819082176}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
@@ -31954,7 +32021,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 36718686-1187-41fb-8934-b204f98f36f8
-    m_ActionName: Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+    m_ActionName: TwoPlayers/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/XInputControllerWindows/leftStick,/XInputControllerWindows1/leftStick]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1819082178}
@@ -31970,7 +32037,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: d94daa44-fec5-4116-b554-7d3ca4da3762
-    m_ActionName: Player/Jump[/Keyboard/space]
+    m_ActionName: TwoPlayers/Jump[/Keyboard/space,/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1819082178}
@@ -31986,7 +32053,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 322f0635-e48d-4638-b082-6bd3f6a001ae
-    m_ActionName: Player/Action[/Keyboard/r]
+    m_ActionName: TwoPlayers/Action[/Keyboard/r,/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1819082178}
@@ -32002,7 +32069,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 74088f1d-09dd-4999-bc59-1593c0ecaf47
-    m_ActionName: Player/RotateCameraLeft[/Keyboard/q]
+    m_ActionName: TwoPlayers/RotateCameraLeft[/Keyboard/q,/XInputControllerWindows/leftShoulder,/XInputControllerWindows1/leftShoulder]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1819082178}
@@ -32018,34 +32085,106 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: d83ad2e7-3fc1-4eba-a68e-cf11cb177de5
-    m_ActionName: Player/RotateCameraRight[/Keyboard/e]
+    m_ActionName: TwoPlayers/RotateCameraRight[/Keyboard/e,/XInputControllerWindows/rightShoulder,/XInputControllerWindows1/rightShoulder]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1819082178}
+        m_TargetAssemblyTypeName: Player_1_Script, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: aee3499b-7b00-49e8-879b-f3881365540c
-    m_ActionName: One Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+    m_ActionName: OnePlayer/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/XInputControllerWindows/leftStick,/XInputControllerWindows1/leftStick]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1819082178}
+        m_TargetAssemblyTypeName: Player_1_Script, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: afd90ec9-e510-42d7-94e6-14f46ee74b6d
-    m_ActionName: One Player/Jump[/Keyboard/space]
+    m_ActionName: OnePlayer/Jump[/Keyboard/space,/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1819082178}
+        m_TargetAssemblyTypeName: Player_1_Script, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 7705da60-98f2-43ce-bf29-f0df531e4f0d
-    m_ActionName: One Player/Action[/Keyboard/r]
+    m_ActionName: OnePlayer/Action[/Keyboard/r,/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1819082178}
+        m_TargetAssemblyTypeName: Player_1_Script, Assembly-CSharp
+        m_MethodName: OnRotateLeft
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: c23fa004-6c42-4bd2-b1f9-6084893fcfac
-    m_ActionName: One Player/RotateCameraLeft[/Keyboard/q]
+    m_ActionName: OnePlayer/RotateCameraLeft[/Keyboard/q,/XInputControllerWindows/leftShoulder,/XInputControllerWindows1/leftShoulder]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1819082178}
+        m_TargetAssemblyTypeName: Player_1_Script, Assembly-CSharp
+        m_MethodName: OnRotateRight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 6a84f553-e2b6-4983-a3a8-6c056cb74590
-    m_ActionName: One Player/RotateCameraRight[/Keyboard/e]
+    m_ActionName: OnePlayer/RotateCameraRight[/Keyboard/e,/XInputControllerWindows/rightShoulder,/XInputControllerWindows1/rightShoulder]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1819082178}
+        m_TargetAssemblyTypeName: Player_1_Script, Assembly-CSharp
+        m_MethodName: ChangeCharacter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: eafbdd4c-1294-454d-bd81-6be0faa5a1ab
-    m_ActionName: One Player/Change Character[/Keyboard/tab]
+    m_ActionName: OnePlayer/Change Character[/Keyboard/tab,/XInputControllerWindows/buttonNorth,/XInputControllerWindows1/buttonNorth]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard
-  m_DefaultActionMap: Two Players
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: TwoPlayers
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!95 &1819082180
