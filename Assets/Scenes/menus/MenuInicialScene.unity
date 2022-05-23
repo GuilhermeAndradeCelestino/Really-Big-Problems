@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -615,8 +615,20 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1718183766}
           m_TargetAssemblyTypeName: Botoes_Script, Assembly-CSharp
-          m_MethodName: Modo_Umjogador
+          m_MethodName: VoltarMenuInicial
           m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1566770704}
+          m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+          m_MethodName: OnSelect
+          m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -671,7 +683,19 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1718183766}
         m_TargetAssemblyTypeName: Botoes_Script, Assembly-CSharp
-        m_MethodName: Modo_Umjogador
+        m_MethodName: VoltarMenuInicial
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1566770704}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: Select
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2203,7 +2227,7 @@ MonoBehaviour:
   m_LeftClickAction: {fileID: 4369940499797240106, guid: b2568afdae6e90143aef6946db348e87, type: 3}
   m_MiddleClickAction: {fileID: 0}
   m_RightClickAction: {fileID: 0}
-  m_ScrollWheelAction: {fileID: 0}
+  m_ScrollWheelAction: {fileID: 978048872877265562, guid: b2568afdae6e90143aef6946db348e87, type: 3}
   m_TrackedDevicePositionAction: {fileID: 0}
   m_TrackedDeviceOrientationAction: {fileID: 0}
   m_DeselectOnBackgroundClick: 1
@@ -2222,7 +2246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 1566770702}
   m_sendNavigationEvents: 1
-  m_DragThreshold: 10
+  m_DragThreshold: 0
 --- !u!4 &731259685
 Transform:
   m_ObjectHideFlags: 0
@@ -4107,6 +4131,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventID: 11
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1718183766}
+          m_TargetAssemblyTypeName: Botoes_Script, Assembly-CSharp
+          m_MethodName: teste
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1718183765
 GameObject:
   m_ObjectHideFlags: 0
@@ -4136,6 +4176,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c25922e2094284f963e0a7341913e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  referencia_MenuInicial: {fileID: 1566770704}
+  referencia_MenuModo: {fileID: 1310545634}
+  acoes: {fileID: -944628639613478452, guid: b2568afdae6e90143aef6946db348e87, type: 3}
 --- !u!4 &1718183767
 Transform:
   m_ObjectHideFlags: 0
