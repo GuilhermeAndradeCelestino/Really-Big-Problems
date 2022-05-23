@@ -8,11 +8,7 @@ using UnityEngine.InputSystem;
 
 public class Botoes_Script : MonoBehaviour
 {
-    public Button referencia_MenuInicial;
-    public Button referencia_MenuModo;
-
-
-    public InputActionAsset acoes;
+    
 
     GameObject ultimoSelecionado;
 
@@ -29,7 +25,7 @@ public class Botoes_Script : MonoBehaviour
 
          
 
-        
+        //Caso haja algum botão selecionado armazena ele em um variavel
         if(EventSystem.current.currentSelectedGameObject != null)
         {
             //ultimoSelecionado.SetSelectedGameObject = EventSystem.current.currentSelectedGameObject;
@@ -38,6 +34,8 @@ public class Botoes_Script : MonoBehaviour
 
         }
 
+        //se não ouver nenhum botão selecionado e o usuario aperta alguma tecla seleciona o ultimo botão 
+        //que foi armazenado na variavel ultimoSelecionado é selecionado
         if (EventSystem.current.currentSelectedGameObject == null)
         {
             if (Keyboard.current.anyKey.wasPressedThisFrame)
@@ -47,7 +45,7 @@ public class Botoes_Script : MonoBehaviour
             }
         }
 
-        print(EventSystem.current.currentSelectedGameObject.name);
+        //print(EventSystem.current.currentSelectedGameObject.name);
     }
 
     public void Menu_BotaoIniciar()
@@ -79,7 +77,25 @@ public class Botoes_Script : MonoBehaviour
     public void VoltarMenuInicial()
     {
         ControladorTelas.id = 0;
+        print(SceneManager.GetActiveScene().name);
+        if(SceneManager.GetActiveScene().name == "cena 1")
+        {
+            SceneManager.LoadScene("MenuInicialScene");
+        }
     }
 
+    public void Reiniciar()
+    {
+        
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+        
+    }
+
+    public void SairPausa()
+    {
+        pausa.podePausar = false;
+    }
     
+    
+
 }

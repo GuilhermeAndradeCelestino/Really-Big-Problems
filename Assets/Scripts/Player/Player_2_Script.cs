@@ -314,4 +314,16 @@ public class Player_2_Script : MonoBehaviour
             ModoDeJogo.qualOjogador = 1;
         }
     }
+
+    public void Pause(InputAction.CallbackContext context)
+    {
+        if (pausa.podePausar == false && context.performed)
+        {
+            pausa.podePausar = true;
+        }
+        else if (pausa.podePausar == true && context.performed)
+        {
+            pausa.podePausar = false;
+        }
+    }
 }

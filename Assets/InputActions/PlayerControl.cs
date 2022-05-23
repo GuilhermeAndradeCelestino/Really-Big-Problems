@@ -71,6 +71,15 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""58c84486-63cf-4fd4-b339-bf655a9c57cb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -227,6 +236,17 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""action"": ""RotateCameraRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""441a7714-ccdf-487e-ad93-c6b67ec514d0"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -283,6 +303,15 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""name"": ""Change Character"",
                     ""type"": ""Button"",
                     ""id"": ""eafbdd4c-1294-454d-bd81-6be0faa5a1ab"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""b8bf6357-0583-4b74-8516-9de1bcd78adb"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -465,6 +494,17 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""action"": ""Change Character"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c0029626-9ad8-4ea7-b8b4-8a013cd5e62d"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -501,7 +541,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Left Click"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""d3405171-c29a-4cec-91a6-0bcfb7a6a609"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -761,6 +801,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         m_TwoPlayers_Action = m_TwoPlayers.FindAction("Action", throwIfNotFound: true);
         m_TwoPlayers_RotateCameraLeft = m_TwoPlayers.FindAction("RotateCameraLeft", throwIfNotFound: true);
         m_TwoPlayers_RotateCameraRight = m_TwoPlayers.FindAction("RotateCameraRight", throwIfNotFound: true);
+        m_TwoPlayers_Pause = m_TwoPlayers.FindAction("Pause", throwIfNotFound: true);
         // OnePlayer
         m_OnePlayer = asset.FindActionMap("OnePlayer", throwIfNotFound: true);
         m_OnePlayer_Movement = m_OnePlayer.FindAction("Movement", throwIfNotFound: true);
@@ -769,6 +810,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         m_OnePlayer_RotateCameraLeft = m_OnePlayer.FindAction("RotateCameraLeft", throwIfNotFound: true);
         m_OnePlayer_RotateCameraRight = m_OnePlayer.FindAction("RotateCameraRight", throwIfNotFound: true);
         m_OnePlayer_ChangeCharacter = m_OnePlayer.FindAction("Change Character", throwIfNotFound: true);
+        m_OnePlayer_Pause = m_OnePlayer.FindAction("Pause", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
@@ -841,6 +883,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
     private readonly InputAction m_TwoPlayers_Action;
     private readonly InputAction m_TwoPlayers_RotateCameraLeft;
     private readonly InputAction m_TwoPlayers_RotateCameraRight;
+    private readonly InputAction m_TwoPlayers_Pause;
     public struct TwoPlayersActions
     {
         private @PlayerControl m_Wrapper;
@@ -850,6 +893,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         public InputAction @Action => m_Wrapper.m_TwoPlayers_Action;
         public InputAction @RotateCameraLeft => m_Wrapper.m_TwoPlayers_RotateCameraLeft;
         public InputAction @RotateCameraRight => m_Wrapper.m_TwoPlayers_RotateCameraRight;
+        public InputAction @Pause => m_Wrapper.m_TwoPlayers_Pause;
         public InputActionMap Get() { return m_Wrapper.m_TwoPlayers; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -874,6 +918,9 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 @RotateCameraRight.started -= m_Wrapper.m_TwoPlayersActionsCallbackInterface.OnRotateCameraRight;
                 @RotateCameraRight.performed -= m_Wrapper.m_TwoPlayersActionsCallbackInterface.OnRotateCameraRight;
                 @RotateCameraRight.canceled -= m_Wrapper.m_TwoPlayersActionsCallbackInterface.OnRotateCameraRight;
+                @Pause.started -= m_Wrapper.m_TwoPlayersActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_TwoPlayersActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_TwoPlayersActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_TwoPlayersActionsCallbackInterface = instance;
             if (instance != null)
@@ -893,6 +940,9 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 @RotateCameraRight.started += instance.OnRotateCameraRight;
                 @RotateCameraRight.performed += instance.OnRotateCameraRight;
                 @RotateCameraRight.canceled += instance.OnRotateCameraRight;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -907,6 +957,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
     private readonly InputAction m_OnePlayer_RotateCameraLeft;
     private readonly InputAction m_OnePlayer_RotateCameraRight;
     private readonly InputAction m_OnePlayer_ChangeCharacter;
+    private readonly InputAction m_OnePlayer_Pause;
     public struct OnePlayerActions
     {
         private @PlayerControl m_Wrapper;
@@ -917,6 +968,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         public InputAction @RotateCameraLeft => m_Wrapper.m_OnePlayer_RotateCameraLeft;
         public InputAction @RotateCameraRight => m_Wrapper.m_OnePlayer_RotateCameraRight;
         public InputAction @ChangeCharacter => m_Wrapper.m_OnePlayer_ChangeCharacter;
+        public InputAction @Pause => m_Wrapper.m_OnePlayer_Pause;
         public InputActionMap Get() { return m_Wrapper.m_OnePlayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -944,6 +996,9 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 @ChangeCharacter.started -= m_Wrapper.m_OnePlayerActionsCallbackInterface.OnChangeCharacter;
                 @ChangeCharacter.performed -= m_Wrapper.m_OnePlayerActionsCallbackInterface.OnChangeCharacter;
                 @ChangeCharacter.canceled -= m_Wrapper.m_OnePlayerActionsCallbackInterface.OnChangeCharacter;
+                @Pause.started -= m_Wrapper.m_OnePlayerActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_OnePlayerActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_OnePlayerActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_OnePlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -966,6 +1021,9 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 @ChangeCharacter.started += instance.OnChangeCharacter;
                 @ChangeCharacter.performed += instance.OnChangeCharacter;
                 @ChangeCharacter.canceled += instance.OnChangeCharacter;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -1068,6 +1126,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         void OnAction(InputAction.CallbackContext context);
         void OnRotateCameraLeft(InputAction.CallbackContext context);
         void OnRotateCameraRight(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IOnePlayerActions
     {
@@ -1077,6 +1136,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         void OnRotateCameraLeft(InputAction.CallbackContext context);
         void OnRotateCameraRight(InputAction.CallbackContext context);
         void OnChangeCharacter(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

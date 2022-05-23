@@ -14,6 +14,13 @@ public class ModoDeJogo : MonoBehaviour
     PlayerInput player1Input;
     PlayerInput player2Input;
 
+
+    public GameObject personagemsSingleplayer;
+    public GameObject personagemsMultiplayer;
+
+    public GameObject cameraSingle;
+    public GameObject cameraMulti;
+
     public static bool mudanca;
 
     public bool a;
@@ -24,17 +31,37 @@ public class ModoDeJogo : MonoBehaviour
         player1Input = player1.GetComponent<PlayerInput>();
         player2Input = player2.GetComponent<PlayerInput>();
 
+        //player1.GetComponent<PlayerInput>().enabled = false;
+        //player2.GetComponent<PlayerInput>().enabled = false;
 
-        isMultiplayer = a;
-        MudancaActionMap();
+        //isMultiplayer = a;
+        // MudancaActionMap();
+
+        personagemsMultiplayer.SetActive(false);
+        personagemsSingleplayer.SetActive(false);
+        cameraSingle.SetActive(false);
+        cameraMulti.SetActive(false);
+
+
+
+        if (isMultiplayer)
+        {
+            personagemsMultiplayer.SetActive(true);
+            cameraMulti.SetActive(true);
+        }
+        else if(!isMultiplayer)
+        {
+            personagemsSingleplayer.SetActive(true);
+            cameraSingle.SetActive(true);
+        }
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        print(player1Input.currentActionMap + "j1");
-        print(player2Input.currentActionMap + "j2");
+        //print(player1Input.currentActionMap + "j1");
+        //print(player2Input.currentActionMap + "j2");
 
 
         if (!isMultiplayer)
@@ -42,7 +69,12 @@ public class ModoDeJogo : MonoBehaviour
             UmJogador();
         }
 
-        print(qualOjogador);
+        //print(qualOjogador);
+        //print("é mulijogador: " + isMultiplayer);
+
+        //print(player1Input.currentControlScheme + " Jogador 1");
+
+
     }
 
     void MudancaActionMap()
@@ -66,7 +98,10 @@ public class ModoDeJogo : MonoBehaviour
             player2.GetComponent<PlayerInput>().enabled = true;
             player1Input.SwitchCurrentActionMap("OnePlayer");
             player2Input.SwitchCurrentActionMap("OnePlayer");
+
+            player2Input.SwitchCurrentControlScheme("Keyboard");
             UmJogador();
+            qualOjogador = 1;
         }
 
     }

@@ -486,12 +486,25 @@ public class Player_1_Script : MonoBehaviour
         //rotateRight = context.started;
     }
 
+
     public void ChangeCharacter(InputAction.CallbackContext context)
     {
         if (context.performed && !isPunching)
         {
             ModoDeJogo.mudanca = true;
             ModoDeJogo.qualOjogador = 2;
+        }
+    }
+
+    public void Pause(InputAction.CallbackContext context)
+    {
+        if (pausa.podePausar == false && context.performed)
+        {
+            pausa.podePausar = true; 
+        }
+        else if (pausa.podePausar == true && context.performed)
+        {
+            pausa.podePausar = false;
         }
     }
 }
