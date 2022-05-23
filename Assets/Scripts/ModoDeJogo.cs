@@ -8,15 +8,20 @@ public class ModoDeJogo : MonoBehaviour
     public static bool isMultiplayer;
     public static int qualOjogador = 1;
 
-    public GameObject player1;
-    public GameObject player2;
+    
 
-    PlayerInput player1Input;
-    PlayerInput player2Input;
 
+    public PlayerInput player1_single_Input;
+    public PlayerInput player2_single_Input;
+    public PlayerInput player1_multi_Input;
+    public PlayerInput player2_multi_Input;
+
+    [Space]
 
     public GameObject personagemsSingleplayer;
     public GameObject personagemsMultiplayer;
+
+    [Space]
 
     public GameObject cameraSingle;
     public GameObject cameraMulti;
@@ -28,8 +33,8 @@ public class ModoDeJogo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player1Input = player1.GetComponent<PlayerInput>();
-        player2Input = player2.GetComponent<PlayerInput>();
+        
+
 
         //player1.GetComponent<PlayerInput>().enabled = false;
         //player2.GetComponent<PlayerInput>().enabled = false;
@@ -55,13 +60,14 @@ public class ModoDeJogo : MonoBehaviour
             cameraSingle.SetActive(true);
         }
 
+        qualOjogador = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //print(player1Input.currentActionMap + "j1");
-        //print(player2Input.currentActionMap + "j2");
+        print(player1_single_Input.currentActionMap + "j1");
+        print(player2_single_Input.currentActionMap + "j2");
 
 
         if (!isMultiplayer)
@@ -69,14 +75,35 @@ public class ModoDeJogo : MonoBehaviour
             UmJogador();
         }
 
-        //print(qualOjogador);
-        //print("é mulijogador: " + isMultiplayer);
+        print(qualOjogador);
+        print("é mulijogador: " + isMultiplayer);
 
-        //print(player1Input.currentControlScheme + " Jogador 1");
-
+        //print(player1_single_Input.currentControlScheme + " Jogador 1");
+        if (pausa.podePausar)
+        {
+            if (isMultiplayer)
+            {
+                player1_multi_Input.enabled = false;
+                player2_multi_Input.enabled = false;                
+            }
+            else if (!isMultiplayer)
+            {
+                player1_single_Input.enabled = false;
+                player2_single_Input.enabled = false;
+            }
+        }
+        else if (!pausa.podePausar)
+        {
+            if (isMultiplayer)
+            {
+                player1_multi_Input.enabled = true;
+                player2_multi_Input.enabled = true;
+            }
+        }
 
     }
 
+    /*
     void MudancaActionMap()
     {
             
@@ -105,18 +132,19 @@ public class ModoDeJogo : MonoBehaviour
         }
 
     }
-
+    */
     void UmJogador()
     {
         if(qualOjogador == 1)
         {
             
-            player2.GetComponent<PlayerInput>().enabled = false;
-            player1.GetComponent<PlayerInput>().enabled = true;
+            player2_single_Input.enabled = false;
+            player1_single_Input.enabled = true;
+
 
             if (mudanca)
             {
-                player1Input.SwitchCurrentActionMap("OnePlayer");
+                player1_single_Input.SwitchCurrentActionMap("OnePlayer");
                 mudanca = false;
             }
 
@@ -124,12 +152,15 @@ public class ModoDeJogo : MonoBehaviour
         }
         else if(qualOjogador == 2)
         {
-            player1.GetComponent<PlayerInput>().enabled = false;
-            player2.GetComponent<PlayerInput>().enabled = true;
+
+
+            player1_single_Input.enabled = false;
+            player2_single_Input.enabled = true;
+            
 
             if (mudanca)
             {
-                player2Input.SwitchCurrentActionMap("OnePlayer");
+                player2_single_Input.SwitchCurrentActionMap("OnePlayer");
                 mudanca = false;
             }
 
@@ -137,4 +168,6 @@ public class ModoDeJogo : MonoBehaviour
   
         }
     }
+
+    
 }
