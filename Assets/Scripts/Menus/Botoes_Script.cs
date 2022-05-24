@@ -38,6 +38,7 @@ public class Botoes_Script : MonoBehaviour
         //que foi armazenado na variavel ultimoSelecionado é selecionado
         if (EventSystem.current.currentSelectedGameObject == null)
         {
+
             if (Keyboard.current.anyKey.wasPressedThisFrame)
             {
                 EventSystem.current.SetSelectedGameObject(ultimoSelecionado);
@@ -65,13 +66,11 @@ public class Botoes_Script : MonoBehaviour
 
     public void Modo_Umjogador()
     {
-        ModoDeJogo.isMultiplayer = false;
-        SceneManager.LoadScene("Cena 1");
+        ControladorTelas.id = 4;
     }
     public void Modo_Doisjogadores()
     {
-        ModoDeJogo.isMultiplayer = true;
-        SceneManager.LoadScene("Cena 1");
+        ControladorTelas.id = 5;
     }
 
     public void VoltarMenuInicial()
@@ -96,6 +95,21 @@ public class Botoes_Script : MonoBehaviour
         pausa.podePausar = false;
     }
     
-    
+    public void SairLerLivro()
+    {
+        livro_interagivel.estouLendo = false;
+    }
+
+    public void TutorialSingle()
+    {
+        ModoDeJogo.isMultiplayer = false;
+        SceneManager.LoadScene("Cena 1");
+    }
+
+    public void TutorialMulti()
+    {
+        ModoDeJogo.isMultiplayer = true;
+        SceneManager.LoadScene("Cena 1");
+    }
 
 }

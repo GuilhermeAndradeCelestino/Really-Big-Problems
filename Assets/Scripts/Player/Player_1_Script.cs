@@ -54,7 +54,7 @@ public class Player_1_Script : MonoBehaviour
     bool estouPuxando;
     Transform tempTransform;
 
-    
+    public static bool vitoriaP1;
 
 
     Vector3 playerMovement;
@@ -66,7 +66,7 @@ public class Player_1_Script : MonoBehaviour
     {
         cc = GetComponent<CharacterController>();
         _gameObject = GetComponent<GameObject>();
-        
+        vitoriaP1 = false;
     }
 
     // Update is called once per frame
@@ -79,8 +79,12 @@ public class Player_1_Script : MonoBehaviour
         //Gravidade
         Gravidade();
 
-        //Movimento e rotação
-        Movimentacao();
+        if (!vitoriaP1)
+        {
+            //Movimento e rotação
+            Movimentacao();
+        }
+
 
         //animaçoes
         //Animacoes();
@@ -98,6 +102,14 @@ public class Player_1_Script : MonoBehaviour
     private void FixedUpdate()
     {
         Animacoes();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Vitoria")
+        {
+            vitoriaP1 = true;
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -125,6 +137,16 @@ public class Player_1_Script : MonoBehaviour
             }
            //print("Caixa");
         }
+
+        if(other.gameObject.tag == "LivroInteragivel")
+        {
+            other.gameObject.GetComponent<livro_interagivel>().mostrarMensagem = true;
+
+            if (interactP1)
+            {
+                livro_interagivel.estouLendo = true;
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -139,6 +161,11 @@ public class Player_1_Script : MonoBehaviour
         {
             canMoveBox = false;
             //print("nCaixa");
+        }
+
+        if (other.gameObject.tag == "LivroInteragivel")
+        {
+            other.gameObject.GetComponent<livro_interagivel>().mostrarMensagem = false;
         }
     }
 
@@ -308,6 +335,10 @@ public class Player_1_Script : MonoBehaviour
         {
             _animator.SetFloat("MoveSpeed", 0);
         }
+        else if (vitoriaP1)
+        {
+            _animator.SetFloat("MoveSpeed", 0);
+        }
 
 
         //soco
@@ -415,7 +446,7 @@ public class Player_1_Script : MonoBehaviour
        */
 
         //Jump
-        if (cc.isGrounded && isPunching == false && isMovingBox == false)
+        if (cc.isGrounded && isPunching == false && isMovingBox == false && vitoriaP1 == false)
         {
 
             isJumping = true;
@@ -498,11 +529,11 @@ public class Player_1_Script : MonoBehaviour
 
     public void Pause(InputAction.CallbackContext context)
     {
-        if (pausa.podePausar == false && context.performed)
+        if (pausa.podePausar == false && context.performed && !livro_interagivel.estouLendo)
         {
             pausa.podePausar = true; 
         }
-        else if (pausa.podePausar == true && context.performed)
+        else if (pausa.podePausar == true && context.performed && !livro_interagivel.estouLendo)
         {
             pausa.podePausar = false;
         }

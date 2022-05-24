@@ -38,9 +38,9 @@ public class Player_2_Script : MonoBehaviour
     bool isMoving;
     bool isJumping;
 
-    
 
 
+    public static bool vitoriaP2;
 
 
     Vector3 playerMovement;
@@ -64,8 +64,11 @@ public class Player_2_Script : MonoBehaviour
         //Gravidade
         Gravidade();
 
-        //Movimento e rotação
-        Movimentacao();
+        if (!vitoriaP2)
+        {
+            //Movimento e rotação
+            Movimentacao();
+        }
 
 
     }
@@ -73,6 +76,15 @@ public class Player_2_Script : MonoBehaviour
     private void FixedUpdate()
     {
         Animacoes();
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Vitoria")
+        {
+            vitoriaP2 = true;
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -94,8 +106,25 @@ public class Player_2_Script : MonoBehaviour
         {
             ApertaBotao();
         }
+
+        if (other.gameObject.tag == "LivroInteragivel")
+        {
+            other.gameObject.GetComponent<livro_interagivel>().mostrarMensagem = true;
+
+            if (interactP2)
+            {
+                livro_interagivel.estouLendo = true;
+            }
+        }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "LivroInteragivel")
+        {
+            other.gameObject.GetComponent<livro_interagivel>().mostrarMensagem = false;
+        }
+    }
 
     void Orientacao_Inputs()
     {
@@ -171,7 +200,10 @@ public class Player_2_Script : MonoBehaviour
         {
             _animator.SetFloat("MoveSpeed", 0);
         }
-
+        else if (vitoriaP2)
+        {
+            _animator.SetFloat("MoveSpeed", 0);
+        }
 
         //Pulo
         //checa se estou pulando
@@ -230,8 +262,10 @@ public class Player_2_Script : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         //movementInput = context.ReadValue<Vector2>();
-        //trava os controle caso o jogador esteja socando
-        movementInput = context.ReadValue<Vector2>();
+        if(vitoriaP2 == false)
+        {
+            movementInput = context.ReadValue<Vector2>();
+        }
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -245,7 +279,7 @@ public class Player_2_Script : MonoBehaviour
         */
 
         //Jump
-        if (cc.isGrounded)
+        if (cc.isGrounded && vitoriaP2 == false)
         {
 
             isJumping = true;
@@ -317,11 +351,11 @@ public class Player_2_Script : MonoBehaviour
 
     public void Pause(InputAction.CallbackContext context)
     {
-        if (pausa.podePausar == false && context.performed)
+        if (pausa.podePausar == false && context.performed && !livro_interagivel.estouLendo)
         {
             pausa.podePausar = true;
         }
-        else if (pausa.podePausar == true && context.performed)
+        else if (pausa.podePausar == true && context.performed && !livro_interagivel.estouLendo)
         {
             pausa.podePausar = false;
         }

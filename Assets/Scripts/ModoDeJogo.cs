@@ -29,17 +29,21 @@ public class ModoDeJogo : MonoBehaviour
     public static bool mudanca;
 
     public bool a;
+    public bool teste;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
 
 
         //player1.GetComponent<PlayerInput>().enabled = false;
         //player2.GetComponent<PlayerInput>().enabled = false;
-
-        //isMultiplayer = a;
+        if (teste)
+        {
+            isMultiplayer = a;
+        }
+        
         // MudancaActionMap();
 
         personagemsMultiplayer.SetActive(false);
@@ -70,6 +74,9 @@ public class ModoDeJogo : MonoBehaviour
         print(player2_single_Input.currentActionMap + "j2");
 
 
+        
+
+
         if (!isMultiplayer)
         {
             UmJogador();
@@ -79,29 +86,41 @@ public class ModoDeJogo : MonoBehaviour
         print("é mulijogador: " + isMultiplayer);
 
         //print(player1_single_Input.currentControlScheme + " Jogador 1");
-        if (pausa.podePausar)
+        if (pausa.podePausar && !livro_interagivel.estouLendo)
         {
-            if (isMultiplayer)
-            {
-                player1_multi_Input.enabled = false;
-                player2_multi_Input.enabled = false;                
-            }
-            else if (!isMultiplayer)
-            {
-                player1_single_Input.enabled = false;
-                player2_single_Input.enabled = false;
-            }
+            Pausa();
         }
         else if (!pausa.podePausar)
         {
-            if (isMultiplayer)
-            {
-                player1_multi_Input.enabled = true;
-                player2_multi_Input.enabled = true;
-            }
+            Despausa();
         }
 
     }
+
+    void Pausa()
+    {
+        if (isMultiplayer)
+        {
+            player1_multi_Input.enabled = false;
+            player2_multi_Input.enabled = false;
+        }
+        else if (!isMultiplayer)
+        {
+            player1_single_Input.enabled = false;
+            player2_single_Input.enabled = false;
+        }
+    }
+
+    void Despausa()
+    {
+        if (isMultiplayer)
+        {
+            player1_multi_Input.enabled = true;
+            player2_multi_Input.enabled = true;
+        }
+    }
+
+    
 
     /*
     void MudancaActionMap()
@@ -135,37 +154,22 @@ public class ModoDeJogo : MonoBehaviour
     */
     void UmJogador()
     {
-        if(qualOjogador == 1)
+        if (livro_interagivel.estouLendo)
+        {
+            player2_single_Input.enabled = false;
+            player1_single_Input.enabled = false;
+        }
+
+        if (qualOjogador == 1 && !livro_interagivel.estouLendo)
         {
             
             player2_single_Input.enabled = false;
             player1_single_Input.enabled = true;
-
-
-            if (mudanca)
-            {
-                player1_single_Input.SwitchCurrentActionMap("OnePlayer");
-                mudanca = false;
-            }
-
-
         }
-        else if(qualOjogador == 2)
+        else if(qualOjogador == 2 && !livro_interagivel.estouLendo)
         {
-
-
             player1_single_Input.enabled = false;
             player2_single_Input.enabled = true;
-            
-
-            if (mudanca)
-            {
-                player2_single_Input.SwitchCurrentActionMap("OnePlayer");
-                mudanca = false;
-            }
-
-
-  
         }
     }
 

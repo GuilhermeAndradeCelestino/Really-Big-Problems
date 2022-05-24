@@ -16,7 +16,9 @@ public class ControladorTelas : MonoBehaviour
     id 0 = tela do menu
     id 1 = tela de opçoes
     id 2 = tela seleção de modo(um jogador ou dois jogadores)
-    id 3 = tela de configuração de dispositivo(apenas para modo 2 jogadores)      
+    id 3 = tela de configuração de dispositivo(apenas para modo 2 jogadores)  
+    id 4 = tutorial single player
+    id 5 = tutorial multi player
      */
 
 
