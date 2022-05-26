@@ -31,6 +31,7 @@ public class Passagem : MonoBehaviour
             StartCoroutine(Teleporta(pointB));
             comecarPassagem = false;
             a_To_b = false;
+            print("A para b");
         }
         
         if (b_To_A && comecarPassagem)
@@ -39,6 +40,7 @@ public class Passagem : MonoBehaviour
             StartCoroutine(Teleporta(pointA));
             comecarPassagem = false;
             b_To_A = false;
+            print("B para a");
         }
         
     }

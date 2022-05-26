@@ -62,7 +62,7 @@ public class Player_2_Script : MonoBehaviour
         Orientacao_Inputs();
 
         //Gravidade
-        Gravidade();
+       Gravidade();
 
         if (!vitoriaP2)
         {
@@ -76,6 +76,15 @@ public class Player_2_Script : MonoBehaviour
     private void FixedUpdate()
     {
         Animacoes();
+
+        /*
+        Gravidade();
+
+        if (!vitoriaP2)
+        {
+            Movimentacao();
+        }
+        */
     }
 
 
@@ -160,6 +169,8 @@ public class Player_2_Script : MonoBehaviour
     {
 
         moveCharacterY -= gravity * Time.deltaTime;
+
+        //moveCharacterY -= gravity * Time.fixedDeltaTime;
         //playerMovement.y -= gravity;
         playerMovement.y = moveCharacterY;
 
@@ -175,8 +186,8 @@ public class Player_2_Script : MonoBehaviour
         //Movimento
         //cc.Move(playerMovement * speed * Time.deltaTime);
         cc.Move(new Vector3(playerMovement.x * speed, playerMovement.y, playerMovement.z * speed) * Time.deltaTime);
-        
 
+        //cc.Move(new Vector3(playerMovement.x * speed, playerMovement.y, playerMovement.z * speed) * Time.fixedDeltaTime);
 
         //Rotação
         if (playerMovement.x != 0 || playerMovement.z != 0)
