@@ -54,10 +54,12 @@ public class livro_interagivel : MonoBehaviour
         {
             tutorial.SetActive(true);
             EventSystem.current.SetSelectedGameObject(botao);
+            
         }
         else if (!estouLendo && mostrarMensagem)
         {
             tutorial.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(null);
         }
     }
 

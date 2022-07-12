@@ -29990,6 +29990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hud_pausa: {fileID: 148385739}
+  botao: {fileID: 1423710942}
 --- !u!4 &1619880794 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 471080, guid: 0533ddc0f38f3c842bf18ac27f90260f, type: 3}
