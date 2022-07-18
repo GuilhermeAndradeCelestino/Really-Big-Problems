@@ -78,7 +78,7 @@ public class Player_1_Script : MonoBehaviour
         //print(pa.CharacterControls);
         //Mudança da orientação do movimento baseado na posição da camera
         Orientacao_Inputs();
-        print(paredeQuebravel);
+        //print(paredeQuebravel);
         //Gravidade
         Gravidade();
 

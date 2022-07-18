@@ -70,8 +70,7 @@ public class ModoDeJogo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(player1_single_Input.currentActionMap + "j1");
-        print(player2_single_Input.currentActionMap + "j2");
+        
 
 
         
@@ -82,8 +81,13 @@ public class ModoDeJogo : MonoBehaviour
             UmJogador();
         }
 
-        print(qualOjogador);
-        print("é mulijogador: " + isMultiplayer);
+        if (teste)
+        {
+            print(player1_single_Input.currentActionMap + "j1");
+            print(player2_single_Input.currentActionMap + "j2");
+            print(qualOjogador);
+            print("é multijogador: " + isMultiplayer);
+        }
 
         //print(player1_single_Input.currentControlScheme + " Jogador 1");
         if (pausa.podePausar && !livro_interagivel.estouLendo)

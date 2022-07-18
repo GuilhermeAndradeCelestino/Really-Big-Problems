@@ -22,7 +22,7 @@ public class Botoes_Script : MonoBehaviour
     
     void Update()
     {
-
+        print(EventSystem.current.currentSelectedGameObject.name);
          
 
         //Caso haja algum botão selecionado armazena ele em um variavel
@@ -38,12 +38,14 @@ public class Botoes_Script : MonoBehaviour
         //que foi armazenado na variavel ultimoSelecionado é selecionado
         if (EventSystem.current.currentSelectedGameObject == null)
         {
-
+            //EventSystem.current.SetSelectedGameObject(ultimoSelecionado);
+            
             if (Keyboard.current.anyKey.wasPressedThisFrame)
             {
                 EventSystem.current.SetSelectedGameObject(ultimoSelecionado);
 
             }
+            
         }
 
         //print(EventSystem.current.currentSelectedGameObject.name);
