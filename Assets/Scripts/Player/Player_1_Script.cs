@@ -51,6 +51,9 @@ public class Player_1_Script : MonoBehaviour
     bool paredeQuebravel;
     bool podeQuebrarParece = false;
 
+    GameObject parede;
+    bool terminouOsoco = false;
+
     //empurrar caixa
     bool isMovingBox = false;
     bool canMoveBox;
@@ -104,6 +107,12 @@ public class Player_1_Script : MonoBehaviour
         {
             IndicadorSinglePlayer();
         }
+
+        if (terminouOsoco)
+        {
+            parede.SetActive(false);
+            terminouOsoco = false;
+        }
         
     }
 
@@ -124,8 +133,11 @@ public class Player_1_Script : MonoBehaviour
     {
         if (other.gameObject.tag == "ParedeQuebrada")
         {
+            other.gameObject.GetComponent<Parede_quebrada>().enabled = true;
+            parede = other.gameObject;
             //print("é uma parede quebravel");
             paredeQuebravel = true;
+            
         }
 
         if(other.gameObject.tag == "CaixaInteragivel")
@@ -161,8 +173,10 @@ public class Player_1_Script : MonoBehaviour
     {
         if (other.gameObject.tag == "ParedeQuebrada")
         {
+            other.gameObject.GetComponent<Parede_quebrada>().enabled = false;
             //print("é uma parede quebravel");
             paredeQuebravel = false;
+
         }
 
         if (other.gameObject.tag == "CaixaInteragivel")
@@ -203,6 +217,9 @@ public class Player_1_Script : MonoBehaviour
         print("1");
         Instantiate(particulaSoco, maoSoco.position, maoSoco.rotation);
         paredeQuebravel = false;
+
+        yield return new WaitForSeconds(5f);
+        terminouOsoco = true;
     }
     
     
@@ -399,6 +416,8 @@ public class Player_1_Script : MonoBehaviour
             orbeP1.SetActive(false);
         }
     }
+
+    
     IEnumerator EmpurrandoCaixa(Collider caixa)
     {
         yield return new WaitForSeconds(0.1f);
