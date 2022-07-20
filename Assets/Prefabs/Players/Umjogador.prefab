@@ -4011,7 +4011,7 @@ GameObject:
   - component: {fileID: 5313784532185882587}
   - component: {fileID: 5313784532185882586}
   m_Layer: 0
-  m_Name: youngerbroother
+  m_Name: youngerbroother-P2-Single
   m_TagString: Player_2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4681,7 +4681,7 @@ GameObject:
   - component: {fileID: 5313784532362451996}
   - component: {fileID: 5313784532362451999}
   m_Layer: 0
-  m_Name: OldBrother
+  m_Name: OldBrother-P1-Single
   m_TagString: Player_1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

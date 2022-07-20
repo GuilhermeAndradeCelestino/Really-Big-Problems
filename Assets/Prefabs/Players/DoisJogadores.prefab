@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 6202625422691705012}
   - component: {fileID: 6202625422691705008}
   m_Layer: 0
-  m_Name: youngerbroother
+  m_Name: youngerbroother-P2-Multi
   m_TagString: Player_2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4714,7 +4714,7 @@ GameObject:
   - component: {fileID: 6202625424486424576}
   - component: {fileID: 6202625424486424579}
   m_Layer: 0
-  m_Name: OldBrother
+  m_Name: OldBrother-P1-Multi
   m_TagString: Player_1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
