@@ -11,7 +11,8 @@ public class Passagem : MonoBehaviour
     public static bool b_To_A;
     public Transform pointA;
     public Transform pointB;
-    public GameObject player;
+    public GameObject player2_single;
+    public GameObject player2_multi;
 
 
 
@@ -30,6 +31,7 @@ public class Passagem : MonoBehaviour
             StartCoroutine(Teleporta(pointB));
             comecarPassagem = false;
             a_To_b = false;
+            print("A para b");
         }
         
         if (b_To_A && comecarPassagem)
@@ -38,6 +40,7 @@ public class Passagem : MonoBehaviour
             StartCoroutine(Teleporta(pointA));
             comecarPassagem = false;
             b_To_A = false;
+            print("B para a");
         }
         
     }
@@ -49,7 +52,15 @@ public class Passagem : MonoBehaviour
     {
         estaPassando = true;
         yield return new WaitForSeconds(1f);
-        player.transform.position = paraOnde.transform.position;
+
+        if (ModoDeJogo.isMultiplayer)
+        {
+            player2_multi.transform.position = paraOnde.transform.position;
+        }
+        else if (!ModoDeJogo.isMultiplayer)
+        {
+            player2_single.transform.position = paraOnde.transform.position;
+        }
         comecarPassagem = false;
     }
 }

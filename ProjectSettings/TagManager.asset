@@ -12,6 +12,8 @@ TagManager:
   - CaixaInteragivel
   - Passagem
   - Botao
+  - LivroInteragivel
+  - Vitoria
   layers:
   - Default
   - TransparentFX

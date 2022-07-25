@@ -5,6 +5,7 @@ using UnityEngine;
 public class BotaoCena1 : MonoBehaviour
 {
     public Animator doorAnimator;
+    public Animator doorAnimator2;
     public GameObject botaoVermelho;
     public GameObject botaoVerde;
 
@@ -24,6 +25,7 @@ public class BotaoCena1 : MonoBehaviour
         if(limitador && apertouBotao) 
         {
             doorAnimator.SetBool("OpenDoor", true);
+            doorAnimator2.SetBool("Abrir", true);
             botaoVerde.SetActive(false);
             botaoVermelho.SetActive(true);
 

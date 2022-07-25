@@ -30,7 +30,10 @@ public class Player_1_Script : MonoBehaviour
     public float jumpForce;
     public float gravity;
     public float rotationSpeed;
-    
+
+    [Space]
+    public GameObject orbeP1;
+
     float rotationVelocity;
     float moveCharacterY;
 
@@ -48,13 +51,16 @@ public class Player_1_Script : MonoBehaviour
     bool paredeQuebravel;
     bool podeQuebrarParece = false;
 
+    GameObject parede;
+    bool terminouOsoco = false;
+
     //empurrar caixa
     bool isMovingBox = false;
     bool canMoveBox;
     bool estouPuxando;
     Transform tempTransform;
 
-    
+    public static bool vitoriaP1;
 
 
     Vector3 playerMovement;
@@ -66,7 +72,7 @@ public class Player_1_Script : MonoBehaviour
     {
         cc = GetComponent<CharacterController>();
         _gameObject = GetComponent<GameObject>();
-        
+        vitoriaP1 = false;
     }
 
     // Update is called once per frame
@@ -75,12 +81,16 @@ public class Player_1_Script : MonoBehaviour
         //print(pa.CharacterControls);
         //Mudança da orientação do movimento baseado na posição da camera
         Orientacao_Inputs();
-
+        //print(paredeQuebravel);
         //Gravidade
         Gravidade();
 
-        //Movimento e rotação
-        Movimentacao();
+        if (!vitoriaP1)
+        {
+            //Movimento e rotação
+            Movimentacao();
+        }
+
 
         //animaçoes
         //Animacoes();
@@ -92,6 +102,17 @@ public class Player_1_Script : MonoBehaviour
         //Checa se o jogador esta observando uma parede (so funciona se vc estiver perto de uma)
         ChecarParede();
 
+        //Indica qual o personagem o jogador esta usando no momento
+        if (!ModoDeJogo.isMultiplayer)
+        {
+            IndicadorSinglePlayer();
+        }
+
+        if (terminouOsoco)
+        {
+            parede.SetActive(false);
+            terminouOsoco = false;
+        }
         
     }
 
@@ -100,12 +121,23 @@ public class Player_1_Script : MonoBehaviour
         Animacoes();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Vitoria")
+        {
+            vitoriaP1 = true;
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "ParedeQuebrada")
         {
+            other.gameObject.GetComponent<Parede_quebrada>().enabled = true;
+            parede = other.gameObject;
             //print("é uma parede quebravel");
             paredeQuebravel = true;
+            
         }
 
         if(other.gameObject.tag == "CaixaInteragivel")
@@ -125,20 +157,37 @@ public class Player_1_Script : MonoBehaviour
             }
            //print("Caixa");
         }
+
+        if(other.gameObject.tag == "LivroInteragivel")
+        {
+            other.gameObject.GetComponent<livro_interagivel>().mostrarMensagem = true;
+
+            if (interactP1)
+            {
+                livro_interagivel.estouLendo = true;
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "ParedeQuebrada")
         {
+            other.gameObject.GetComponent<Parede_quebrada>().enabled = false;
             //print("é uma parede quebravel");
             paredeQuebravel = false;
+
         }
 
         if (other.gameObject.tag == "CaixaInteragivel")
         {
             canMoveBox = false;
             //print("nCaixa");
+        }
+
+        if (other.gameObject.tag == "LivroInteragivel")
+        {
+            other.gameObject.GetComponent<livro_interagivel>().mostrarMensagem = false;
         }
     }
 
@@ -167,6 +216,10 @@ public class Player_1_Script : MonoBehaviour
         podeQuebrarParece = false;
         print("1");
         Instantiate(particulaSoco, maoSoco.position, maoSoco.rotation);
+        paredeQuebravel = false;
+
+        yield return new WaitForSeconds(5f);
+        terminouOsoco = true;
     }
     
     
@@ -308,6 +361,10 @@ public class Player_1_Script : MonoBehaviour
         {
             _animator.SetFloat("MoveSpeed", 0);
         }
+        else if (vitoriaP1)
+        {
+            _animator.SetFloat("MoveSpeed", 0);
+        }
 
 
         //soco
@@ -348,6 +405,19 @@ public class Player_1_Script : MonoBehaviour
 
     }
 
+    void IndicadorSinglePlayer()
+    {
+        if(ModoDeJogo.qualOjogador == 1)
+        {
+            orbeP1.SetActive(true);
+        }
+        else
+        {
+            orbeP1.SetActive(false);
+        }
+    }
+
+    
     IEnumerator EmpurrandoCaixa(Collider caixa)
     {
         yield return new WaitForSeconds(0.1f);
@@ -415,7 +485,7 @@ public class Player_1_Script : MonoBehaviour
        */
 
         //Jump
-        if (cc.isGrounded && isPunching == false && isMovingBox == false)
+        if (cc.isGrounded && isPunching == false && isMovingBox == false && vitoriaP1 == false)
         {
 
             isJumping = true;
@@ -486,12 +556,25 @@ public class Player_1_Script : MonoBehaviour
         //rotateRight = context.started;
     }
 
+
     public void ChangeCharacter(InputAction.CallbackContext context)
     {
         if (context.performed && !isPunching)
         {
             ModoDeJogo.mudanca = true;
             ModoDeJogo.qualOjogador = 2;
+        }
+    }
+
+    public void Pause(InputAction.CallbackContext context)
+    {
+        if (pausa.podePausar == false && context.performed && !livro_interagivel.estouLendo)
+        {
+            pausa.podePausar = true; 
+        }
+        else if (pausa.podePausar == true && context.performed && !livro_interagivel.estouLendo)
+        {
+            pausa.podePausar = false;
         }
     }
 }

@@ -7,6 +7,7 @@ using UnityEngine;
 
     public class Parede_quebrada : MonoBehaviour
     {
+        
         public GameObject parede;
         public GameObject paredeQuebrada;
         public GameObject particulaPoera;
@@ -35,7 +36,7 @@ using UnityEngine;
         // Start is called before the first frame update
         void Start()
         {
-
+            
         }
 
         // Update is called once per frame
@@ -83,11 +84,13 @@ using UnityEngine;
 
             }
 
-            _collider.enabled = false;
+            //_collider.enabled = false;
 
-
-            Destroy(paredeQuebrada, tempoParaSumir);
-
+            yield return new WaitForSeconds(tempoParaSumir);
+            paredeQuebrada.SetActive(false);
+        //Destroy(paredeQuebrada, tempoParaSumir);
+       
+           
         }
     }
 

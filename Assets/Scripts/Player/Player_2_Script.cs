@@ -26,6 +26,9 @@ public class Player_2_Script : MonoBehaviour
     public float gravity;
     public float rotationSpeed;
 
+    [Space]
+    public GameObject orbeP2;
+
     float rotationVelocity;
     float moveCharacterY;
 
@@ -38,9 +41,9 @@ public class Player_2_Script : MonoBehaviour
     bool isMoving;
     bool isJumping;
 
-    
 
 
+    public static bool vitoriaP2;
 
 
     Vector3 playerMovement;
@@ -50,6 +53,7 @@ public class Player_2_Script : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        vitoriaP2 = false;
         cc = GetComponent<CharacterController>();
         _gameObject = GetComponent<GameObject>();
     }
@@ -57,22 +61,48 @@ public class Player_2_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //print("vitoriaP2 é: " + vitoriaP2);
         //Mudança da orientação do movimento baseado na posição da camera
         Orientacao_Inputs();
 
         //Gravidade
-        Gravidade();
+       Gravidade();
 
-        //Movimento e rotação
-        Movimentacao();
+        if (!vitoriaP2)
+        {
+            //Movimento e rotação
+            Movimentacao();
+        }
 
+        //Indica qual o personagem o jogador esta usando no momento
+        if (!ModoDeJogo.isMultiplayer)
+        {
+            IndicadorSinglePlayer();
+        }
 
     }
 
     private void FixedUpdate()
     {
         Animacoes();
+
+        /*
+        Gravidade();
+
+        if (!vitoriaP2)
+        {
+            Movimentacao();
+        }
+        */
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Vitoria")
+        {
+            vitoriaP2 = true;
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -94,8 +124,25 @@ public class Player_2_Script : MonoBehaviour
         {
             ApertaBotao();
         }
+
+        if (other.gameObject.tag == "LivroInteragivel")
+        {
+            other.gameObject.GetComponent<livro_interagivel>().mostrarMensagem = true;
+
+            if (interactP2)
+            {
+                livro_interagivel.estouLendo = true;
+            }
+        }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "LivroInteragivel")
+        {
+            other.gameObject.GetComponent<livro_interagivel>().mostrarMensagem = false;
+        }
+    }
 
     void Orientacao_Inputs()
     {
@@ -131,6 +178,8 @@ public class Player_2_Script : MonoBehaviour
     {
 
         moveCharacterY -= gravity * Time.deltaTime;
+
+        //moveCharacterY -= gravity * Time.fixedDeltaTime;
         //playerMovement.y -= gravity;
         playerMovement.y = moveCharacterY;
 
@@ -146,8 +195,8 @@ public class Player_2_Script : MonoBehaviour
         //Movimento
         //cc.Move(playerMovement * speed * Time.deltaTime);
         cc.Move(new Vector3(playerMovement.x * speed, playerMovement.y, playerMovement.z * speed) * Time.deltaTime);
-        
 
+        //cc.Move(new Vector3(playerMovement.x * speed, playerMovement.y, playerMovement.z * speed) * Time.fixedDeltaTime);
 
         //Rotação
         if (playerMovement.x != 0 || playerMovement.z != 0)
@@ -171,7 +220,11 @@ public class Player_2_Script : MonoBehaviour
         {
             _animator.SetFloat("MoveSpeed", 0);
         }
-
+        
+        if (vitoriaP2)
+        {
+            _animator.SetFloat("MoveSpeed", 0);
+        }
 
         //Pulo
         //checa se estou pulando
@@ -226,12 +279,26 @@ public class Player_2_Script : MonoBehaviour
         }
     }
 
+
+    void IndicadorSinglePlayer()
+    {
+        if (ModoDeJogo.qualOjogador == 2)
+        {
+            orbeP2.SetActive(true);
+        }
+        else
+        {
+            orbeP2.SetActive(false);
+        }
+    }
     // inputs 
     public void OnMove(InputAction.CallbackContext context)
     {
         //movementInput = context.ReadValue<Vector2>();
-        //trava os controle caso o jogador esteja socando
-        movementInput = context.ReadValue<Vector2>();
+        if(vitoriaP2 == false)
+        {
+            movementInput = context.ReadValue<Vector2>();
+        }
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -245,7 +312,7 @@ public class Player_2_Script : MonoBehaviour
         */
 
         //Jump
-        if (cc.isGrounded)
+        if (cc.isGrounded && vitoriaP2 == false)
         {
 
             isJumping = true;
@@ -312,6 +379,18 @@ public class Player_2_Script : MonoBehaviour
             print("foi");
             ModoDeJogo.mudanca = true;
             ModoDeJogo.qualOjogador = 1;
+        }
+    }
+
+    public void Pause(InputAction.CallbackContext context)
+    {
+        if (pausa.podePausar == false && context.performed && !livro_interagivel.estouLendo)
+        {
+            pausa.podePausar = true;
+        }
+        else if (pausa.podePausar == true && context.performed && !livro_interagivel.estouLendo)
+        {
+            pausa.podePausar = false;
         }
     }
 }
