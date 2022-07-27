@@ -62,6 +62,8 @@ public class Player_1_Script : MonoBehaviour
 
     public static bool vitoriaP1;
 
+    //troca de lugar
+   
 
     Vector3 playerMovement;
 
@@ -167,6 +169,17 @@ public class Player_1_Script : MonoBehaviour
                 livro_interagivel.estouLendo = true;
             }
         }
+
+        if(other.gameObject.tag == "PortalTrocaA")
+        {
+            Portal_Troca.P1EstaPronto = true;
+            Portal_Troca.P1EstaNoA = true;
+        }
+        else if (other.gameObject.tag == "PortalTrocaB")
+        {
+            Portal_Troca.P1EstaPronto = true;
+        }
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -188,6 +201,17 @@ public class Player_1_Script : MonoBehaviour
         if (other.gameObject.tag == "LivroInteragivel")
         {
             other.gameObject.GetComponent<livro_interagivel>().mostrarMensagem = false;
+        }
+
+
+        if (other.gameObject.tag == "PortalTrocaA")
+        {
+            Portal_Troca.P1EstaPronto = false;
+            Portal_Troca.P1EstaNoA = false;
+        }
+        else if (other.gameObject.tag == "PortalTrocaB")
+        {
+            Portal_Troca.P1EstaPronto = false;
         }
     }
 
@@ -223,6 +247,7 @@ public class Player_1_Script : MonoBehaviour
     }
     
     
+
     void Orientacao_Inputs()
     {
         //Checa para ver qual é a posição da camenra no momento e ajusta o playerMovement conforme a camera.
@@ -405,6 +430,7 @@ public class Player_1_Script : MonoBehaviour
 
     }
 
+    
     void IndicadorSinglePlayer()
     {
         if(ModoDeJogo.qualOjogador == 1)
@@ -510,9 +536,6 @@ public class Player_1_Script : MonoBehaviour
         {
             StartCoroutine(Punch());
         }
-
-
-
     }
 
     public void OnRotateLeft(InputAction.CallbackContext context)

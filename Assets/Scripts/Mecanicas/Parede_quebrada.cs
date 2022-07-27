@@ -12,6 +12,7 @@ using UnityEngine;
         public GameObject paredeQuebrada;
         public GameObject particulaPoera;
         public Collider _collider;
+
         //public Outline outlineParede1;
         //public Outline outlineParede2;
 

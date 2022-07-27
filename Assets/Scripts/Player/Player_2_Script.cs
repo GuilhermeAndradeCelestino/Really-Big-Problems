@@ -134,6 +134,13 @@ public class Player_2_Script : MonoBehaviour
                 livro_interagivel.estouLendo = true;
             }
         }
+
+        if (other.gameObject.tag == "PortalTrocaA" || other.gameObject.tag == "PortalTrocaB")
+        {
+            Portal_Troca.P2EstaPronto = true;
+        }
+
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -142,6 +149,12 @@ public class Player_2_Script : MonoBehaviour
         {
             other.gameObject.GetComponent<livro_interagivel>().mostrarMensagem = false;
         }
+
+        if (other.gameObject.tag == "PortalTrocaA" || other.gameObject.tag == "PortalTrocaB")
+        {
+            Portal_Troca.P2EstaPronto = false;
+        }
+
     }
 
     void Orientacao_Inputs()
