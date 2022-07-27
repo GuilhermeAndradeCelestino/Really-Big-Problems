@@ -27,7 +27,7 @@ TagManager:
   - FloorLayer
   - WallLayer
   - InteractBoxLayer
-  - 
+  - InspectionObject
   - 
   - 
   - 
