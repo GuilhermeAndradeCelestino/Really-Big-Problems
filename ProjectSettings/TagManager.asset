@@ -14,6 +14,9 @@ TagManager:
   - Botao
   - LivroInteragivel
   - Vitoria
+  - PortalTrocaA
+  - PortalTrocaB
+  - PortalTroca
   layers:
   - Default
   - TransparentFX
@@ -24,7 +27,7 @@ TagManager:
   - FloorLayer
   - WallLayer
   - InteractBoxLayer
-  - 
+  - InspectionObject
   - 
   - 
   - 
