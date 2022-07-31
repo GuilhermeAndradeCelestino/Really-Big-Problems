@@ -48,6 +48,12 @@ public class Player_2_Script : MonoBehaviour
 
     Vector3 playerMovement;
 
+    //puzzle sequencia colorido
+    bool estouPertoDoBotao = false;
+    bool isBlue = false;
+    bool isRed = false;
+    bool isYellow = false;
+    bool isGreen = false;
 
 
     // Start is called before the first frame update
@@ -140,7 +146,13 @@ public class Player_2_Script : MonoBehaviour
             Portal_Troca.P2EstaPronto = true;
         }
 
+        if (other.gameObject.tag == "Botao_ReiniciarSequencia")
+        {
+            estouPertoDoBotao = true;
+        }
 
+        bool a = true;
+        PuzzleSequenciaCor(other, a);
     }
 
     private void OnTriggerExit(Collider other)
@@ -155,6 +167,13 @@ public class Player_2_Script : MonoBehaviour
             Portal_Troca.P2EstaPronto = false;
         }
 
+        if (other.gameObject.tag == "Botao_ReiniciarSequencia")
+        {
+            estouPertoDoBotao = false;
+        }
+
+        bool a = false;
+        PuzzleSequenciaCor(other, a);
     }
 
     void Orientacao_Inputs()
@@ -293,6 +312,47 @@ public class Player_2_Script : MonoBehaviour
     }
 
 
+    void PuzzleSequenciaCor(Collider _collider, bool verdadeOUfalso)
+    {
+        if (_collider.gameObject.tag == "Piso_Azul")
+        {
+            isBlue = verdadeOUfalso;
+        }
+        else if (_collider.gameObject.tag == "Piso_Verde")
+        {
+            isGreen = verdadeOUfalso;
+        }
+        else if (_collider.gameObject.tag == "Piso_Vermelho")
+        {
+            isRed = verdadeOUfalso;
+        }
+        else if (_collider.gameObject.tag == "Piso_Amarelo")
+        {
+            isYellow = verdadeOUfalso;
+        }
+    }
+
+    void PuzzleInformarBotao(bool input)
+    {
+        if (isRed && input)
+        {
+            puzzle_sequencia_com_cor.placaVermelho = true;
+        }
+        else if (isYellow && input)
+        {
+            puzzle_sequencia_com_cor.placaAmarelo = true;
+        }
+        else if (isGreen && input)
+        {
+            puzzle_sequencia_com_cor.placaVerde = true;
+        }
+        else if (isBlue && input)
+        {
+            puzzle_sequencia_com_cor.placaAzul = true;
+        }
+    }
+
+
     void IndicadorSinglePlayer()
     {
         if (ModoDeJogo.qualOjogador == 2)
@@ -345,6 +405,13 @@ public class Player_2_Script : MonoBehaviour
         {
             interactP2 = false;
         }
+
+        if (estouPertoDoBotao && context.started)
+        {
+            puzzle_sequencia_com_cor.reiniciar = true;
+        }
+
+        PuzzleInformarBotao(context.started);
     }
 
     public void OnRotateLeft(InputAction.CallbackContext context)

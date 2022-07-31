@@ -16,7 +16,11 @@ TagManager:
   - Vitoria
   - PortalTrocaA
   - PortalTrocaB
-  - PortalTroca
+  - Piso_Amarelo
+  - Piso_Verde
+  - Piso_Vermelho
+  - Piso_Azul
+  - Botao_ReiniciarSequencia
   layers:
   - Default
   - TransparentFX
