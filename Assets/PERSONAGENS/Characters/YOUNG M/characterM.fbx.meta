@@ -15,7 +15,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'Hips' not found\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -23,7 +24,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -72,12 +73,63 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips: []
+  referencedClips:
+  - 39bbf2e5a4db1544e8e8c6440ae38ae4
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: characterM(Clone)
+      parentName: 
+      position: {x: 0.061609488, y: 8.7751665, z: 0.401933}
+      rotation: {x: 1, y: -1.1102233e-16, z: 1.110223e-16, w: 0.0000000754979}
+      scale: {x: 17.371248, y: 17.371248, z: 17.371248}
+    - name: Plane.001
+      parentName: characterM(Clone)
+      position: {x: 0.01175692, y: 0.220868, z: 0.0003809905}
+      rotation: {x: -0.00000005960465, y: 3.970467e-23, z: 4.6322114e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Plane.002
+      parentName: characterM(Clone)
+      position: {x: -0.003546669, y: -0.028995551, z: 0.00838788}
+      rotation: {x: -0.00000005960465, y: 3.970467e-23, z: 4.6322114e-23, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Circle.003
+      parentName: characterM(Clone)
+      position: {x: -0.0035466356, y: 0.058232613, z: -0.016622461}
+      rotation: {x: 0.54677606, y: 0.20630406, z: 0.3901633, w: 0.71151054}
+      scale: {x: 2.6772432, y: 2.7154922, z: 5.2788343}
+    - name: Circle.005
+      parentName: characterM(Clone)
+      position: {x: 0.0005559212, y: -0.22465335, z: 0.025091985}
+      rotation: {x: 0.69836843, y: 0.11231961, z: 0.06365243, w: 0.70399874}
+      scale: {x: 3.6766114, y: 3.676612, z: 3.6766114}
+    - name: Cube
+      parentName: characterM(Clone)
+      position: {x: -0.016316116, y: -0.2300619, z: -0.008523975}
+      rotation: {x: 0.7071068, y: -1.5700924e-16, z: 1.2790027e-23, w: 0.7071067}
+      scale: {x: 3.481141, y: 3.481141, z: 3.481141}
+    - name: Sphere.003
+      parentName: characterM(Clone)
+      position: {x: -0.019459717, y: -0.19358936, z: -0.0061798263}
+      rotation: {x: 1, y: -1.1102228e-16, z: 1.11022296e-16, w: -0.0000000754979}
+      scale: {x: 0.69600564, y: 0.69600564, z: 0.69600564}
+    - name: Circle.004
+      parentName: characterM(Clone)
+      position: {x: -0.06386949, y: 0.25540158, z: -0.0006669092}
+      rotation: {x: 0.7071068, y: -1.5700924e-16, z: 1.2790027e-23, w: 0.7071067}
+      scale: {x: 2.4909096, y: 2.4909096, z: 2.4909096}
+    - name: Plane.003
+      parentName: characterM(Clone)
+      position: {x: 0.044533975, y: 0.49655497, z: -0.018302491}
+      rotation: {x: -0.00000005960465, y: 5.9675586e-23, z: 4.2446516e-23, w: 1}
+      scale: {x: 1.2472062, y: 1.2472062, z: 1.2472062}
+    - name: Circle.002
+      parentName: characterM(Clone)
+      position: {x: -0.055776384, y: 0.22652178, z: -0.000018208026}
+      rotation: {x: 0.69522566, y: 0.14296015, z: 0.106171146, w: 0.6963846}
+      scale: {x: 3.5706842, y: 3.2273757, z: 3.2752457}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -92,9 +144,9 @@ ModelImporter:
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 1
+  animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
