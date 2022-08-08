@@ -32453,7 +32453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mostrarMensagem: 0
-  tutorial: {fileID: 6760301415740780010}
+  tutorial: {fileID: 6760301415243074761}
   Texto: {fileID: 6760301413966910421}
   botao: {fileID: 6760301415078710645}
 --- !u!135 &2934297733953669766
@@ -33381,7 +33381,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &6760301415701142715
 CanvasRenderer:
   m_ObjectHideFlags: 0
