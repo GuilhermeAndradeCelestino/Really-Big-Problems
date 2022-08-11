@@ -35,6 +35,9 @@ public class Player_2_Script : MonoBehaviour
     Vector2 movementInput;
 
     public static bool interactP2 = false;
+    
+    bool estouPassando = false;
+
 
     float originalSpeed;
 
@@ -67,6 +70,7 @@ public class Player_2_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         //print("vitoriaP2 é: " + vitoriaP2);
         //Mudança da orientação do movimento baseado na posição da camera
         Orientacao_Inputs();
@@ -74,7 +78,7 @@ public class Player_2_Script : MonoBehaviour
         //Gravidade
        Gravidade();
 
-        if (!vitoriaP2)
+        if (!vitoriaP2 && !estouPassando)
         {
             //Movimento e rotação
             Movimentacao();
@@ -109,21 +113,18 @@ public class Player_2_Script : MonoBehaviour
         {
             vitoriaP2 = true;
         }
+        
+        
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.tag == "Passagem")
+        if (other.gameObject.tag == "Passagem" && interactP2)
         {
-            if(other.gameObject.name == "Portal_A" )
-            {
-                PassagemPlayer(true);
-            }
-
-            if (other.gameObject.name == "Portal_B")
-            {
-                PassagemPlayer(false);
-            }
+            estouPassando = true;
+            
+            other.GetComponent<Passagem_Script>().Passar(transform);
+            
         }
 
         if (other.gameObject.tag == "Botao")
@@ -141,10 +142,7 @@ public class Player_2_Script : MonoBehaviour
             }
         }
 
-        if (other.gameObject.tag == "PortalTrocaA" || other.gameObject.tag == "PortalTrocaB")
-        {
-            Portal_Troca.P2EstaPronto = true;
-        }
+        
 
         if (other.gameObject.tag == "Botao_ReiniciarSequencia")
         {
@@ -162,15 +160,19 @@ public class Player_2_Script : MonoBehaviour
             other.gameObject.GetComponent<livro_interagivel>().mostrarMensagem = false;
         }
 
-        if (other.gameObject.tag == "PortalTrocaA" || other.gameObject.tag == "PortalTrocaB")
-        {
-            Portal_Troca.P2EstaPronto = false;
-        }
+        
 
         if (other.gameObject.tag == "Botao_ReiniciarSequencia")
         {
             estouPertoDoBotao = false;
         }
+        
+        if (other.gameObject.tag == "Passagem")
+        {
+            estouPassando = false;
+            
+        }
+
 
         bool a = false;
         PuzzleSequenciaCor(other, a);
@@ -288,20 +290,8 @@ public class Player_2_Script : MonoBehaviour
 
     }
 
-    void PassagemPlayer(bool a_ou_b)
-    {
-        // a = true , b = false
-        if (interactP2 && a_ou_b)
-        {
-            Passagem.comecarPassagem = true;
-            Passagem.a_To_b = true;
-        }
-        else if (interactP2 && !a_ou_b)
-        {
-            Passagem.comecarPassagem = true;
-            Passagem.b_To_A = true;
-        }
-    }
+    
+    
 
     void ApertaBotao()
     {
@@ -411,6 +401,19 @@ public class Player_2_Script : MonoBehaviour
             puzzle_sequencia_com_cor.reiniciar = true;
         }
 
+
+       
+
+        /*
+        if (context.started)
+        {
+            interactP2_started = true;
+        }
+        else if (!context.started)
+        {
+            interactP2_started = false;
+        }
+        */
         PuzzleInformarBotao(context.started);
     }
 

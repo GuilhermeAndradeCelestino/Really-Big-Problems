@@ -30,22 +30,25 @@ public class FadeCamPlayer2 : MonoBehaviour
 
     void Fade()
     {
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("ComFade"))
+        if (Passagem_Script.comecar_fade)
         {
-            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
-            {
-                _animator.SetBool("PlayFade", false);
-            }
-        }
-
-
-        if (Passagem.estaPassando)
-        {
-            _animator.SetBool("PlayFade", true);
-            Passagem.estaPassando = false;
+            StartCoroutine(animacao());
+            Passagem_Script.comecar_fade = false;
         }
     }
 
-    
+    IEnumerator animacao()
+    {
+
+        _animator.SetBool("PlayFade", true);
+        yield return new WaitForSeconds(1.3f);
+        _animator.SetBool("PlayFade", false);
+        _animator.SetBool("StopFade", true);
+        yield return new WaitForSeconds(0.5f);
+        _animator.SetBool("StopFade", false);
+        _animator.SetBool("normalState", true);
+        yield return new WaitForSeconds(0.2f);
+        _animator.SetBool("normalState", false);
+    }
 
 }
