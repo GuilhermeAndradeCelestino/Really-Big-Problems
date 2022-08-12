@@ -91,7 +91,7 @@ public class Player_1_Script : MonoBehaviour
         //Gravidade
         Gravidade();
 
-        if (!vitoriaP1)
+        if (!vitoriaP1 && !Mecanica_Troca_Script.trocaTroca)
         {
             //Movimento e rotação
             Movimentacao();
@@ -133,6 +133,8 @@ public class Player_1_Script : MonoBehaviour
         {
             vitoriaP1 = true;
         }
+
+        
     }
 
     private void OnTriggerStay(Collider other)
@@ -176,12 +178,13 @@ public class Player_1_Script : MonoBehaviour
 
         if(other.gameObject.tag == "PortalTrocaA")
         {
-            Portal_Troca.P1EstaPronto = true;
-            Portal_Troca.P1EstaNoA = true;
+            print("foi1");
+            Mecanica_Troca_Script.player1A_pronto = true;
         }
         else if (other.gameObject.tag == "PortalTrocaB")
         {
-            Portal_Troca.P1EstaPronto = true;
+            print("foi2");
+            Mecanica_Troca_Script.player1B_pronto = true;
         }
 
 
@@ -217,15 +220,7 @@ public class Player_1_Script : MonoBehaviour
         }
 
 
-        if (other.gameObject.tag == "PortalTrocaA")
-        {
-            Portal_Troca.P1EstaPronto = false;
-            Portal_Troca.P1EstaNoA = false;
-        }
-        else if (other.gameObject.tag == "PortalTrocaB")
-        {
-            Portal_Troca.P1EstaPronto = false;
-        }
+        
 
 
         if (other.gameObject.tag == "Botao_ReiniciarSequencia")

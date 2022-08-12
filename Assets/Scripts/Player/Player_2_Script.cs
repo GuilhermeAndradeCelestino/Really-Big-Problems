@@ -78,7 +78,7 @@ public class Player_2_Script : MonoBehaviour
         //Gravidade
        Gravidade();
 
-        if (!vitoriaP2 && !estouPassando)
+        if (!vitoriaP2 && !estouPassando && !Mecanica_Troca_Script.trocaTroca)
         {
             //Movimento e rotação
             Movimentacao();
@@ -113,8 +113,8 @@ public class Player_2_Script : MonoBehaviour
         {
             vitoriaP2 = true;
         }
-        
-        
+
+       
     }
 
     private void OnTriggerStay(Collider other)
@@ -126,6 +126,20 @@ public class Player_2_Script : MonoBehaviour
             other.GetComponent<Passagem_Script>().Passar(transform);
             
         }
+
+
+
+        if(other.gameObject.tag == "PortalTrocaA")
+        {
+            print("foi3");
+            Mecanica_Troca_Script.player2A_pronto = true;
+        }
+        else if (other.gameObject.tag == "PortalTrocaB")
+        {
+            print("foi4");
+            Mecanica_Troca_Script.player2B_pronto = true;
+        }
+
 
         if (other.gameObject.tag == "Botao")
         {
@@ -141,6 +155,7 @@ public class Player_2_Script : MonoBehaviour
                 livro_interagivel.estouLendo = true;
             }
         }
+
 
         
 
