@@ -69,6 +69,11 @@ public class Player_1_Script : MonoBehaviour
     bool isYellow = false;
     bool isGreen = false;
 
+
+    //puzle porta cena 3
+    int respostaAtual = -1;
+    Collider porta;
+
     Vector3 playerMovement;
 
 
@@ -139,6 +144,7 @@ public class Player_1_Script : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        porta = other;
         if (other.gameObject.tag == "ParedeQuebrada")
         {
             other.gameObject.GetComponent<Parede_quebrada>().enabled = true;
@@ -193,6 +199,9 @@ public class Player_1_Script : MonoBehaviour
             estouPertoDoBotao = true;
         }
         
+
+        
+
         bool a = true;
         PuzzleSequenciaCor(other, a);
 
@@ -545,6 +554,29 @@ public class Player_1_Script : MonoBehaviour
         }
     }
 
+    void PuzzleCena3Porta(Collider other, bool bora)
+    {
+        if (other.gameObject.tag == "Cena3_Sala1")
+        {
+            if (other.gameObject.name == "Porta0" && bora)
+            {
+                other.GetComponent<Salas>().MandaResposta(0);
+            }
+            else if (other.gameObject.name == "Porta1" && bora)
+            {
+                other.GetComponent<Salas>().MandaResposta(1);
+            }
+            else if (other.gameObject.name == "Porta2" && bora)
+            {
+                other.GetComponent<Salas>().MandaResposta(2);
+            }
+            else if (other.gameObject.name == "Porta3" && bora)
+            {
+                other.GetComponent<Salas>().MandaResposta(3);
+            }
+        }
+    }
+
     // inputs 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -605,6 +637,7 @@ public class Player_1_Script : MonoBehaviour
         }
 
         PuzzleInformarBotao(context.started);
+        PuzzleCena3Porta(porta, context.started);
     }
 
     public void OnRotateLeft(InputAction.CallbackContext context)
