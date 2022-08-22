@@ -96,7 +96,7 @@ public class Player_1_Script : MonoBehaviour
         //Gravidade
         Gravidade();
 
-        if (!vitoriaP1 && !Mecanica_Troca_Script.trocaTroca)
+        if (!vitoriaP1 && !Mecanica_Troca_Script.trocaTroca && !Puzzle_porta.transicao)
         {
             //Movimento e rotação
             Movimentacao();

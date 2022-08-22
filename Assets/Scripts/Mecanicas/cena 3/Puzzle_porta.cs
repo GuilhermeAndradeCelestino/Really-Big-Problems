@@ -6,7 +6,7 @@ public class Puzzle_porta : MonoBehaviour
 {
 
 
-    //da esquerda para direita, 0 = porta1 |1 = porta2 | 2 = porta3 | 3 = porta4 | 
+    //da esquerda para direita com as portas viradas para sua visao, 0 = porta1 |1 = porta2 | 2 = porta3 | 3 = porta4 | 
     public int[] portasCertas;
     [Space]
     [Space]
@@ -31,6 +31,20 @@ public class Puzzle_porta : MonoBehaviour
     int salaAtual;
     public static int resposta;
     public static bool respondendo;
+
+    [Space]
+    //tp: 0  - Sala1 | 1 - Sala2 | 2 - Sala3  | 3 - Sala Finalização | 4 - sala princiapal laberinto
+    public Transform[] pontosTP;
+
+    [Space]
+    // Posição 0: player 1 || Posição 1: player 2
+    public GameObject[] playersSingle;
+    public GameObject[] playersMulti;
+    [Space]
+    public Animator fade;
+
+    public static bool transicao;
+
 
     [Header("Opçoes de teste")]
     public bool testeSorteoPortaCerta = false;
@@ -57,11 +71,11 @@ public class Puzzle_porta : MonoBehaviour
         {
             if (portasCertas[salaAtual - 1] == resposta)
             {
-                Acertou();
+                StartCoroutine(teleporteAcertou());
             }
             else
             {
-                errou();
+                StartCoroutine(teleporteErrou());
             }
             respondendo = false;
         }
@@ -78,24 +92,200 @@ public class Puzzle_porta : MonoBehaviour
 
 
 
-    void Acertou()
+    IEnumerator teleporteAcertou()
     {
-        print("A C E R T O U");
-        if(salaAtual == 3)
+        transicao = true;
+        yield return new WaitForSeconds(1);
+        transicao = false;
+
+
+        if (ModoDeJogo.isMultiplayer)
         {
-            print("T E R M I N O U");
+            if (salaAtual == 3)
+            {
+                transicao = true;
+
+                fade.SetBool("FadeIn", true);
+                yield return new WaitForSeconds(1);
+
+                playersMulti[0].transform.position = pontosTP[3].position;
+                transicao = false;
+
+                fade.SetBool("FadeIn", false);
+                fade.SetBool("FadeOut", true);
+                yield return new WaitForSeconds(1);
+                fade.SetBool("FadeOut", false);
+                fade.SetBool("voltaPadrao", true);
+                yield return new WaitForSeconds(1);
+                fade.SetBool("voltaPadrao", false);
+
+            }
+            else if (salaAtual == 1)
+            {
+                transicao = true;
+
+                fade.SetBool("FadeIn", true);
+                yield return new WaitForSeconds(1);
+
+                playersMulti[0].transform.position = pontosTP[1].position;
+                transicao = false;
+
+                fade.SetBool("FadeIn", false);
+                fade.SetBool("FadeOut", true);
+                yield return new WaitForSeconds(1);
+                fade.SetBool("FadeOut", false);
+                fade.SetBool("voltaPadrao", true);
+                yield return new WaitForSeconds(1);
+                fade.SetBool("voltaPadrao", false);
+            }
+            else if (salaAtual == 2)
+            {
+
+                transicao = true;
+
+                fade.SetBool("FadeIn", true);
+                yield return new WaitForSeconds(1);
+
+                playersMulti[0].transform.position = pontosTP[2].position;
+                transicao = false;
+
+                fade.SetBool("FadeIn", false);
+                fade.SetBool("FadeOut", true);
+                yield return new WaitForSeconds(1);
+                fade.SetBool("FadeOut", false);
+                fade.SetBool("voltaPadrao", true);
+                yield return new WaitForSeconds(1);
+                fade.SetBool("voltaPadrao", false);
+            }
+
+            if (salaAtual != 3)
+            {
+                salaAtual++;
+            }
+
         }
-        else
+        else if (!ModoDeJogo.isMultiplayer)
         {
-            salaAtual++;
+            if (salaAtual == 3)
+            {
+                transicao = true;
+
+                fade.SetBool("FadeIn", true);
+                yield return new WaitForSeconds(1);
+
+                playersSingle[0].transform.position = pontosTP[3].position;
+                transicao = false;
+
+                fade.SetBool("FadeIn", false);
+                fade.SetBool("FadeOut", true);
+                yield return new WaitForSeconds(1);
+                fade.SetBool("FadeOut", false);
+                fade.SetBool("voltaPadrao", true);
+                yield return new WaitForSeconds(1);
+                fade.SetBool("voltaPadrao", false);
+
+            }
+            else if (salaAtual == 1)
+            {
+                transicao = true;
+
+                fade.SetBool("FadeIn", true);
+                yield return new WaitForSeconds(1);
+
+                playersSingle[0].transform.position = pontosTP[1].position;
+                transicao = false;
+
+                fade.SetBool("FadeIn", false);
+                fade.SetBool("FadeOut", true);
+                yield return new WaitForSeconds(1);
+                fade.SetBool("FadeOut", false);
+                fade.SetBool("voltaPadrao", true);
+                yield return new WaitForSeconds(1);
+                fade.SetBool("voltaPadrao", false);
+            }
+            else if (salaAtual == 2)
+            {
+                
+                transicao = true;
+
+                fade.SetBool("FadeIn", true);
+                yield return new WaitForSeconds(1);
+
+                playersSingle[0].transform.position = pontosTP[2].position;
+                transicao = false;
+
+                fade.SetBool("FadeIn", false);
+                fade.SetBool("FadeOut", true);
+                yield return new WaitForSeconds(1);
+                fade.SetBool("FadeOut", false);
+                fade.SetBool("voltaPadrao", true);
+                yield return new WaitForSeconds(1);
+                fade.SetBool("voltaPadrao", false);
+            }
+            
+            if(salaAtual != 3)
+            {
+                salaAtual++;
+            }
+            
         }
     }
 
-    void errou()
+    IEnumerator teleporteErrou()
     {
-        print("E R R O U");
-        preparacaoCompleta();
-        salaAtual = 1;
+        
+        if (ModoDeJogo.isMultiplayer)
+        {
+            transicao = true;
+
+            fade.SetBool("FadeIn", true);
+            yield return new WaitForSeconds(1);
+
+            playersMulti[0].transform.position = pontosTP[0].position;
+            playersMulti[1].transform.position = pontosTP[4].position;
+            transicao = false;
+
+            fade.SetBool("FadeIn", false);
+            fade.SetBool("FadeOut", true);
+            yield return new WaitForSeconds(1);
+            fade.SetBool("FadeOut", false);
+            fade.SetBool("voltaPadrao", true);
+
+
+            print("E R R O U");
+            preparacaoCompleta();
+            salaAtual = 1;
+
+            yield return new WaitForSeconds(1);
+            fade.SetBool("voltaPadrao", false);
+
+        }
+        else if (!ModoDeJogo.isMultiplayer)
+        {
+
+            transicao = true;
+
+            fade.SetBool("FadeIn", true);
+            yield return new WaitForSeconds(1);
+
+            playersSingle[0].transform.position = pontosTP[0].position;
+            playersSingle[1].transform.position = pontosTP[4].position;
+            transicao = false;
+
+            fade.SetBool("FadeIn", false);
+            fade.SetBool("FadeOut", true);
+            yield return new WaitForSeconds(1);
+            fade.SetBool("FadeOut", false);
+            fade.SetBool("voltaPadrao", true);
+
+
+            print("E R R O U");
+            preparacaoCompleta();
+            salaAtual = 1;
+
+            yield return new WaitForSeconds(1);
+            fade.SetBool("voltaPadrao", false);
+        }
     }
 
     void posicionaMiniaturasAleatoriamente()
