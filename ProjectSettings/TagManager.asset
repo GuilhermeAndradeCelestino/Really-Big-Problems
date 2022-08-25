@@ -24,6 +24,7 @@ TagManager:
   - Cena3_Sala1
   - Cena3_Sala2
   - Cena3_Sala3
+  - Cena3_TriggerPortas
   layers:
   - Default
   - TransparentFX

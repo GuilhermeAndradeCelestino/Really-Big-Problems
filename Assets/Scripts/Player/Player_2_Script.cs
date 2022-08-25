@@ -157,7 +157,17 @@ public class Player_2_Script : MonoBehaviour
         }
 
 
-        
+        if(other.gameObject.tag == "Cena3_TriggerPortas")
+        {
+            if(other.gameObject.name == "Trigger_porta")
+            {
+                other.gameObject.GetComponent<Cena3_porta_script>().FecharPorta();
+            }
+            else if (other.gameObject.name == "Trigger_portao")
+            {
+                other.gameObject.GetComponent<Cena3_porta_script>().AbrirPortao();
+            }
+        }
 
         if (other.gameObject.tag == "Botao_ReiniciarSequencia")
         {
