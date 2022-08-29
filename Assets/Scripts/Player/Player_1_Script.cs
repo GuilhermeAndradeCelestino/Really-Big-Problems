@@ -54,6 +54,10 @@ public class Player_1_Script : MonoBehaviour
     GameObject parede;
     bool terminouOsoco = false;
 
+
+    
+
+
     //empurrar caixa
     bool isMovingBox = false;
     bool canMoveBox;

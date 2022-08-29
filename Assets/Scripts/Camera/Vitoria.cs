@@ -17,12 +17,13 @@ public class Vitoria : MonoBehaviour
     public GameObject telaVitoria;
     public GameObject botao;
     public static bool ganhou;
-
+    bool umaVez;
 
     // Start is called before the first frame update
     void Start()
     {
         ganhou = false;
+        umaVez = true;
     }
 
     // Update is called once per frame
@@ -55,11 +56,12 @@ public class Vitoria : MonoBehaviour
             }
         }
 
-        if(Player_1_Script.vitoriaP1 && Player_2_Script.vitoriaP2)
+        if(Player_1_Script.vitoriaP1 && Player_2_Script.vitoriaP2 && umaVez)
         {
             ganhou = true;
             telaVitoria.SetActive(true);
             EventSystem.current.SetSelectedGameObject(botao);
+            umaVez = false;
         }
     }
 

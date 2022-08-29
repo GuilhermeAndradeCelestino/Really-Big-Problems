@@ -114,4 +114,14 @@ public class Botoes_Script : MonoBehaviour
         SceneManager.LoadScene("Cena 1");
     }
 
+
+    public void IndoPara1_2()
+    {
+        SceneManager.LoadScene("Cena 2");
+    }
+
+    public void IndoPara1_3()
+    {
+        SceneManager.LoadScene("Cena 3");
+    }
 }
