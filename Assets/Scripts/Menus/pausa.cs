@@ -25,7 +25,7 @@ public class pausa : MonoBehaviour
         {
             Time.timeScale = 0;
             hud_pausa.SetActive(true);
-            if (EventSystem.current.currentSelectedGameObject == null)
+            if (umaVez == true)
             {
                 print("sadasdasdsadsssssss");
                 EventSystem.current.SetSelectedGameObject(botao);
@@ -37,7 +37,7 @@ public class pausa : MonoBehaviour
         else if (!podePausar)
         {
             hud_pausa.SetActive(false);
-            umaVez = false;
+            umaVez = true;
             Time.timeScale = 1;
         }
     }

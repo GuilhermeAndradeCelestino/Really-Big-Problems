@@ -19,37 +19,58 @@ public class Botoes_Script : MonoBehaviour
     }
 
     // Update is called once per frame
+
+
     
+
     void Update()
     {
         print(EventSystem.current.currentSelectedGameObject.name);
-         
 
-        //Caso haja algum botão selecionado armazena ele em um variavel
-        if(EventSystem.current.currentSelectedGameObject != null)
+        /*
+        if (pausa.podePausar)
         {
-            //ultimoSelecionado.SetSelectedGameObject = EventSystem.current.currentSelectedGameObject;
-
-            ultimoSelecionado = EventSystem.current.currentSelectedGameObject;
-
-        }
-
-        //se não ouver nenhum botão selecionado e o usuario aperta alguma tecla seleciona o ultimo botão 
-        //que foi armazenado na variavel ultimoSelecionado é selecionado
-        if (EventSystem.current.currentSelectedGameObject == null)
-        {
-            //EventSystem.current.SetSelectedGameObject(ultimoSelecionado);
-            
-            if (Keyboard.current.anyKey.wasPressedThisFrame)
+            //Caso haja algum botão selecionado armazena ele em um variavel
+            if (EventSystem.current.currentSelectedGameObject != null)
             {
-                EventSystem.current.SetSelectedGameObject(ultimoSelecionado);
+                //ultimoSelecionado.SetSelectedGameObject = EventSystem.current.currentSelectedGameObject;
+
+                ultimoSelecionado = EventSystem.current.currentSelectedGameObject;
 
             }
-            
-        }
 
+
+
+
+
+
+            //se não ouver nenhum botão selecionado e o usuario aperta alguma tecla seleciona o ultimo botão 
+            //que foi armazenado na variavel ultimoSelecionado é selecionado
+            if (EventSystem.current.currentSelectedGameObject == null)
+            {
+                //EventSystem.current.SetSelectedGameObject(ultimoSelecionado);
+
+                if (Keyboard.current.anyKey.wasPressedThisFrame)
+                {
+                    EventSystem.current.SetSelectedGameObject(ultimoSelecionado);
+
+                }
+
+            }
+
+        }
+        */
         //print(EventSystem.current.currentSelectedGameObject.name);
     }
+
+
+
+    public void Clik()
+    {
+        EventSystem.current.SetSelectedGameObject(ultimoSelecionado);
+    }
+
+
 
     public void Menu_BotaoIniciar()
     {
@@ -79,7 +100,7 @@ public class Botoes_Script : MonoBehaviour
     {
         ControladorTelas.id = 0;
         print(SceneManager.GetActiveScene().name);
-        if(SceneManager.GetActiveScene().name == "Cena 1" || SceneManager.GetActiveScene().name == "Cena 2" || SceneManager.GetActiveScene().name == "Cena 3")
+        if(SceneManager.GetActiveScene().name == "cena 1" || SceneManager.GetActiveScene().name == "cena 2" || SceneManager.GetActiveScene().name == "Cena 3")
         {
             SceneManager.LoadScene("MenuInicialScene");
         }
