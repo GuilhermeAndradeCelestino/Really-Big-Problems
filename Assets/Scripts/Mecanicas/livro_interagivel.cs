@@ -12,6 +12,9 @@ public class livro_interagivel : MonoBehaviour
     public GameObject Texto;
     public GameObject botao;
 
+
+    bool limitador = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,12 +57,17 @@ public class livro_interagivel : MonoBehaviour
         {
             tutorial.SetActive(true);
             EventSystem.current.SetSelectedGameObject(botao);
-            
+            if (limitador)
+            {
+                GetComponent<AudioSource>().Play();
+                limitador = false;
+            }
         }
         else if (!estouLendo && mostrarMensagem)
         {
             tutorial.SetActive(false);
             EventSystem.current.SetSelectedGameObject(null);
+            limitador = true;
         }
     }
 

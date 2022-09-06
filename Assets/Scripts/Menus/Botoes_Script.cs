@@ -25,7 +25,7 @@ public class Botoes_Script : MonoBehaviour
 
     void Update()
     {
-        print(EventSystem.current.currentSelectedGameObject.name);
+        //print(EventSystem.current.currentSelectedGameObject.name);
 
         /*
         if (pausa.podePausar)
@@ -38,12 +38,6 @@ public class Botoes_Script : MonoBehaviour
                 ultimoSelecionado = EventSystem.current.currentSelectedGameObject;
 
             }
-
-
-
-
-
-
             //se não ouver nenhum botão selecionado e o usuario aperta alguma tecla seleciona o ultimo botão 
             //que foi armazenado na variavel ultimoSelecionado é selecionado
             if (EventSystem.current.currentSelectedGameObject == null)
@@ -60,15 +54,15 @@ public class Botoes_Script : MonoBehaviour
 
         }
         */
+
+
+
         //print(EventSystem.current.currentSelectedGameObject.name);
     }
 
 
 
-    public void Clik()
-    {
-        EventSystem.current.SetSelectedGameObject(ultimoSelecionado);
-    }
+    
 
 
 
