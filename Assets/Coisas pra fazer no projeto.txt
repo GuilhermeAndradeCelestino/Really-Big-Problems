@@ -1,9 +1,0 @@
-Lista de coisas para se fazer no projeto
-
-1 - implementar os sons
-
-2 - fazer melhorias:
-2.1 corrigir o tamanho da hud
-2.2 melhora o indicador de quem é o irmaão atual (tenta usar a ideia das telas seram dos tamanhos 3/4 e  1/4 sendo o que 3/4 opersonagem atual sendo controlado)
-2.3adiciona transição entre as fazes
-2.4 adicianr um fundo ao menu principal
