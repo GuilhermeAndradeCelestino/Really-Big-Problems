@@ -487,6 +487,7 @@ public class Player_2_Script : MonoBehaviour
             print("foi");
             ModoDeJogo.mudanca = true;
             ModoDeJogo.qualOjogador = 1;
+            QualOplayer_Single.MudarCamera = true;
         }
     }
 

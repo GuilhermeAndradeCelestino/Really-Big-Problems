@@ -692,6 +692,7 @@ public class Player_1_Script : MonoBehaviour
         {
             ModoDeJogo.mudanca = true;
             ModoDeJogo.qualOjogador = 2;
+            QualOplayer_Single.MudarCamera = true;
         }
     }
 
