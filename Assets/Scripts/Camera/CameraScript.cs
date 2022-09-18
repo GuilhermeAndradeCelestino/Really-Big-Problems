@@ -15,7 +15,8 @@ public class CameraScript : MonoBehaviour
     Vector3 velocity = Vector3.zero;
 
     public static int posicaoJogador1;
-
+    
+    public RectTransform fundoPreto;
     /*
     posiçoes camera
     1- down (padrao)- Position : x = 0 | y = 10.7 | z = -7.5   &   Rotation x = 45 | y = 0 | z = 0

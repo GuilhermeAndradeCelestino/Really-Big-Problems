@@ -27,7 +27,7 @@ public class Player_2_Script : MonoBehaviour
     public float rotationSpeed;
 
     [Space]
-    public GameObject orbeP2;
+    
 
     float rotationVelocity;
     float moveCharacterY;
@@ -84,11 +84,8 @@ public class Player_2_Script : MonoBehaviour
             Movimentacao();
         }
 
-        //Indica qual o personagem o jogador esta usando no momento
-        if (!ModoDeJogo.isMultiplayer)
-        {
-            IndicadorSinglePlayer();
-        }
+        
+        
 
     }
 
@@ -368,17 +365,7 @@ public class Player_2_Script : MonoBehaviour
     }
 
 
-    void IndicadorSinglePlayer()
-    {
-        if (ModoDeJogo.qualOjogador == 2)
-        {
-            orbeP2.SetActive(true);
-        }
-        else
-        {
-            orbeP2.SetActive(false);
-        }
-    }
+    
     // inputs 
     public void OnMove(InputAction.CallbackContext context)
     {

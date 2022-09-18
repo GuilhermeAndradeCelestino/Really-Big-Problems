@@ -22,7 +22,12 @@ public class QualOplayer_Single : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Rect valorAntigoP1 = cameraP1.rect;
+        Rect valorAntigoP2 = cameraP2.rect;
+
+
+        cameraP1.rect = new Rect(0, 0, Mathf.Lerp(valorAntigoP1.width, valorMaior, speed * Time.deltaTime), 1);
+        cameraP2.rect = new Rect(Mathf.Lerp(valorAntigoP2.x, valorMaior, speed * Time.deltaTime), 0, Mathf.Lerp(valorAntigoP2.width, valorMenor, speed * Time.deltaTime), 1);
     }
 
     // Update is called once per frame
@@ -30,7 +35,7 @@ public class QualOplayer_Single : MonoBehaviour
     {
         if (!ModoDeJogo.isMultiplayer)
         {
-            if (ModoDeJogo.qualOjogador == 1 && MudarCamera)
+            if (ModoDeJogo.qualOjogador == 1 )
             {
                 Rect valorAntigoP1 = cameraP1.rect;
                 Rect valorAntigoP2 = cameraP2.rect;
@@ -40,7 +45,7 @@ public class QualOplayer_Single : MonoBehaviour
                 cameraP2.rect = new Rect(Mathf.Lerp(valorAntigoP2.x, valorMaior, speed * Time.deltaTime), 0, Mathf.Lerp(valorAntigoP2.width, valorMenor, speed * Time.deltaTime), 1);
                 //MudarCamera = false;
             }
-            else if (ModoDeJogo.qualOjogador == 2 && MudarCamera)
+            else if (ModoDeJogo.qualOjogador == 2)
             {
                 Rect valorAntigoP1 = cameraP1.rect;
                 Rect valorAntigoP2 = cameraP2.rect;

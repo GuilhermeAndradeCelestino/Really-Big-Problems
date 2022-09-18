@@ -32,7 +32,9 @@ public class Player_1_Script : MonoBehaviour
     public float rotationSpeed;
 
     [Space]
-    public GameObject orbeP1;
+    
+
+
 
     float rotationVelocity;
     float moveCharacterY;
@@ -117,11 +119,8 @@ public class Player_1_Script : MonoBehaviour
         //Checa se o jogador esta observando uma parede (so funciona se vc estiver perto de uma)
         ChecarParede();
 
-        //Indica qual o personagem o jogador esta usando no momento
-        if (!ModoDeJogo.isMultiplayer)
-        {
-            IndicadorSinglePlayer();
-        }
+       
+        
 
         if (terminouOsoco)
         {
@@ -464,17 +463,7 @@ public class Player_1_Script : MonoBehaviour
     }
 
     
-    void IndicadorSinglePlayer()
-    {
-        if(ModoDeJogo.qualOjogador == 1)
-        {
-            orbeP1.SetActive(true);
-        }
-        else
-        {
-            orbeP1.SetActive(false);
-        }
-    }
+    
 
     
     IEnumerator EmpurrandoCaixa(Collider caixa)

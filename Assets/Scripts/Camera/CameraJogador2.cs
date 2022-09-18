@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraJogador2 : MonoBehaviour
 {
@@ -26,7 +27,10 @@ public class CameraJogador2 : MonoBehaviour
     
     Quaternion offsetRotationQuar;
     Vector3 velocity = Vector3.zero;
-    
+
+    [Space]
+
+    public RectTransform fundoPreto;
     
 
     /*
@@ -48,6 +52,10 @@ public class CameraJogador2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Arruma o tamanho da tela conforme o jogador selecionado no momento
+        TamanhoTelaPreta();
+
+
         //Posiciona e rotaciona a camera na posição certa, faz ela seguir o jogador
 
         transform.position = Vector3.SmoothDamp(transform.position, target.position + offsetPosition, ref velocity, speed);
@@ -148,4 +156,22 @@ public class CameraJogador2 : MonoBehaviour
     }
 
 
+
+    void TamanhoTelaPreta()
+    {
+        if (!ModoDeJogo.isMultiplayer)
+        {
+            if(ModoDeJogo.qualOjogador == 1)
+            {
+                fundoPreto.localScale = new Vector3(1.007025f, 1.962f, 1);
+                fundoPreto.anchoredPosition = new Vector3(675, fundoPreto.anchoredPosition.y,0);
+                //texto.anchoredPosition = new Vector3(44, texto.anchoredPosition.y, 0);
+            }
+            else if(ModoDeJogo.qualOjogador == 2)
+            {
+                fundoPreto.localScale = new Vector3(1.435111f, 1.962f, 1);
+                fundoPreto.anchoredPosition = new Vector3(497, fundoPreto.anchoredPosition.y, 0);
+            }
+        }
+    }
 }

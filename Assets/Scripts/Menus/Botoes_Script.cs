@@ -94,7 +94,7 @@ public class Botoes_Script : MonoBehaviour
     {
         ControladorTelas.id = 0;
         print(SceneManager.GetActiveScene().name);
-        if(SceneManager.GetActiveScene().name == "cena 1" || SceneManager.GetActiveScene().name == "cena 2" || SceneManager.GetActiveScene().name == "Cena 3")
+        if(SceneManager.GetActiveScene().name == "cena 1" || SceneManager.GetActiveScene().name == "cena 2" || SceneManager.GetActiveScene().name == "CENA 3")
         {
             SceneManager.LoadScene("MenuInicialScene");
         }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraJogador1 : MonoBehaviour
 {
@@ -27,8 +28,10 @@ public class CameraJogador1 : MonoBehaviour
     Quaternion offsetRotationQuar;
     Vector3 velocity = Vector3.zero;
 
-   
-   
+
+
+    public RectTransform fundoPreto;
+    public RectTransform texto;
 
 
     /*
@@ -52,8 +55,11 @@ public class CameraJogador1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        TamanhoTelaPreta();
+
+
         //Posiciona e rotaciona a camera na posição certa, faz ela seguir o jogador
-        
+
         transform.position = Vector3.SmoothDamp(transform.position, target.position + offsetPosition, ref velocity, speed);
         offsetRotationQuar = Quaternion.Euler(offsetRotation);
         transform.rotation = Quaternion.Lerp(transform.rotation, offsetRotationQuar, rotationSpeed);
@@ -154,5 +160,18 @@ public class CameraJogador1 : MonoBehaviour
         yield return new WaitForSeconds(delayEntreTroca);
         offsetRotation = rotation;
     }
-    
+
+
+    void TamanhoTelaPreta()
+    {
+        if (!ModoDeJogo.isMultiplayer)
+        {
+            if (ModoDeJogo.qualOjogador == 2)
+            {
+                fundoPreto.anchoredPosition = new Vector3(-667, fundoPreto.anchoredPosition.y, 0);
+                texto.anchoredPosition = new Vector3(107, texto.anchoredPosition.y, 0);
+            }
+        }
+    }
+
 }
