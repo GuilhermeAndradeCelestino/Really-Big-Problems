@@ -55,7 +55,7 @@ public class Player_1_Script : MonoBehaviour
 
     GameObject parede;
     bool terminouOsoco = false;
-
+    bool umaVezSoco = true;
 
     
 
@@ -125,6 +125,7 @@ public class Player_1_Script : MonoBehaviour
         if (terminouOsoco)
         {
             parede.SetActive(false);
+            umaVezSoco = true;
             terminouOsoco = false;
         }
         
@@ -618,9 +619,10 @@ public class Player_1_Script : MonoBehaviour
             interactP1 = false;
         }
 
-        if (podeQuebrarParece && paredeQuebravel && context.started)
+        if (podeQuebrarParece && paredeQuebravel && context.started && umaVezSoco)
         {
             StartCoroutine(Punch());
+            umaVezSoco = false;
         }
 
         if (estouPertoDoBotao && context.started)
