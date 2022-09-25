@@ -15,7 +15,7 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
     [Space]
     public GameObject[] collidersInteragiveis;
     [Space]
-    //1- camera ods players 2- camera cutscene
+    //0- camera dos players 1- camera cutscene 2-Cameras Sequencia
     public GameObject[] cameras;
     public Animator abrirPassagem;
     public Animator fade;
@@ -37,7 +37,10 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
     
     //indicar a sequenci ja foi embaralhada
     bool terminouDeEmbaralha = false;
-    
+
+    //garante que o a cutscene da seuquencia não seja tocado 2 vezes
+    bool cutsceneTocandoSequenci = false;
+
     //uma garantinha extra para ter certeza que o embaralhador não seja iniciado acidentalmente
     bool estouJogando = false;
     
@@ -72,6 +75,9 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
     [Space]
     public bool testarVitoria;
     
+    
+    
+
     void Start()
     {
         //deliga o collider ods botoes coloridos para evitar erros
@@ -100,11 +106,9 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
         if(!vitoria)
         {
             //inicia o sorteio da sequencia e trava o botão 
-            if (reiniciar && !estouJogando)
+            if (reiniciar && !estouJogando && !cutsceneTocandoSequenci)
             {
                 StartCoroutine(Embaralhar());
-                travarBotao = true;
-                reiniciar = false;
             }
 
             //trava e destrava o botão de reiniciar/embaralhar
@@ -296,6 +300,33 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
 
     IEnumerator Embaralhar()
     {
+        cutsceneTocandoSequenci = true;
+        travarBotao = true;
+        reiniciar = false;
+
+
+        Player_1_Script.travaPlayer = true;
+        Player_2_Script.travaPlayer = true;
+        fade.SetBool("FadeIn", true);
+
+        yield return new WaitForSeconds(1);
+
+        cameras[0].SetActive(false);
+        cameras[2].SetActive(true);
+
+        yield return new WaitForSeconds(0.2f);
+
+        fade.SetBool("FadeOut", true);
+        fade.SetBool("FadeIn", false);
+
+        yield return new WaitForSeconds(1);
+        fade.SetBool("voltaPadrao", true);
+        yield return new WaitForSeconds(0.1f);
+        fade.SetBool("FadeOut", false);
+        fade.SetBool("voltaPadrao", false);
+
+
+
         for (int i = 0; i < 10; i++)
         {
             sequenciaCerta[i] = Random.Range(0, 4);
@@ -311,9 +342,33 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
                 collidersInteragiveis[1].GetComponent<Collider>().enabled = true;
                 collidersInteragiveis[2].GetComponent<Collider>().enabled = true;
                 collidersInteragiveis[3].GetComponent<Collider>().enabled = true;
+
+                fade.SetBool("FadeIn", true);
+
+                yield return new WaitForSeconds(1);
+                
+                cameras[2].SetActive(false);
+                cameras[0].SetActive(true);
+               
+                yield return new WaitForSeconds(0.2f);
+
+                fade.SetBool("FadeOut", true);
+                fade.SetBool("FadeIn", false);
+
+                yield return new WaitForSeconds(1);
+                fade.SetBool("voltaPadrao", true);
+                yield return new WaitForSeconds(0.1f);
+                fade.SetBool("FadeOut", false);
+                fade.SetBool("voltaPadrao", false);
+                Player_1_Script.travaPlayer = false;
+                Player_2_Script.travaPlayer = false;
+                cutsceneTocandoSequenci = false;
             }
         }
     }
+
+   
+    
 
 
     void botaoReiniciar()
@@ -379,4 +434,6 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
         }
     }
 
+
+    
 }

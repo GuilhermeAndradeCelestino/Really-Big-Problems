@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class Player_1_Script : MonoBehaviour
 {
+    //travar o player
+    public static bool travaPlayer = false;
+
     public Transform olhandoDirecao;
     public Transform olhos;
     public Transform maoSoco;
@@ -95,6 +98,7 @@ public class Player_1_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        print(estouPertoDoBotao + " P1");
         //print(pa.CharacterControls);
         //Mudança da orientação do movimento baseado na posição da camera
         Orientacao_Inputs();
@@ -102,7 +106,7 @@ public class Player_1_Script : MonoBehaviour
         //Gravidade
         Gravidade();
 
-        if (!vitoriaP1 && !Mecanica_Troca_Script.trocaTroca && !Puzzle_porta.transicao)
+        if (!vitoriaP1 && !Mecanica_Troca_Script.trocaTroca && !Puzzle_porta.transicao )
         {
             //Movimento e rotação
             Movimentacao();
@@ -419,9 +423,17 @@ public class Player_1_Script : MonoBehaviour
         {
             _animator.SetFloat("MoveSpeed", 0);
         }
-        else if (vitoriaP1)
+        
+        if (vitoriaP1)
         {
             _animator.SetFloat("MoveSpeed", 0);
+        }
+        
+        if (travaPlayer)
+        {
+            _animator.SetFloat("MoveSpeed", 0);
+            playerMovement.x = 0;
+            playerMovement.z = 0;
         }
 
 
@@ -625,7 +637,7 @@ public class Player_1_Script : MonoBehaviour
             umaVezSoco = false;
         }
 
-        if (estouPertoDoBotao && context.started)
+        if (estouPertoDoBotao && context.started && cc.isGrounded)
         {
             puzzle_sequencia_com_cor.reiniciar = true;
             estouPertoDoBotao = false;
@@ -638,7 +650,7 @@ public class Player_1_Script : MonoBehaviour
     public void OnRotateLeft(InputAction.CallbackContext context)
     {
         //trava os controle caso o jogador esteja socando
-        if (context.performed && isPunching == false)
+        if (context.performed && isPunching == false && !travaPlayer)
         {
             if (CameraJogador1.posicaoJogador1 < 4)
             {
@@ -657,7 +669,7 @@ public class Player_1_Script : MonoBehaviour
     public void OnRotateRight(InputAction.CallbackContext context)
     {
         //trava os controle caso o jogador esteja socando
-        if (context.performed && isPunching == false)
+        if (context.performed && isPunching == false && !travaPlayer)
         {
             if (CameraJogador1.posicaoJogador1 > 1)
             {
@@ -679,7 +691,7 @@ public class Player_1_Script : MonoBehaviour
 
     public void ChangeCharacter(InputAction.CallbackContext context)
     {
-        if (context.performed && !isPunching)
+        if (context.performed && !isPunching && !travaPlayer)
         {
             ModoDeJogo.mudanca = true;
             ModoDeJogo.qualOjogador = 2;
@@ -689,11 +701,11 @@ public class Player_1_Script : MonoBehaviour
 
     public void Pause(InputAction.CallbackContext context)
     {
-        if (pausa.podePausar == false && context.performed && !livro_interagivel.estouLendo)
+        if (pausa.podePausar == false && context.performed && !livro_interagivel.estouLendo && !travaPlayer)
         {
             pausa.podePausar = true; 
         }
-        else if (pausa.podePausar == true && context.performed && !livro_interagivel.estouLendo)
+        else if (pausa.podePausar == true && context.performed && !livro_interagivel.estouLendo && !travaPlayer)
         {
             pausa.podePausar = false;
         }

@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class Player_2_Script : MonoBehaviour
 {
+    //travar o player
+    public static bool travaPlayer = false;
 
     [Space]
 
@@ -70,7 +72,7 @@ public class Player_2_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        print(estouPertoDoBotao + " P2");
         //print("vitoriaP2 é: " + vitoriaP2);
         //Mudança da orientação do movimento baseado na posição da camera
         Orientacao_Inputs();
@@ -281,7 +283,13 @@ public class Player_2_Script : MonoBehaviour
         {
             _animator.SetFloat("MoveSpeed", 0);
         }
-
+        
+        if (travaPlayer)
+        {
+            _animator.SetFloat("MoveSpeed", 0);
+            playerMovement.x = 0;
+            playerMovement.z = 0;
+        }
         //Pulo
         //checa se estou pulando
         _animator.SetBool("IsGrounded", cc.isGrounded);
@@ -408,9 +416,10 @@ public class Player_2_Script : MonoBehaviour
             interactP2 = false;
         }
 
-        if (estouPertoDoBotao && context.started)
+        if (estouPertoDoBotao && context.started && cc.isGrounded)
         {
             puzzle_sequencia_com_cor.reiniciar = true;
+            estouPertoDoBotao = false;
         }
 
 
@@ -432,7 +441,7 @@ public class Player_2_Script : MonoBehaviour
     public void OnRotateLeft(InputAction.CallbackContext context)
     {
         //trava os controle caso o jogador esteja socando
-        if (context.performed)
+        if (context.performed && !travaPlayer)
         {
             if (CameraJogador2.posicaoJogador2 < 4)
             {
@@ -451,7 +460,7 @@ public class Player_2_Script : MonoBehaviour
     public void OnRotateRight(InputAction.CallbackContext context)
     {
         //trava os controle caso o jogador esteja socando
-        if (context.performed)
+        if (context.performed && !travaPlayer)
         {
             if (CameraJogador2.posicaoJogador2 > 1)
             {
@@ -469,7 +478,7 @@ public class Player_2_Script : MonoBehaviour
 
     public void ChangeCharacter(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !travaPlayer)
         {
             print("foi");
             ModoDeJogo.mudanca = true;
@@ -480,11 +489,11 @@ public class Player_2_Script : MonoBehaviour
 
     public void Pause(InputAction.CallbackContext context)
     {
-        if (pausa.podePausar == false && context.performed && !livro_interagivel.estouLendo)
+        if (pausa.podePausar == false && context.performed && !livro_interagivel.estouLendo && !travaPlayer)
         {
             pausa.podePausar = true;
         }
-        else if (pausa.podePausar == true && context.performed && !livro_interagivel.estouLendo)
+        else if (pausa.podePausar == true && context.performed && !livro_interagivel.estouLendo && !travaPlayer)
         {
             pausa.podePausar = false;
         }
