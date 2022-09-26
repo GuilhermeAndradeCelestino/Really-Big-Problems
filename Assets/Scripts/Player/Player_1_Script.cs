@@ -80,8 +80,8 @@ public class Player_1_Script : MonoBehaviour
 
 
     //puzle porta cena 3
-    int respostaAtual = -1;
-    Collider porta;
+    bool estouNaPorta;
+    int respostaPorta;
 
     Vector3 playerMovement;
 
@@ -98,7 +98,9 @@ public class Player_1_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(estouPertoDoBotao + " P1");
+        
+
+        //(estouPertoDoBotao + " P1");
         //print(pa.CharacterControls);
         //Mudança da orientação do movimento baseado na posição da camera
         Orientacao_Inputs();
@@ -152,7 +154,8 @@ public class Player_1_Script : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        porta = other;
+        
+
         if (other.gameObject.tag == "ParedeQuebrada")
         {
             other.gameObject.GetComponent<Parede_quebrada>().enabled = true;
@@ -206,9 +209,9 @@ public class Player_1_Script : MonoBehaviour
         {
             estouPertoDoBotao = true;
         }
-        
 
-        
+
+        PuzzleCena3Porta(other);
 
         bool a = true;
         PuzzleSequenciaCor(other, a);
@@ -247,6 +250,12 @@ public class Player_1_Script : MonoBehaviour
 
         bool a = false;
         PuzzleSequenciaCor(other, a);
+
+        if(other.gameObject.tag == "Cena3_Sala1")
+        {
+            estouNaPorta = false;
+        }
+
     }
 
 
@@ -560,25 +569,29 @@ public class Player_1_Script : MonoBehaviour
         }
     }
 
-    void PuzzleCena3Porta(Collider other, bool bora)
+    void PuzzleCena3Porta(Collider other)
     {
         if (other.gameObject.tag == "Cena3_Sala1")
         {
-            if (other.gameObject.name == "Porta0" && bora)
+            if (other.gameObject.name == "Porta0")
             {
-                other.GetComponent<Salas>().MandaResposta(0);
+                estouNaPorta = true;
+                respostaPorta = 0;
             }
-            else if (other.gameObject.name == "Porta1" && bora)
+            else if (other.gameObject.name == "Porta1")
             {
-                other.GetComponent<Salas>().MandaResposta(1);
+                estouNaPorta = true;
+                respostaPorta = 1;
             }
-            else if (other.gameObject.name == "Porta2" && bora)
+            else if (other.gameObject.name == "Porta2")
             {
-                other.GetComponent<Salas>().MandaResposta(2);
+                estouNaPorta = true;
+                respostaPorta = 2;
             }
-            else if (other.gameObject.name == "Porta3" && bora)
+            else if (other.gameObject.name == "Porta3")
             {
-                other.GetComponent<Salas>().MandaResposta(3);
+                estouNaPorta = true;
+                respostaPorta = 3;
             }
         }
     }
@@ -644,7 +657,11 @@ public class Player_1_Script : MonoBehaviour
         }
 
         PuzzleInformarBotao(context.started);
-        PuzzleCena3Porta(porta, context.started);
+
+        if (estouNaPorta && context.started)
+        {
+            Salas.MandaResposta(respostaPorta);
+        }
     }
 
     public void OnRotateLeft(InputAction.CallbackContext context)

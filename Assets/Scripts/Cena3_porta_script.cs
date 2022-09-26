@@ -18,6 +18,7 @@ public class Cena3_porta_script : MonoBehaviour
     {
         porta.SetTrigger("Abrir");
         collider_.enabled = false;
+        Puzzle_porta.portaTravada = true;
     }
 
     public void AbrirPortao()

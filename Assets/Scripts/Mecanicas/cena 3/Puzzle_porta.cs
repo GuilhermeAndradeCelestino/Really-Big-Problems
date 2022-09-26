@@ -12,12 +12,14 @@ public class Puzzle_porta : MonoBehaviour
     [Space]
     
     
-    [Header("Obejetos das portas")]
+    [Header("Objetos das portas")]
     public GameObject[] portasSala1;
     
     public GameObject[] portasSala2;
     
     public GameObject[] portasSala3;
+
+    public GameObject portasColliders;
 
     [Space]
     [Space]
@@ -44,7 +46,7 @@ public class Puzzle_porta : MonoBehaviour
     public Animator fade;
 
     public static bool transicao;
-
+    public static bool portaTravada;
 
     [Header("Opçoes de teste")]
     public bool testeSorteoPortaCerta = false;
@@ -57,6 +59,7 @@ public class Puzzle_porta : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        portaTravada = false;
         salaAtual = 1;
         
         preparacaoCompleta();
@@ -65,10 +68,12 @@ public class Puzzle_porta : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        travar_ou_destravar_Portas(portaTravada);
         testes();
 
         if (respondendo)
         {
+            print(resposta + " resposta");
             if (portasCertas[salaAtual - 1] == resposta)
             {
                 StartCoroutine(teleporteAcertou());
@@ -98,6 +103,7 @@ public class Puzzle_porta : MonoBehaviour
         yield return new WaitForSeconds(1);
         transicao = false;
 
+        
 
         if (ModoDeJogo.isMultiplayer)
         {
@@ -109,6 +115,7 @@ public class Puzzle_porta : MonoBehaviour
                 yield return new WaitForSeconds(1);
 
                 playersMulti[0].transform.position = pontosTP[3].position;
+                yield return new WaitForSeconds(0.2f);
                 transicao = false;
 
                 fade.SetBool("FadeIn", false);
@@ -128,6 +135,7 @@ public class Puzzle_porta : MonoBehaviour
                 yield return new WaitForSeconds(1);
 
                 playersMulti[0].transform.position = pontosTP[1].position;
+                yield return new WaitForSeconds(0.2f);
                 transicao = false;
 
                 fade.SetBool("FadeIn", false);
@@ -147,6 +155,7 @@ public class Puzzle_porta : MonoBehaviour
                 yield return new WaitForSeconds(1);
 
                 playersMulti[0].transform.position = pontosTP[2].position;
+                yield return new WaitForSeconds(0.2f);
                 transicao = false;
 
                 fade.SetBool("FadeIn", false);
@@ -174,6 +183,7 @@ public class Puzzle_porta : MonoBehaviour
                 yield return new WaitForSeconds(1);
 
                 playersSingle[0].transform.position = pontosTP[3].position;
+                yield return new WaitForSeconds(0.2f);
                 transicao = false;
 
                 fade.SetBool("FadeIn", false);
@@ -193,6 +203,7 @@ public class Puzzle_porta : MonoBehaviour
                 yield return new WaitForSeconds(1);
 
                 playersSingle[0].transform.position = pontosTP[1].position;
+                yield return new WaitForSeconds(0.2f);
                 transicao = false;
 
                 fade.SetBool("FadeIn", false);
@@ -212,6 +223,7 @@ public class Puzzle_porta : MonoBehaviour
                 yield return new WaitForSeconds(1);
 
                 playersSingle[0].transform.position = pontosTP[2].position;
+                yield return new WaitForSeconds(0.2f);
                 transicao = false;
 
                 fade.SetBool("FadeIn", false);
@@ -229,6 +241,8 @@ public class Puzzle_porta : MonoBehaviour
             }
             
         }
+
+        Salas.umaVez = true;
     }
 
     IEnumerator teleporteErrou()
@@ -243,6 +257,7 @@ public class Puzzle_porta : MonoBehaviour
 
             playersMulti[0].transform.position = pontosTP[0].position;
             playersMulti[1].transform.position = pontosTP[4].position;
+            yield return new WaitForSeconds(0.2f);
             transicao = false;
 
             fade.SetBool("FadeIn", false);
@@ -270,6 +285,7 @@ public class Puzzle_porta : MonoBehaviour
 
             playersSingle[0].transform.position = pontosTP[0].position;
             playersSingle[1].transform.position = pontosTP[4].position;
+            yield return new WaitForSeconds(0.2f);
             transicao = false;
 
             fade.SetBool("FadeIn", false);
@@ -286,6 +302,8 @@ public class Puzzle_porta : MonoBehaviour
             yield return new WaitForSeconds(1);
             fade.SetBool("voltaPadrao", false);
         }
+
+        Salas.umaVez = true;
     }
 
     void posicionaMiniaturasAleatoriamente()
@@ -411,5 +429,10 @@ public class Puzzle_porta : MonoBehaviour
         }
     }
 
+    //trava ou destrava as portas , impedindo o player 1 de interagir com elas 
+    void travar_ou_destravar_Portas(bool devoTravar)
+    {
+        portasColliders.SetActive(devoTravar);
+    }
 
 }

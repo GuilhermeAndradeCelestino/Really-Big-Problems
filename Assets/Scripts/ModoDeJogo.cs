@@ -30,6 +30,7 @@ public class ModoDeJogo : MonoBehaviour
 
     public bool a;
     public bool teste;
+    public bool printInformacoes;
 
     // Start is called before the first frame update
     void Start()
@@ -81,7 +82,7 @@ public class ModoDeJogo : MonoBehaviour
             UmJogador();
         }
 
-        if (teste)
+        if (teste && printInformacoes)
         {
             print(player1_single_Input.currentActionMap + "j1");
             print(player2_single_Input.currentActionMap + "j2");

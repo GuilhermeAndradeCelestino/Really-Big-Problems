@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Salas : MonoBehaviour
 {
+    public static bool umaVez;
     // Start is called before the first frame update
     void Start()
     {
-        
+        umaVez = true;
     }
 
     // Update is called once per frame
@@ -16,9 +17,14 @@ public class Salas : MonoBehaviour
         
     }
 
-    public void MandaResposta(int qualAPorta)
+    public static void MandaResposta(int qualAPorta)
     {
-        Puzzle_porta.resposta = qualAPorta;
-        Puzzle_porta.respondendo = true;
+        if (umaVez)
+        {
+            Puzzle_porta.resposta = qualAPorta;
+            Puzzle_porta.respondendo = true;
+            umaVez = false;
+        }
+        
     }
 }

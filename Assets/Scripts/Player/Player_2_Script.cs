@@ -72,7 +72,7 @@ public class Player_2_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(estouPertoDoBotao + " P2");
+        //print(estouPertoDoBotao + " P2");
         //print("vitoriaP2 é: " + vitoriaP2);
         //Mudança da orientação do movimento baseado na posição da camera
         Orientacao_Inputs();
