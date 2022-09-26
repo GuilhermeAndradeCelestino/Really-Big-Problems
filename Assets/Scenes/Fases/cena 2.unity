@@ -5441,7 +5441,7 @@ GameObject:
   - component: {fileID: 47589220}
   - component: {fileID: 47589219}
   m_Layer: 0
-  m_Name: SM_Prop_Jewel_06
+  m_Name: Jewel_verde
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31674,7 +31674,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 404515305}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -60.31, y: 52.70595, z: 5.7279816}
+  m_LocalPosition: {x: -60.31, y: 52.70595, z: 5.43}
   m_LocalScale: {x: 1.8213, y: 1.8213, z: 1.8213}
   m_Children:
   - {fileID: 1393394037}
@@ -34277,7 +34277,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24334
+  m_Name: pb_Mesh24348
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -36138,7 +36138,7 @@ RectTransform:
   m_GameObject: {fileID: 682136647}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.9915, y: 2.9915, z: 2.9915}
   m_Children: []
   m_Father: {fileID: 713647809}
   m_RootOrder: 0
@@ -42227,6 +42227,17 @@ MonoBehaviour:
   - {fileID: 298608667}
   - {fileID: 1131916929}
   - {fileID: 920877372}
+  botaoPedra:
+  - {fileID: 4532045610313057152}
+  - {fileID: 1407753392}
+  - {fileID: 2109064945}
+  - {fileID: 47589217}
+  botoesMaterial:
+  - {fileID: 2100000, guid: f845226a76dee864bbd4d651fc7e585c, type: 2}
+  - {fileID: 2100000, guid: 1cfcecd8405223844a16f091b689a342, type: 2}
+  - {fileID: 2100000, guid: a8a7b6dbda35b614b83e5f21259c7793, type: 2}
+  - {fileID: 2100000, guid: e705b5129af88f24697e6b9914589e2b, type: 2}
+  botoaoDesativado: {fileID: 2100000, guid: e2208125da324dc4e9a93e695f29cd5b, type: 2}
   cameras:
   - {fileID: 5430926725893332801}
   - {fileID: 1026515987}
@@ -59773,7 +59784,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1180517508}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 52.14429, y: 52.70595, z: 5.7279816}
+  m_LocalPosition: {x: 52.14429, y: 52.70595, z: 5.46}
   m_LocalScale: {x: 1.8213, y: 1.8213, z: 1.8213}
   m_Children:
   - {fileID: 670467840}
@@ -64324,7 +64335,7 @@ GameObject:
   - component: {fileID: 1407753395}
   - component: {fileID: 1407753394}
   m_Layer: 0
-  m_Name: SM_Prop_Jewel_06
+  m_Name: Jewel_Azul
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94554,7 +94565,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24126
+  m_Name: pb_Mesh24142
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -100675,7 +100686,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24324
+  m_Name: pb_Mesh24338
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -121540,7 +121551,7 @@ GameObject:
   - component: {fileID: 2109064948}
   - component: {fileID: 2109064947}
   m_Layer: 0
-  m_Name: SM_Prop_Jewel_06
+  m_Name: Jewel_Amarelo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124851,7 +124862,7 @@ GameObject:
   - component: {fileID: 4532045610315224768}
   - component: {fileID: 4467707795145807200}
   m_Layer: 0
-  m_Name: SM_Prop_Jewel_06
+  m_Name: Jewel_vermelho
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

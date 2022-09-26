@@ -13,7 +13,14 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
     [Space]
     public Animator[] feedbackVisual;
     [Space]
+    
     public GameObject[] collidersInteragiveis;
+
+    //0 - vermelho, 1 - azul, 2 - amarelo, 3 - verde,
+    public GameObject[] botaoPedra;
+    public Material[] botoesMaterial;
+    public Material botoaoDesativado;
+
     [Space]
     //0- camera dos players 1- camera cutscene 2-Cameras Sequencia
     public GameObject[] cameras;
@@ -22,6 +29,8 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
     
     //0- verde 1- vermelho 2-verde 3-vermelho || 4 e 5 collider
     public GameObject[] botoes;
+    
+    
 
     public static bool placaVerde;
     public static bool placaAzul;
@@ -81,11 +90,24 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
     void Start()
     {
         //deliga o collider ods botoes coloridos para evitar erros
+        int j = 0;
+        while(j < 4)
+        {
+            collidersInteragiveis[j].GetComponent<Collider>().enabled = false;
+            botaoPedra[j].GetComponent<MeshRenderer>().material = botoaoDesativado;
+            j++;
+        }
+        /*
         collidersInteragiveis[0].GetComponent<Collider>().enabled = false;
         collidersInteragiveis[1].GetComponent<Collider>().enabled = false;
         collidersInteragiveis[2].GetComponent<Collider>().enabled = false;
         collidersInteragiveis[3].GetComponent<Collider>().enabled = false;
-        
+
+        botaoPedra[0].GetComponent<MeshRenderer>().material = botoaoDesativado;
+        botaoPedra[1].GetComponent<MeshRenderer>().material = botoaoDesativado;
+        botaoPedra[2].GetComponent<MeshRenderer>().material = botoaoDesativado;
+        botaoPedra[3].GetComponent<MeshRenderer>().material = botoaoDesativado;
+        */
         //seta a sequencia do player para 5 em totos os slots pra evitar erro
         for (int i = 0; i < 10; i++)
         {
@@ -96,7 +118,7 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
     
     void Update()
     {
-
+        
         //liga o modo teste
         if (isModoTesteLigado)
         {
@@ -338,10 +360,13 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
             {
                 estouJogando = true;
                 terminouDeEmbaralha = true;
-                collidersInteragiveis[0].GetComponent<Collider>().enabled = true;
-                collidersInteragiveis[1].GetComponent<Collider>().enabled = true;
-                collidersInteragiveis[2].GetComponent<Collider>().enabled = true;
-                collidersInteragiveis[3].GetComponent<Collider>().enabled = true;
+                
+                for(int j = 0; j < collidersInteragiveis.Length; j++)
+                {
+                    collidersInteragiveis[j].GetComponent<Collider>().enabled = true;
+                    botaoPedra[j].GetComponent<MeshRenderer>().material = botoesMaterial[j];
+                }
+            
 
                 fade.SetBool("FadeIn", true);
 
