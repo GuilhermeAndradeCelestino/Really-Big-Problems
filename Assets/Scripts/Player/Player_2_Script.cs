@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.UI;
 public class Player_2_Script : MonoBehaviour
 {
     //travar o player
@@ -29,7 +29,10 @@ public class Player_2_Script : MonoBehaviour
     public float rotationSpeed;
 
     [Space]
-    
+
+    //0 - baixo, 1 - left , 2 - up, 3 - right
+    public Image[] indicadoresPosicaoP2;
+
 
     float rotationVelocity;
     float moveCharacterY;
@@ -72,6 +75,7 @@ public class Player_2_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         //print(estouPertoDoBotao + " P2");
         //print("vitoriaP2 é: " + vitoriaP2);
         //Mudança da orientação do movimento baseado na posição da camera
@@ -86,8 +90,8 @@ public class Player_2_Script : MonoBehaviour
             Movimentacao();
         }
 
-        
-        
+
+        IndicadorDirecao();
 
     }
 
@@ -372,8 +376,38 @@ public class Player_2_Script : MonoBehaviour
         }
     }
 
+    void IndicadorDirecao()
+    {
+        if (CameraJogador2.posicaoJogador2 == 1)
+        {
+            indicadoresPosicaoP2[0].color = Color.red;
+            indicadoresPosicaoP2[1].color = Color.white;
+            indicadoresPosicaoP2[2].color = Color.white;
+            indicadoresPosicaoP2[3].color = Color.white;
+        }
+        else if (CameraJogador2.posicaoJogador2 == 2)
+        {
+            indicadoresPosicaoP2[0].color = Color.white;
+            indicadoresPosicaoP2[1].color = Color.red;
+            indicadoresPosicaoP2[2].color = Color.white;
+            indicadoresPosicaoP2[3].color = Color.white;
+        }
+        else if (CameraJogador2.posicaoJogador2 == 3)
+        {
+            indicadoresPosicaoP2[0].color = Color.white;
+            indicadoresPosicaoP2[1].color = Color.white;
+            indicadoresPosicaoP2[2].color = Color.red;
+            indicadoresPosicaoP2[3].color = Color.white;
+        }
+        else if (CameraJogador2.posicaoJogador2 == 4)
+        {
+            indicadoresPosicaoP2[0].color = Color.white;
+            indicadoresPosicaoP2[1].color = Color.white;
+            indicadoresPosicaoP2[2].color = Color.white;
+            indicadoresPosicaoP2[3].color = Color.red;
+        }
+    }
 
-    
     // inputs 
     public void OnMove(InputAction.CallbackContext context)
     {

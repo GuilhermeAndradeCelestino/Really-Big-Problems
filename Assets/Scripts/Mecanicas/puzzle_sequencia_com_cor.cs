@@ -241,7 +241,7 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
         feedbackVisual[0].SetBool("Acertou", true);
         feedbackVisual[1].SetBool("Acertou", true);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(0.5f);
 
         feedbackVisual[0].SetBool("Acertou", false);
         feedbackVisual[1].SetBool("Acertou", false);
@@ -253,7 +253,7 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
         feedbackVisual[0].SetBool("Errou", true);
         feedbackVisual[1].SetBool("Errou", true);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(0.5f);
 
         feedbackVisual[0].SetBool("Errou", false);
         feedbackVisual[1].SetBool("Errou", false);

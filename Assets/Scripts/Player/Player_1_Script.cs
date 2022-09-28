@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.UI;
 public class Player_1_Script : MonoBehaviour
 {
     //travar o player
@@ -35,9 +35,9 @@ public class Player_1_Script : MonoBehaviour
     public float rotationSpeed;
 
     [Space]
+    //0 - baixo, 1 - left , 2 - up, 3 - right
+    public Image[] indicadoresPosicaoP1;
     
-
-
 
     float rotationVelocity;
     float moveCharacterY;
@@ -134,7 +134,7 @@ public class Player_1_Script : MonoBehaviour
             umaVezSoco = true;
             terminouOsoco = false;
         }
-        
+        IndicadorDirecao();
     }
 
     private void FixedUpdate()
@@ -596,6 +596,39 @@ public class Player_1_Script : MonoBehaviour
         }
     }
 
+    void IndicadorDirecao()
+    {
+        if (CameraJogador1.posicaoJogador1 == 1)
+        {
+            indicadoresPosicaoP1[0].color = Color.red;
+            indicadoresPosicaoP1[1].color = Color.white;
+            indicadoresPosicaoP1[2].color = Color.white;
+            indicadoresPosicaoP1[3].color = Color.white;
+        }
+        else if (CameraJogador1.posicaoJogador1 == 2)
+        {
+            indicadoresPosicaoP1[0].color = Color.white;
+            indicadoresPosicaoP1[1].color = Color.red;
+            indicadoresPosicaoP1[2].color = Color.white;
+            indicadoresPosicaoP1[3].color = Color.white;
+        }
+        else if (CameraJogador1.posicaoJogador1 == 3)
+        {
+            indicadoresPosicaoP1[0].color = Color.white;
+            indicadoresPosicaoP1[1].color = Color.white;
+            indicadoresPosicaoP1[2].color = Color.red;
+            indicadoresPosicaoP1[3].color = Color.white;
+        }
+        else if (CameraJogador1.posicaoJogador1 == 4)
+        {
+            indicadoresPosicaoP1[0].color = Color.white;
+            indicadoresPosicaoP1[1].color = Color.white;
+            indicadoresPosicaoP1[2].color = Color.white;
+            indicadoresPosicaoP1[3].color = Color.red;
+        }
+    }
+
+
     // inputs 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -727,5 +760,6 @@ public class Player_1_Script : MonoBehaviour
             pausa.podePausar = false;
         }
     }
+
 }
 

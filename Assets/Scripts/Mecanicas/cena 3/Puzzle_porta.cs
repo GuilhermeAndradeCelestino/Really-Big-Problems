@@ -21,6 +21,8 @@ public class Puzzle_porta : MonoBehaviour
 
     public GameObject portasColliders;
 
+    public GameObject particulaInteracao;
+
     [Space]
     [Space]
 
@@ -433,6 +435,7 @@ public class Puzzle_porta : MonoBehaviour
     void travar_ou_destravar_Portas(bool devoTravar)
     {
         portasColliders.SetActive(devoTravar);
+        particulaInteracao.SetActive(devoTravar);
     }
 
 }
