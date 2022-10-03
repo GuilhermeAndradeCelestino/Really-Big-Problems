@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 7007179926644319610}
   - component: {fileID: 7007179928091201021}
   m_Layer: 8
-  m_Name: Caixa_Movivel
+  m_Name: Errada_Caixa_Movivel
   m_TagString: CaixaInteragivel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

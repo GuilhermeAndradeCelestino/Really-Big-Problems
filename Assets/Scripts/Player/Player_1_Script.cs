@@ -68,6 +68,8 @@ public class Player_1_Script : MonoBehaviour
     bool canMoveBox;
     bool estouPuxando;
     Transform tempTransform;
+    public static int direcaoCaixa = 0;
+    public static bool pararDeMoverCaixa;
 
     public static bool vitoriaP1;
 
@@ -98,6 +100,10 @@ public class Player_1_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        
+        print(playerMovement.x);
+
         
 
         //(estouPertoDoBotao + " P1");
@@ -167,6 +173,10 @@ public class Player_1_Script : MonoBehaviour
 
         if(other.gameObject.tag == "CaixaInteragivel")
         {
+            direcaoCaixa = int.Parse(other.gameObject.name);
+            
+
+
             canMoveBox = true;
             if (!isMovingBox)
             {
@@ -181,6 +191,8 @@ public class Player_1_Script : MonoBehaviour
                 CameraJogador1.posicaoJogador1 = int.Parse(other.gameObject.name);
             }
            //print("Caixa");
+
+            
         }
 
         if(other.gameObject.tag == "LivroInteragivel")
@@ -231,6 +243,7 @@ public class Player_1_Script : MonoBehaviour
         if (other.gameObject.tag == "CaixaInteragivel")
         {
             canMoveBox = false;
+            direcaoCaixa = 0;
             //print("nCaixa");
         }
 
@@ -303,6 +316,15 @@ public class Player_1_Script : MonoBehaviour
             {
                 playerMovement = new Vector3(0, 0, movementInput.y) /* * speed */;
 
+                //Para o movimento quando a caixa chega perto da parede
+                if (pararDeMoverCaixa)
+                {
+                    if(playerMovement.z > 0)
+                    {
+                        playerMovement.z = 0;
+                    }
+                }
+
                 if(playerMovement.z < 0)
                 {
                     estouPuxando = true;
@@ -324,6 +346,17 @@ public class Player_1_Script : MonoBehaviour
             {
                 playerMovement = new Vector3(movementInput.y, 0, 0) /* * speed */;
 
+                //Para o movimento quando a caixa chega perto da parede
+                if (pararDeMoverCaixa)
+                {
+                    if (playerMovement.x > 0)
+                    {
+                        playerMovement.x = 0;
+                    }
+                }
+
+
+
                 if (playerMovement.x < 0)
                 {
                     estouPuxando = true;
@@ -343,6 +376,17 @@ public class Player_1_Script : MonoBehaviour
             if (isMovingBox)
             {
                 playerMovement = new Vector3(0 , 0, movementInput.y * -1)  /* * speed */;
+                
+                //Para o movimento quando a caixa chega perto da parede
+                if (pararDeMoverCaixa)
+                {
+                    if (playerMovement.z < 0)
+                    {
+                        playerMovement.z = 0;
+                    }
+                }
+
+
 
                 if (playerMovement.z > 0)
                 {
@@ -363,6 +407,15 @@ public class Player_1_Script : MonoBehaviour
             if (isMovingBox)
             {
                 playerMovement = new Vector3(movementInput.y * -1, 0, 0)  /* * speed */;
+
+                //Para o movimento quando a caixa chega perto da parede
+                if (pararDeMoverCaixa)
+                {
+                    if (playerMovement.x < 0)
+                    {
+                        playerMovement.x = 0;
+                    }
+                }
 
                 if (playerMovement.z > 0)
                 {
@@ -484,7 +537,8 @@ public class Player_1_Script : MonoBehaviour
 
     }
 
-    
+
+
     
 
     

@@ -8699,7 +8699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 7911613106060986218}
   speed: 0.2
-  rotationSpeed: 0.35
+  rotationSpeed: 0.05
   delayEntreTroca: 0.1
   offsetPosition: {x: 0, y: 3.6, z: -2.52}
   offsetRotation: {x: 45, y: 0, z: 0}
@@ -8895,7 +8895,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 7911613106724061932}
   speed: 0.2
-  rotationSpeed: 0.35
+  rotationSpeed: 0.05
   delayEntreTroca: 0.1
   offsetPosition: {x: 0, y: 3.6, z: -2.52}
   offsetRotation: {x: 45, y: 0, z: 0}
@@ -25529,7 +25529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 7911613105034457648}
   speed: 0.2
-  rotationSpeed: 0.35
+  rotationSpeed: 0.05
   delayEntreTroca: 0.1
   offsetPosition: {x: 0, y: 3.6, z: -2.52}
   offsetRotation: {x: 45, y: 0, z: 0}
@@ -26030,7 +26030,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 7911613105169937294}
   speed: 0.2
-  rotationSpeed: 0.35
+  rotationSpeed: 0.05
   delayEntreTroca: 0.1
   offsetPosition: {x: 0, y: 3.6, z: -2.52}
   offsetRotation: {x: 45, y: 0, z: 0}
