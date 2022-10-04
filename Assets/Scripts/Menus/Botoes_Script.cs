@@ -73,7 +73,7 @@ public class Botoes_Script : MonoBehaviour
 
     public void Menu_BotaoOpcoes()
     {
-        //ControladorTelas.id = 1;
+        ControladorTelas.id = 1;
     }
 
     public void Menu_BotaoSair()
