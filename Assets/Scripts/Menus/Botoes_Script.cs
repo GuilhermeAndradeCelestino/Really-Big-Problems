@@ -11,11 +11,13 @@ public class Botoes_Script : MonoBehaviour
     
 
     GameObject ultimoSelecionado;
+    public AudioClip[] audiosBotoes;
+    AudioSource _audioSorce;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        _audioSorce = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -63,7 +65,16 @@ public class Botoes_Script : MonoBehaviour
 
 
     
+    public void Audio_ApertaBotao()
+    {
+        _audioSorce.clip = audiosBotoes[0];
+        _audioSorce.Play();
+    }
 
+    public void Audio_SelecionarBotao()
+    {
+
+    }
 
 
     public void Menu_BotaoIniciar()
@@ -90,20 +101,38 @@ public class Botoes_Script : MonoBehaviour
         ControladorTelas.id = 5;
     }
 
+    IEnumerator voltaMenuDelay()
+    {
+        Time.timeScale = 1;
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("MenuInicialScene");
+    }
+
     public void VoltarMenuInicial()
     {
         ControladorTelas.id = 0;
         print(SceneManager.GetActiveScene().name);
         if(SceneManager.GetActiveScene().name == "cena 1" || SceneManager.GetActiveScene().name == "cena 2" || SceneManager.GetActiveScene().name == "CENA 3")
         {
-            SceneManager.LoadScene("MenuInicialScene");
+            
+            StartCoroutine(voltaMenuDelay());
+            //SceneManager.LoadScene("MenuInicialScene");
         }
+    }
+
+
+    IEnumerator reniciarDelay()
+    {
+        Time.timeScale = 1;
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
     }
 
     public void Reiniciar()
     {
-        
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+        StartCoroutine(reniciarDelay());
+        print("reiniciei");
+        //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
         
     }
 

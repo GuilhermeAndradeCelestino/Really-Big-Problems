@@ -23,10 +23,11 @@ public class pausa : MonoBehaviour
     {
         if (podePausar)
         {
-            Time.timeScale = 0;
+            
             hud_pausa.SetActive(true);
             if (umaVez == true)
             {
+                Time.timeScale = 0;
                 print("sadasdasdsadsssssss");
                 EventSystem.current.SetSelectedGameObject(botao);
                 umaVez = false;
