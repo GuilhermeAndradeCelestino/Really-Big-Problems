@@ -13,11 +13,12 @@ public class Botoes_Script : MonoBehaviour
     GameObject ultimoSelecionado;
     public AudioClip[] audiosBotoes;
     AudioSource _audioSorce;
-
+    bool possoReinicar = true;
     // Start is called before the first frame update
     void Start()
     {
         _audioSorce = GetComponent<AudioSource>();
+        possoReinicar = true;
     }
 
     // Update is called once per frame
@@ -125,15 +126,33 @@ public class Botoes_Script : MonoBehaviour
     {
         Time.timeScale = 1;
         yield return new WaitForSeconds(1);
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+        if(possoReinicar == true)
+        {
+            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+            possoReinicar = false;
+        }
+        
     }
 
     public void Reiniciar()
     {
+        
         StartCoroutine(reniciarDelay());
-        print("reiniciei");
+        
         //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
         
+    }
+
+    public void SalvaConfigSomEfeito()
+    {
+        VolumeAtual.volumeEfeitoSonoro = GameObject.Find("Slider_EfeitosSonoros").GetComponent<Slider>().value;
+        ControleVolume.podeAtualizar = true;
+    }
+
+    public void SalvaConfigSomMusica()
+    {
+        VolumeAtual.volumeMusica = GameObject.Find("Slider_Musica").GetComponent<Slider>().value;
+        ControleVolume.podeAtualizar = true;
     }
 
     public void SairPausa()

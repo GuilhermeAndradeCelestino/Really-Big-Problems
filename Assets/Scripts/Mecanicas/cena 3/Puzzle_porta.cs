@@ -50,6 +50,11 @@ public class Puzzle_porta : MonoBehaviour
     public static bool transicao;
     public static bool portaTravada;
 
+
+    [Space]
+    AudioSource _audioSource;
+    public AudioClip[] clips;
+
     [Header("Opçoes de teste")]
     public bool testeSorteoPortaCerta = false;
     public bool testeArrumarPortas = false;
@@ -63,7 +68,7 @@ public class Puzzle_porta : MonoBehaviour
     {
         portaTravada = false;
         salaAtual = 1;
-        
+        _audioSource = GetComponent<AudioSource>();
         preparacaoCompleta();
     }
 
@@ -97,7 +102,19 @@ public class Puzzle_porta : MonoBehaviour
         posicionaMiniaturasAleatoriamente();
     }
 
-
+    void SomAcertouErrou(bool acertei)
+    {
+        if (acertei)
+        {
+            _audioSource.clip = clips[0];
+            _audioSource.Play();
+        }
+        else if (!acertei)
+        {
+            _audioSource.clip = clips[1];
+            _audioSource.Play();
+        }
+    }
 
     IEnumerator teleporteAcertou()
     {
@@ -119,13 +136,15 @@ public class Puzzle_porta : MonoBehaviour
                 playersMulti[0].transform.position = pontosTP[3].position;
                 yield return new WaitForSeconds(0.2f);
                 transicao = false;
-
+                SomAcertouErrou(true);
                 fade.SetBool("FadeIn", false);
                 fade.SetBool("FadeOut", true);
                 yield return new WaitForSeconds(1);
+                
                 fade.SetBool("FadeOut", false);
                 fade.SetBool("voltaPadrao", true);
                 yield return new WaitForSeconds(1);
+
                 fade.SetBool("voltaPadrao", false);
 
             }
@@ -139,10 +158,11 @@ public class Puzzle_porta : MonoBehaviour
                 playersMulti[0].transform.position = pontosTP[1].position;
                 yield return new WaitForSeconds(0.2f);
                 transicao = false;
-
+                SomAcertouErrou(true);
                 fade.SetBool("FadeIn", false);
                 fade.SetBool("FadeOut", true);
                 yield return new WaitForSeconds(1);
+                
                 fade.SetBool("FadeOut", false);
                 fade.SetBool("voltaPadrao", true);
                 yield return new WaitForSeconds(1);
@@ -159,10 +179,11 @@ public class Puzzle_porta : MonoBehaviour
                 playersMulti[0].transform.position = pontosTP[2].position;
                 yield return new WaitForSeconds(0.2f);
                 transicao = false;
-
+                SomAcertouErrou(true);
                 fade.SetBool("FadeIn", false);
                 fade.SetBool("FadeOut", true);
                 yield return new WaitForSeconds(1);
+               
                 fade.SetBool("FadeOut", false);
                 fade.SetBool("voltaPadrao", true);
                 yield return new WaitForSeconds(1);
@@ -187,10 +208,11 @@ public class Puzzle_porta : MonoBehaviour
                 playersSingle[0].transform.position = pontosTP[3].position;
                 yield return new WaitForSeconds(0.2f);
                 transicao = false;
-
+                SomAcertouErrou(true);
                 fade.SetBool("FadeIn", false);
                 fade.SetBool("FadeOut", true);
                 yield return new WaitForSeconds(1);
+                
                 fade.SetBool("FadeOut", false);
                 fade.SetBool("voltaPadrao", true);
                 yield return new WaitForSeconds(1);
@@ -207,10 +229,11 @@ public class Puzzle_porta : MonoBehaviour
                 playersSingle[0].transform.position = pontosTP[1].position;
                 yield return new WaitForSeconds(0.2f);
                 transicao = false;
-
+                SomAcertouErrou(true);
                 fade.SetBool("FadeIn", false);
                 fade.SetBool("FadeOut", true);
                 yield return new WaitForSeconds(1);
+                
                 fade.SetBool("FadeOut", false);
                 fade.SetBool("voltaPadrao", true);
                 yield return new WaitForSeconds(1);
@@ -227,10 +250,11 @@ public class Puzzle_porta : MonoBehaviour
                 playersSingle[0].transform.position = pontosTP[2].position;
                 yield return new WaitForSeconds(0.2f);
                 transicao = false;
-
+                SomAcertouErrou(true);
                 fade.SetBool("FadeIn", false);
                 fade.SetBool("FadeOut", true);
                 yield return new WaitForSeconds(1);
+                
                 fade.SetBool("FadeOut", false);
                 fade.SetBool("voltaPadrao", true);
                 yield return new WaitForSeconds(1);
@@ -261,10 +285,11 @@ public class Puzzle_porta : MonoBehaviour
             playersMulti[1].transform.position = pontosTP[4].position;
             yield return new WaitForSeconds(0.2f);
             transicao = false;
-
+            SomAcertouErrou(false);
             fade.SetBool("FadeIn", false);
             fade.SetBool("FadeOut", true);
             yield return new WaitForSeconds(1);
+            
             fade.SetBool("FadeOut", false);
             fade.SetBool("voltaPadrao", true);
 
@@ -289,10 +314,11 @@ public class Puzzle_porta : MonoBehaviour
             playersSingle[1].transform.position = pontosTP[4].position;
             yield return new WaitForSeconds(0.2f);
             transicao = false;
-
+            SomAcertouErrou(false);
             fade.SetBool("FadeIn", false);
             fade.SetBool("FadeOut", true);
             yield return new WaitForSeconds(1);
+            
             fade.SetBool("FadeOut", false);
             fade.SetBool("voltaPadrao", true);
 

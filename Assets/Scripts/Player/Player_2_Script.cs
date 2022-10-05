@@ -34,6 +34,10 @@ public class Player_2_Script : MonoBehaviour
     public Image[] indicadoresPosicaoP2;
 
 
+    [Space]
+    AudioSource audioSource_;
+    public AudioClip[] stepClips;
+
     float rotationVelocity;
     float moveCharacterY;
 
@@ -70,6 +74,7 @@ public class Player_2_Script : MonoBehaviour
         vitoriaP2 = false;
         cc = GetComponent<CharacterController>();
         _gameObject = GetComponent<GameObject>();
+        audioSource_ = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -323,9 +328,15 @@ public class Player_2_Script : MonoBehaviour
         }
 
     }
+    
+    
+    //Audio
+    private void StepP2()
+    {
+        audioSource_.clip = stepClips[Random.Range(0, stepClips.Length - 1)];
+        audioSource_.Play();
+    }
 
-    
-    
 
     void ApertaBotao()
     {

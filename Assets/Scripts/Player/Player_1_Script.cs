@@ -37,7 +37,11 @@ public class Player_1_Script : MonoBehaviour
     [Space]
     //0 - baixo, 1 - left , 2 - up, 3 - right
     public Image[] indicadoresPosicaoP1;
-    
+
+
+    [Space]
+    AudioSource audioSource_;
+    public AudioClip[] stepClips;
 
     float rotationVelocity;
     float moveCharacterY;
@@ -94,6 +98,7 @@ public class Player_1_Script : MonoBehaviour
     {
         cc = GetComponent<CharacterController>();
         _gameObject = GetComponent<GameObject>();
+        audioSource_ = GetComponent<AudioSource>();
         vitoriaP1 = false;
     }
 
@@ -538,7 +543,12 @@ public class Player_1_Script : MonoBehaviour
     }
 
 
-
+    //Audio
+    private void StepP1()
+    {
+        audioSource_.clip = stepClips[Random.Range(0, stepClips.Length - 1)];
+        audioSource_.Play();
+    }
     
 
     

@@ -9,6 +9,12 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
     //1-Amarelo
     //2-Verde
     //3-vermelho
+
+
+    AudioSource _audioSource;
+    //0 - acerto / 1 - erro / 2 - cristal brilhando / 4 - portao
+    public AudioClip[] clips;
+    [Space]
     public Animator[] indicadores;
     [Space]
     public Animator[] feedbackVisual;
@@ -20,6 +26,7 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
     public GameObject[] botaoPedra;
     public Material[] botoesMaterial;
     public Material botoaoDesativado;
+    public GameObject partticulasInteragivelCor;
 
     [Space]
     //0- camera dos players 1- camera cutscene 2-Cameras Sequencia
@@ -29,7 +36,7 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
     
     //0- verde 1- vermelho 2-verde 3-vermelho || 4 e 5 collider
     public GameObject[] botoes;
-    
+    public GameObject particulasBotaoReiniciar;
     
 
     public static bool placaVerde;
@@ -89,6 +96,8 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
 
     void Start()
     {
+        partticulasInteragivelCor.SetActive(false);
+        _audioSource = GetComponent<AudioSource>();
         //deliga o collider ods botoes coloridos para evitar erros
         int j = 0;
         while(j < 4)
@@ -157,6 +166,19 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
 
     }
 
+    void TocarSom(int QualOsom)
+    {
+        _audioSource.clip = clips[QualOsom];
+        _audioSource.Play();
+    }
+
+
+    void AbrirPortaoSom()
+    {
+        _audioSource.clip = clips[3];
+        _audioSource.Play();
+    }
+
     IEnumerator Cutscene()
     {
         fade.SetBool("FadeIn", true);
@@ -173,6 +195,8 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
         fade.SetBool("voltaPadrao", true);
         fade.SetBool("FadeOut", false);
         abrirPassagem.SetBool("Abre", true);
+        yield return new WaitForSeconds(0.2f);
+        AbrirPortaoSom();
         yield return new WaitForSeconds(3f);
 
         fade.SetBool("FadeIn", true);
@@ -232,6 +256,7 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
             terminouDeEmbaralha = false;
             travarBotao = false;
             estouJogando = false;
+            partticulasInteragivelCor.SetActive(false);
             errou = false;
         }
     }
@@ -241,6 +266,7 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
         feedbackVisual[0].SetBool("Acertou", true);
         feedbackVisual[1].SetBool("Acertou", true);
 
+        TocarSom(0);
         yield return new WaitForSeconds(0.5f);
 
         feedbackVisual[0].SetBool("Acertou", false);
@@ -253,6 +279,7 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
         feedbackVisual[0].SetBool("Errou", true);
         feedbackVisual[1].SetBool("Errou", true);
 
+        TocarSom(1);
         yield return new WaitForSeconds(0.5f);
 
         feedbackVisual[0].SetBool("Errou", false);
@@ -347,12 +374,13 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
         fade.SetBool("FadeOut", false);
         fade.SetBool("voltaPadrao", false);
 
-
+        _audioSource.clip = clips[2];
 
         for (int i = 0; i < 10; i++)
         {
             sequenciaCerta[i] = Random.Range(0, 4);
             indicadores[sequenciaCerta[i]].SetBool("Tocar", true);
+            _audioSource.Play();
             yield return new WaitForSeconds(1f);
             indicadores[sequenciaCerta[i]].SetBool("Tocar", false);
             yield return new WaitForSeconds(1f);
@@ -365,6 +393,7 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
                 {
                     collidersInteragiveis[j].GetComponent<Collider>().enabled = true;
                     botaoPedra[j].GetComponent<MeshRenderer>().material = botoesMaterial[j];
+                    partticulasInteragivelCor.SetActive(true);
                 }
             
 
@@ -406,6 +435,8 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
             botoes[3].SetActive(false);
             botoes[4].GetComponent<Collider>().enabled = true;
             botoes[5].GetComponent<Collider>().enabled = true;
+            particulasBotaoReiniciar.SetActive(true);
+
         }
         else if(travarBotao == true)
         {
@@ -415,6 +446,7 @@ public class puzzle_sequencia_com_cor : MonoBehaviour
             botoes[3].SetActive(true);
             botoes[4].GetComponent<Collider>().enabled = false;
             botoes[5].GetComponent<Collider>().enabled = false;
+            particulasBotaoReiniciar.SetActive(false);
         }
     }
 

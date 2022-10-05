@@ -8,7 +8,7 @@ using UnityEngine;
 public class Mecanica_Troca_Script : MonoBehaviour
 {
 
-    
+    AudioSource _audioSource;
 
     public Transform pontoA;
     public Transform pontoB;
@@ -47,7 +47,7 @@ public class Mecanica_Troca_Script : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -103,6 +103,7 @@ public class Mecanica_Troca_Script : MonoBehaviour
         }
         yield return new WaitForSeconds(0.2f); 
         trocaTroca = false;
+        _audioSource.Play();
         yield return new WaitForSeconds(_tempoComTelaEscura);
         
         fade.SetBool("FadeIn", false);
