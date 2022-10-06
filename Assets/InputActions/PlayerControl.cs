@@ -80,6 +80,15 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextLevel"",
+                    ""type"": ""Button"",
+                    ""id"": ""5e326f00-efe4-409a-8414-ddb8a2b61a3f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -258,6 +267,17 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""26390a73-7e0d-4c35-820c-bcd5f0a85568"",
+                    ""path"": ""<Keyboard>/f3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""NextLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -323,6 +343,15 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""b8bf6357-0583-4b74-8516-9de1bcd78adb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextLevel"",
+                    ""type"": ""Button"",
+                    ""id"": ""270dba90-9dde-4920-8a40-f9b307cd832e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -525,6 +554,17 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""62b0e92b-913e-4aba-b4b3-6059f69b1d5a"",
+                    ""path"": ""<Keyboard>/f3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""NextLevel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -824,6 +864,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         m_TwoPlayers_RotateCameraLeft = m_TwoPlayers.FindAction("RotateCameraLeft", throwIfNotFound: true);
         m_TwoPlayers_RotateCameraRight = m_TwoPlayers.FindAction("RotateCameraRight", throwIfNotFound: true);
         m_TwoPlayers_Pause = m_TwoPlayers.FindAction("Pause", throwIfNotFound: true);
+        m_TwoPlayers_NextLevel = m_TwoPlayers.FindAction("NextLevel", throwIfNotFound: true);
         // OnePlayer
         m_OnePlayer = asset.FindActionMap("OnePlayer", throwIfNotFound: true);
         m_OnePlayer_Movement = m_OnePlayer.FindAction("Movement", throwIfNotFound: true);
@@ -833,6 +874,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         m_OnePlayer_RotateCameraRight = m_OnePlayer.FindAction("RotateCameraRight", throwIfNotFound: true);
         m_OnePlayer_ChangeCharacter = m_OnePlayer.FindAction("Change Character", throwIfNotFound: true);
         m_OnePlayer_Pause = m_OnePlayer.FindAction("Pause", throwIfNotFound: true);
+        m_OnePlayer_NextLevel = m_OnePlayer.FindAction("NextLevel", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
@@ -906,6 +948,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
     private readonly InputAction m_TwoPlayers_RotateCameraLeft;
     private readonly InputAction m_TwoPlayers_RotateCameraRight;
     private readonly InputAction m_TwoPlayers_Pause;
+    private readonly InputAction m_TwoPlayers_NextLevel;
     public struct TwoPlayersActions
     {
         private @PlayerControl m_Wrapper;
@@ -916,6 +959,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         public InputAction @RotateCameraLeft => m_Wrapper.m_TwoPlayers_RotateCameraLeft;
         public InputAction @RotateCameraRight => m_Wrapper.m_TwoPlayers_RotateCameraRight;
         public InputAction @Pause => m_Wrapper.m_TwoPlayers_Pause;
+        public InputAction @NextLevel => m_Wrapper.m_TwoPlayers_NextLevel;
         public InputActionMap Get() { return m_Wrapper.m_TwoPlayers; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -943,6 +987,9 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 @Pause.started -= m_Wrapper.m_TwoPlayersActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_TwoPlayersActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_TwoPlayersActionsCallbackInterface.OnPause;
+                @NextLevel.started -= m_Wrapper.m_TwoPlayersActionsCallbackInterface.OnNextLevel;
+                @NextLevel.performed -= m_Wrapper.m_TwoPlayersActionsCallbackInterface.OnNextLevel;
+                @NextLevel.canceled -= m_Wrapper.m_TwoPlayersActionsCallbackInterface.OnNextLevel;
             }
             m_Wrapper.m_TwoPlayersActionsCallbackInterface = instance;
             if (instance != null)
@@ -965,6 +1012,9 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @NextLevel.started += instance.OnNextLevel;
+                @NextLevel.performed += instance.OnNextLevel;
+                @NextLevel.canceled += instance.OnNextLevel;
             }
         }
     }
@@ -980,6 +1030,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
     private readonly InputAction m_OnePlayer_RotateCameraRight;
     private readonly InputAction m_OnePlayer_ChangeCharacter;
     private readonly InputAction m_OnePlayer_Pause;
+    private readonly InputAction m_OnePlayer_NextLevel;
     public struct OnePlayerActions
     {
         private @PlayerControl m_Wrapper;
@@ -991,6 +1042,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         public InputAction @RotateCameraRight => m_Wrapper.m_OnePlayer_RotateCameraRight;
         public InputAction @ChangeCharacter => m_Wrapper.m_OnePlayer_ChangeCharacter;
         public InputAction @Pause => m_Wrapper.m_OnePlayer_Pause;
+        public InputAction @NextLevel => m_Wrapper.m_OnePlayer_NextLevel;
         public InputActionMap Get() { return m_Wrapper.m_OnePlayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1021,6 +1073,9 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 @Pause.started -= m_Wrapper.m_OnePlayerActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_OnePlayerActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_OnePlayerActionsCallbackInterface.OnPause;
+                @NextLevel.started -= m_Wrapper.m_OnePlayerActionsCallbackInterface.OnNextLevel;
+                @NextLevel.performed -= m_Wrapper.m_OnePlayerActionsCallbackInterface.OnNextLevel;
+                @NextLevel.canceled -= m_Wrapper.m_OnePlayerActionsCallbackInterface.OnNextLevel;
             }
             m_Wrapper.m_OnePlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1046,6 +1101,9 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @NextLevel.started += instance.OnNextLevel;
+                @NextLevel.performed += instance.OnNextLevel;
+                @NextLevel.canceled += instance.OnNextLevel;
             }
         }
     }
@@ -1149,6 +1207,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         void OnRotateCameraLeft(InputAction.CallbackContext context);
         void OnRotateCameraRight(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnNextLevel(InputAction.CallbackContext context);
     }
     public interface IOnePlayerActions
     {
@@ -1159,6 +1218,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         void OnRotateCameraRight(InputAction.CallbackContext context);
         void OnChangeCharacter(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnNextLevel(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

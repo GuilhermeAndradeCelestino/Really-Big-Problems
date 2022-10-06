@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class Player_1_Script : MonoBehaviour
 {
     //travar o player
@@ -822,6 +824,22 @@ public class Player_1_Script : MonoBehaviour
         else if (pausa.podePausar == true && context.performed && !livro_interagivel.estouLendo && !travaPlayer)
         {
             pausa.podePausar = false;
+        }
+    }
+
+    public void ChangeScene(InputAction.CallbackContext context)
+    {
+        if (SceneManager.GetActiveScene().name == "cena 1" && context.started)
+        {
+            SceneManager.LoadScene("cena 2");
+        }
+        else if (SceneManager.GetActiveScene().name == "cena 2" && context.started)
+        {
+            SceneManager.LoadScene("CENA 3");
+        }
+        else if (SceneManager.GetActiveScene().name == "Cena 3" && context.started)
+        {
+            SceneManager.LoadScene("cena 1");
         }
     }
 
