@@ -7,19 +7,26 @@ public class livro_interagivel : MonoBehaviour
 {
     public static bool estouLendo;
     public bool mostrarMensagem;
+    public static bool vouLer;
 
     public GameObject tutorial;
     public GameObject Texto;
     public GameObject botao;
 
+    public static bool p1EstaPerto;
+    public static bool p2EstaPerto;
+
+    Collider co;
 
     bool limitador = true;
 
     // Start is called before the first frame update
     void Start()
     {
+        estouLendo = false;
         tutorial.SetActive(false);
         Texto.SetActive(false);
+        co = GetComponent<Collider>();
     }
 
     // Update is called once per frame
@@ -33,7 +40,7 @@ public class livro_interagivel : MonoBehaviour
 
     void MostrarMensagem()
     {
-        if (estouLendo)
+        if (vouLer)
         {
             Texto.SetActive(false);
         }
@@ -45,7 +52,7 @@ public class livro_interagivel : MonoBehaviour
         {
             Texto.SetActive(false);
         }
-        else if (mostrarMensagem && !estouLendo)
+        else if (mostrarMensagem && !vouLer)
         {
             Texto.SetActive(true);
         }
@@ -53,9 +60,11 @@ public class livro_interagivel : MonoBehaviour
 
     void MostrarLivro()
     {
-        if (estouLendo && mostrarMensagem)
+        if (vouLer && mostrarMensagem)
         {
+            estouLendo = true;
             tutorial.SetActive(true);
+            co.enabled = false;
             EventSystem.current.SetSelectedGameObject(botao);
             if (limitador)
             {
@@ -63,13 +72,21 @@ public class livro_interagivel : MonoBehaviour
                 limitador = false;
             }
         }
-        else if (!estouLendo && mostrarMensagem)
+        else if (!vouLer && mostrarMensagem)
         {
+            
             tutorial.SetActive(false);
             EventSystem.current.SetSelectedGameObject(null);
             limitador = true;
+            estouLendo = false;
+            StartCoroutine(habilitar());
         }
     }
 
-    
+    IEnumerator habilitar()
+    {
+        yield return new WaitForSeconds(1);
+        
+        co.enabled = true;
+    }
 }

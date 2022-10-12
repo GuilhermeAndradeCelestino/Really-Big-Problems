@@ -66,7 +66,9 @@ public class Player_1_Script : MonoBehaviour
     bool terminouOsoco = false;
     bool umaVezSoco = true;
 
-    
+
+    //livro interatico
+    bool possoLer = true;
 
 
     //empurrar caixa
@@ -205,11 +207,8 @@ public class Player_1_Script : MonoBehaviour
         if(other.gameObject.tag == "LivroInteragivel")
         {
             other.gameObject.GetComponent<livro_interagivel>().mostrarMensagem = true;
-
-            if (interactP1)
-            {
-                livro_interagivel.estouLendo = true;
-            }
+            livro_interagivel.p1EstaPerto = true;
+            possoLer = true;
         }
 
         if(other.gameObject.tag == "PortalTrocaA")
@@ -247,6 +246,17 @@ public class Player_1_Script : MonoBehaviour
 
         }
 
+        if (other.gameObject.tag == "PortalTrocaA")
+        {
+            print("foi1");
+            Mecanica_Troca_Script.player1A_pronto = false;
+        }
+        else if (other.gameObject.tag == "PortalTrocaB")
+        {
+            print("foi2");
+            Mecanica_Troca_Script.player1B_pronto = false;
+        }
+
         if (other.gameObject.tag == "CaixaInteragivel")
         {
             canMoveBox = false;
@@ -257,6 +267,8 @@ public class Player_1_Script : MonoBehaviour
         if (other.gameObject.tag == "LivroInteragivel")
         {
             other.gameObject.GetComponent<livro_interagivel>().mostrarMensagem = false;
+            livro_interagivel.p1EstaPerto = false;
+            possoLer = false;
         }
 
 
@@ -743,6 +755,15 @@ public class Player_1_Script : MonoBehaviour
             interactP1 = false;
         }
 
+        //abrir livro
+        if(possoLer && context.started && !livro_interagivel.estouLendo && !livro_interagivel.p2EstaPerto)
+        {
+            livro_interagivel.vouLer = true;
+        }
+
+        
+
+
         if (podeQuebrarParece && paredeQuebravel && context.started && umaVezSoco)
         {
             StartCoroutine(Punch());
@@ -817,11 +838,11 @@ public class Player_1_Script : MonoBehaviour
 
     public void Pause(InputAction.CallbackContext context)
     {
-        if (pausa.podePausar == false && context.performed && !livro_interagivel.estouLendo && !travaPlayer)
+        if (pausa.podePausar == false && context.performed && !livro_interagivel.vouLer && !travaPlayer)
         {
             pausa.podePausar = true; 
         }
-        else if (pausa.podePausar == true && context.performed && !livro_interagivel.estouLendo && !travaPlayer)
+        else if (pausa.podePausar == true && context.performed && !livro_interagivel.vouLer && !travaPlayer)
         {
             pausa.podePausar = false;
         }

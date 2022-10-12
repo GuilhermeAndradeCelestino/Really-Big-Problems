@@ -162,7 +162,7 @@ public class Botoes_Script : MonoBehaviour
     
     public void SairLerLivro()
     {
-        livro_interagivel.estouLendo = false;
+        livro_interagivel.vouLer = false;
     }
 
     public void TutorialSingle()

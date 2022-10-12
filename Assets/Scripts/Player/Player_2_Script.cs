@@ -54,6 +54,9 @@ public class Player_2_Script : MonoBehaviour
     bool isJumping;
 
 
+    //livro interatico
+    bool possoLer = true;
+
 
     public static bool vitoriaP2;
 
@@ -157,11 +160,8 @@ public class Player_2_Script : MonoBehaviour
         if (other.gameObject.tag == "LivroInteragivel")
         {
             other.gameObject.GetComponent<livro_interagivel>().mostrarMensagem = true;
-
-            if (interactP2)
-            {
-                livro_interagivel.estouLendo = true;
-            }
+            possoLer = true;
+            livro_interagivel.p2EstaPerto = true;
         }
 
 
@@ -191,9 +191,23 @@ public class Player_2_Script : MonoBehaviour
         if (other.gameObject.tag == "LivroInteragivel")
         {
             other.gameObject.GetComponent<livro_interagivel>().mostrarMensagem = false;
+            possoLer = false;
+            livro_interagivel.p2EstaPerto = false;
         }
 
-        
+
+        if (other.gameObject.tag == "PortalTrocaA")
+        {
+            print("foi3");
+            Mecanica_Troca_Script.player2A_pronto = false;
+        }
+        else if (other.gameObject.tag == "PortalTrocaB")
+        {
+            print("foi4");
+            Mecanica_Troca_Script.player2B_pronto = false;
+        }
+
+
 
         if (other.gameObject.tag == "Botao_ReiniciarSequencia")
         {
@@ -467,8 +481,17 @@ public class Player_2_Script : MonoBehaviour
             estouPertoDoBotao = false;
         }
 
+        //abrir livro
+        if (possoLer && context.started && !livro_interagivel.estouLendo && !livro_interagivel.p1EstaPerto)
+        {
+            livro_interagivel.vouLer = true;
+        }
 
-       
+        //fechar livro
+        if (context.started && livro_interagivel.estouLendo && livro_interagivel.vouLer)
+        {
+            livro_interagivel.vouLer = false;
+        }
 
         /*
         if (context.started)
@@ -534,11 +557,11 @@ public class Player_2_Script : MonoBehaviour
 
     public void Pause(InputAction.CallbackContext context)
     {
-        if (pausa.podePausar == false && context.performed && !livro_interagivel.estouLendo && !travaPlayer)
+        if (pausa.podePausar == false && context.performed && !livro_interagivel.vouLer && !travaPlayer)
         {
             pausa.podePausar = true;
         }
-        else if (pausa.podePausar == true && context.performed && !livro_interagivel.estouLendo && !travaPlayer)
+        else if (pausa.podePausar == true && context.performed && !livro_interagivel.vouLer && !travaPlayer)
         {
             pausa.podePausar = false;
         }
