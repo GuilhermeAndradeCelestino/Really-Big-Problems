@@ -54,8 +54,7 @@ public class Player_2_Script : MonoBehaviour
     bool isJumping;
 
 
-    //livro interatico
-    bool possoLer = true;
+     
 
 
     public static bool vitoriaP2;
@@ -160,7 +159,7 @@ public class Player_2_Script : MonoBehaviour
         if (other.gameObject.tag == "LivroInteragivel")
         {
             other.gameObject.GetComponent<livro_interagivel>().mostrarMensagem = true;
-            possoLer = true;
+            
             livro_interagivel.p2EstaPerto = true;
         }
 
@@ -191,7 +190,7 @@ public class Player_2_Script : MonoBehaviour
         if (other.gameObject.tag == "LivroInteragivel")
         {
             other.gameObject.GetComponent<livro_interagivel>().mostrarMensagem = false;
-            possoLer = false;
+            
             livro_interagivel.p2EstaPerto = false;
         }
 
@@ -482,16 +481,28 @@ public class Player_2_Script : MonoBehaviour
         }
 
         //abrir livro
+        /*
         if (possoLer && context.started && !livro_interagivel.estouLendo && !livro_interagivel.p1EstaPerto)
         {
             livro_interagivel.vouLer = true;
         }
+        */
+        if (context.started && livro_interagivel.p2EstaPerto && !livro_interagivel.p1EstaPerto && !livro_interagivel.estouLendo)
+        {
+            livro_interagivel.vouLer = true;
+        }
+
+
 
         //fechar livro
-        if (context.started && livro_interagivel.estouLendo && livro_interagivel.vouLer)
+        if (ModoDeJogo.isMultiplayer)
         {
-            livro_interagivel.vouLer = false;
+            if (context.started && livro_interagivel.estouLendo)
+            {
+                livro_interagivel.vouLer = false;
+            }
         }
+        
 
         /*
         if (context.started)
@@ -546,7 +557,7 @@ public class Player_2_Script : MonoBehaviour
 
     public void ChangeCharacter(InputAction.CallbackContext context)
     {
-        if (context.performed && !travaPlayer)
+        if (context.performed && !travaPlayer && !livro_interagivel.estouLendo)
         {
             print("foi");
             ModoDeJogo.mudanca = true;

@@ -5,9 +5,14 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEditor.SearchService;
+
 
 public class Botoes_Script : MonoBehaviour
 {
+    public GameObject LoadingScreen;
+    public Slider LoadingBarfill;
+
     
 
     GameObject ultimoSelecionado;
@@ -102,21 +107,22 @@ public class Botoes_Script : MonoBehaviour
         ControladorTelas.id = 5;
     }
 
-    IEnumerator voltaMenuDelay()
+    IEnumerator voltaMenuDelay(int sceneID)
     {
         Time.timeScale = 1;
         yield return new WaitForSeconds(1);
-        SceneManager.LoadScene("MenuInicialScene");
+        StartCoroutine(LoadSceneAsyncFase(sceneID));
     }
 
-    public void VoltarMenuInicial()
+    public void VoltarMenuInicial(int sceneId)
     {
         ControladorTelas.id = 0;
         print(SceneManager.GetActiveScene().name);
         if(SceneManager.GetActiveScene().name == "cena 1" || SceneManager.GetActiveScene().name == "cena 2" || SceneManager.GetActiveScene().name == "CENA 3")
         {
-            
-            StartCoroutine(voltaMenuDelay());
+            pausa.podePausar = false;
+            StartCoroutine(LoadSceneAsyncFase(sceneId));
+            //StartCoroutine(voltaMenuDelay(sceneId));
             //SceneManager.LoadScene("MenuInicialScene");
         }
     }
@@ -165,26 +171,89 @@ public class Botoes_Script : MonoBehaviour
         livro_interagivel.vouLer = false;
     }
 
-    public void TutorialSingle()
+    public void TutorialSingle(int sceneID)
     {
-        ModoDeJogo.isMultiplayer = false;
-        SceneManager.LoadScene("Cena 1");
+       
+         ModoDeJogo.isMultiplayer = false;
+         //SceneManager.LoadScene("Cena 1");
+         StartCoroutine(LoadSceneAsyncMenu(sceneID));
+        
+        
     }
 
-    public void TutorialMulti()
+    public void TutorialMulti(int sceneID)
     {
         ModoDeJogo.isMultiplayer = true;
-        SceneManager.LoadScene("Cena 1");
+        StartCoroutine(LoadSceneAsyncMenu(sceneID));
     }
 
 
-    public void IndoPara1_2()
+    public void IndoPara1_2(int sceneID)
     {
-        SceneManager.LoadScene("Cena 2");
+        //SceneManager.LoadScene("Cena 2");
+        StartCoroutine(LoadSceneAsyncFase(sceneID));
     }
 
-    public void IndoPara1_3()
+    public void IndoPara1_3(int sceneID)
     {
-        SceneManager.LoadScene("Cena 3");
+        //SceneManager.LoadScene("Cena 3");
+        StartCoroutine(LoadSceneAsyncFase(sceneID));
+    }
+
+    IEnumerator LoadSceneAsyncMenu(int sceneID)
+    {
+        
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneID);
+
+       // operation.allowSceneActivation = false;
+
+        ControladorTelas.id = 6;
+
+        while (!operation.isDone)
+        {
+            float progressValue = Mathf.Clamp01(operation.progress / 0.9f);
+            Debug.Log(operation.progress);
+            
+
+            LoadingBarfill.value = progressValue;
+
+            yield return null;
+            /*
+            if(progressValue == 1)
+            {
+                yield return new WaitForSeconds(1);
+                operation.allowSceneActivation = true;
+            }
+            */
+        }
+    }
+
+    IEnumerator LoadSceneAsyncFase(int sceneID)
+    {
+
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneID);
+
+        //operation.allowSceneActivation = false;
+
+        Vitoria.tirarTela = true;
+        LoadingScreen.SetActive(true);
+
+        while (!operation.isDone)
+        {
+            float progressValue = Mathf.Clamp01(operation.progress / 0.9f);
+            Debug.Log(operation.progress);
+
+
+            LoadingBarfill.value = progressValue;
+
+            yield return null;
+            /*
+            if (progressValue == 1)
+            {
+                yield return new WaitForSeconds(1);
+                operation.allowSceneActivation = true;
+            }
+            */
+        }
     }
 }

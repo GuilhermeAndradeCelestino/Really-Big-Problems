@@ -68,7 +68,7 @@ public class Player_1_Script : MonoBehaviour
 
 
     //livro interatico
-    bool possoLer = true;
+    //bool possoLer = true;
 
 
     //empurrar caixa
@@ -208,7 +208,7 @@ public class Player_1_Script : MonoBehaviour
         {
             other.gameObject.GetComponent<livro_interagivel>().mostrarMensagem = true;
             livro_interagivel.p1EstaPerto = true;
-            possoLer = true;
+            //possoLer = true;
         }
 
         if(other.gameObject.tag == "PortalTrocaA")
@@ -268,7 +268,7 @@ public class Player_1_Script : MonoBehaviour
         {
             other.gameObject.GetComponent<livro_interagivel>().mostrarMensagem = false;
             livro_interagivel.p1EstaPerto = false;
-            possoLer = false;
+            //possoLer = false;
         }
 
 
@@ -289,11 +289,6 @@ public class Player_1_Script : MonoBehaviour
         }
 
     }
-
-
-
-
-
 
     IEnumerator Punch()
     {
@@ -324,8 +319,6 @@ public class Player_1_Script : MonoBehaviour
         terminouOsoco = true;
     }
     
-    
-
     void Orientacao_Inputs()
     {
         //Checa para ver qual é a posição da camenra no momento e ajusta o playerMovement conforme a camera.
@@ -756,11 +749,16 @@ public class Player_1_Script : MonoBehaviour
         }
 
         //abrir livro
+        /*
         if(possoLer && context.started && !livro_interagivel.estouLendo && !livro_interagivel.p2EstaPerto)
         {
             livro_interagivel.vouLer = true;
         }
-
+        */
+        if (context.started && livro_interagivel.p1EstaPerto && !livro_interagivel.p2EstaPerto && !livro_interagivel.estouLendo)
+        {
+            livro_interagivel.vouLer = true;
+        }
         
 
 
@@ -828,7 +826,7 @@ public class Player_1_Script : MonoBehaviour
 
     public void ChangeCharacter(InputAction.CallbackContext context)
     {
-        if (context.performed && !isPunching && !travaPlayer)
+        if (context.performed && !isPunching && !travaPlayer && !livro_interagivel.estouLendo)
         {
             ModoDeJogo.mudanca = true;
             ModoDeJogo.qualOjogador = 2;

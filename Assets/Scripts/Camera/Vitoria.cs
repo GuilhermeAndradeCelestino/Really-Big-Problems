@@ -18,6 +18,11 @@ public class Vitoria : MonoBehaviour
     public GameObject botao;
     public static bool ganhou;
     bool umaVez;
+    public GameObject cameraVitoria;
+    public GameObject[] camerasPlayer;
+    public static bool tirarTela = false;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,11 +34,17 @@ public class Vitoria : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (tirarTela)
+        {
+            telaVitoria.SetActive(false);
+            tirarTela = false;
+        }
+
         if (Player_1_Script.vitoriaP1)
         {
             if (ModoDeJogo.isMultiplayer)
             {
-                animacoes[2].SetBool("Victory", true);
+                animacoes[2].SetBool("VictoryMulti", true);
             }
             else if(!ModoDeJogo.isMultiplayer)
             {
@@ -46,7 +57,7 @@ public class Vitoria : MonoBehaviour
         {
             if (ModoDeJogo.isMultiplayer)
             {
-                animacoes[3].SetBool("Victory", true);
+                animacoes[3].SetBool("VictoryMulti", true);
             }
             else if(!ModoDeJogo.isMultiplayer)
             {
@@ -58,10 +69,17 @@ public class Vitoria : MonoBehaviour
 
         if(Player_1_Script.vitoriaP1 && Player_2_Script.vitoriaP2 && umaVez)
         {
-            ganhou = true;
-            telaVitoria.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(botao);
-            umaVez = false;
+            
+                ganhou = true;
+                foreach (GameObject t in camerasPlayer)
+                {
+                    t.SetActive(false);
+                }
+                cameraVitoria.SetActive(true);
+                telaVitoria.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(botao);
+                umaVez = false;
+            
         }
     }
 

@@ -14,10 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Fases/cena 2.unity
     guid: ff4e0599e5242894495b447252bbe8d7
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/Fases/Cena 3.unity
+    path: Assets/Scenes/Fases/CENA 3.unity
     guid: 510f08875f5e78a45addfc1e734cd2f9
   m_configObjects: {}

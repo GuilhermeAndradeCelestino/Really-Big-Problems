@@ -8,7 +8,7 @@ public class Caixa_empurravel : MonoBehaviour
 
     public LayerMask wallLayer;
 
-    bool pararIndicador = false;
+    
 
 
     // Start is called before the first frame update

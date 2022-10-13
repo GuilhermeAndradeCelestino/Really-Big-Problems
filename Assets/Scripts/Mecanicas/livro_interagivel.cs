@@ -34,7 +34,8 @@ public class livro_interagivel : MonoBehaviour
     {
         MostrarMensagem();
 
-        MostrarLivro();
+        //MostrarLivro();
+        teste();
     }
 
 
@@ -44,49 +45,86 @@ public class livro_interagivel : MonoBehaviour
         {
             Texto.SetActive(false);
         }
-        else if (!mostrarMensagem)
+        
+        if (!mostrarMensagem)
         {
             Texto.SetActive(false);
         }
-        else if (pausa.podePausar)
+        
+        if (pausa.podePausar)
         {
             Texto.SetActive(false);
         }
-        else if (mostrarMensagem && !vouLer)
+        
+        if (mostrarMensagem && !vouLer)
         {
             Texto.SetActive(true);
         }
     }
 
+
+
     void MostrarLivro()
     {
-        if (vouLer && mostrarMensagem)
+        if (p1EstaPerto || p2EstaPerto)
         {
-            estouLendo = true;
-            tutorial.SetActive(true);
-            co.enabled = false;
-            EventSystem.current.SetSelectedGameObject(botao);
-            if (limitador)
+            if (vouLer && mostrarMensagem)
             {
-                GetComponent<AudioSource>().Play();
-                limitador = false;
+                estouLendo = true;
+                tutorial.SetActive(true);
+                co.enabled = false;
+                EventSystem.current.SetSelectedGameObject(botao);
+                if (limitador)
+                {
+                    GetComponent<AudioSource>().Play();
+                    limitador = false;
+                }
+            }
+            else if (!vouLer && mostrarMensagem)
+            {
+
+                tutorial.SetActive(false);
+                EventSystem.current.SetSelectedGameObject(null);
+                limitador = true;
+                estouLendo = false;
+                StartCoroutine(habilitar());
             }
         }
-        else if (!vouLer && mostrarMensagem)
+    }
+
+    void teste()
+    {
+        if(p1EstaPerto || p2EstaPerto)
         {
-            
-            tutorial.SetActive(false);
-            EventSystem.current.SetSelectedGameObject(null);
-            limitador = true;
-            estouLendo = false;
-            StartCoroutine(habilitar());
+            if (vouLer)
+            {
+                estouLendo = true;
+                tutorial.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(botao);
+                if (limitador)
+                {
+                    GetComponent<AudioSource>().Play();
+                    limitador = false;
+                }
+            }
+
+            if (!vouLer) 
+            {
+                tutorial.SetActive(false);
+                EventSystem.current.SetSelectedGameObject(null);
+                limitador = true;
+                estouLendo = false;
+                StartCoroutine(habilitar());
+            }
         }
     }
+
 
     IEnumerator habilitar()
     {
         yield return new WaitForSeconds(1);
         
-        co.enabled = true;
+        //co.enabled = true;
+        estouLendo = false;
     }
 }
