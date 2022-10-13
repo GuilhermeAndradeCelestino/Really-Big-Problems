@@ -98,7 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6863769841718636369}
   m_Layer: 8
-  m_Name: IndicadorParede1
+  m_Name: IndicadorParede1 (0)
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -111,9 +111,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6863769841718636368}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0.7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.9, y: 0.8, z: 0.1}
   m_Children: []
   m_Father: {fileID: 6863769842381746765}
   m_RootOrder: 4
@@ -128,7 +128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6863769841866512763}
   m_Layer: 8
-  m_Name: IndicadorParede2
+  m_Name: IndicadorParede2 (0)
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -141,9 +141,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6863769841866512762}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0.5, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.8, z: 0.9}
   m_Children: []
   m_Father: {fileID: 6863769842381746765}
   m_RootOrder: 5
@@ -158,7 +158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6863769841937404998}
   m_Layer: 8
-  m_Name: IndicadorParede4
+  m_Name: IndicadorParede4 (0)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -171,9 +171,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6863769841937404993}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.7, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.5, y: 0.5, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.8, z: 0.9}
   m_Children: []
   m_Father: {fileID: 6863769842381746765}
   m_RootOrder: 7
@@ -400,7 +400,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6863769843175656932}
   m_Layer: 8
-  m_Name: IndicadorParede3
+  m_Name: IndicadorParede3 (0)
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -413,9 +413,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6863769843175656935}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: -0.7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: -0.5}
+  m_LocalScale: {x: 0.9, y: 0.8, z: 0.1}
   m_Children: []
   m_Father: {fileID: 6863769842381746765}
   m_RootOrder: 6

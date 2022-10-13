@@ -111,7 +111,7 @@ public class Player_1_Script : MonoBehaviour
     {
         
         
-        print(playerMovement.x);
+       // print(playerMovement.x);
 
         
 

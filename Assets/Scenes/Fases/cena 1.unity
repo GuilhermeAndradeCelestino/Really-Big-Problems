@@ -6499,6 +6499,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Env_Mushroom_Giant_05
       objectReference: {fileID: 0}
+    - target: {fileID: 192026, guid: 16d7d3227049b944fb34c0d7bd878ee9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 435992, guid: 16d7d3227049b944fb34c0d7bd878ee9, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -13707,7 +13711,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh62912
+  m_Name: pb_Mesh153090
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16259,11 +16263,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5325408499692638922, guid: 52c3f7404011b6944ad6611cedfb4763, type: 3}
       propertyPath: a
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5325408499692638922, guid: 52c3f7404011b6944ad6611cedfb4763, type: 3}
       propertyPath: teste
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5885974296103045930, guid: 52c3f7404011b6944ad6611cedfb4763, type: 3}
       propertyPath: m_RenderPostProcessing
@@ -33693,7 +33697,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 187514, guid: baad99cbf08303549860656d6f6d6933, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 455104, guid: baad99cbf08303549860656d6f6d6933, type: 3}
       propertyPath: m_RootOrder
@@ -37852,7 +37856,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh63378
+  m_Name: pb_Mesh153556
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
