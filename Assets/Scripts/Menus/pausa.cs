@@ -27,7 +27,7 @@ public class pausa : MonoBehaviour
             hud_pausa.SetActive(true);
             if (umaVez == true)
             {
-                Time.timeScale = 0;
+                StartCoroutine(delay());
                 print("sadasdasdsadsssssss");
                 EventSystem.current.SetSelectedGameObject(botao);
                 umaVez = false;
@@ -41,5 +41,11 @@ public class pausa : MonoBehaviour
             umaVez = true;
             Time.timeScale = 1;
         }
+    }
+
+    IEnumerator delay()
+    {
+        yield return new WaitForSeconds(0.2f);
+        Time.timeScale = 0;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using UnityEditor.SearchService;
+
 
 
 public class Botoes_Script : MonoBehaviour

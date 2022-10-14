@@ -96,7 +96,7 @@ public class livro_interagivel : MonoBehaviour
     {
         if(p1EstaPerto || p2EstaPerto)
         {
-            if (vouLer)
+            if (vouLer && mostrarMensagem)
             {
                 estouLendo = true;
                 tutorial.SetActive(true);
@@ -108,12 +108,11 @@ public class livro_interagivel : MonoBehaviour
                 }
             }
 
-            if (!vouLer) 
+            if (!vouLer && mostrarMensagem && estouLendo) 
             {
                 tutorial.SetActive(false);
                 EventSystem.current.SetSelectedGameObject(null);
                 limitador = true;
-                estouLendo = false;
                 StartCoroutine(habilitar());
             }
         }
@@ -122,7 +121,7 @@ public class livro_interagivel : MonoBehaviour
 
     IEnumerator habilitar()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.2f);
         
         //co.enabled = true;
         estouLendo = false;
