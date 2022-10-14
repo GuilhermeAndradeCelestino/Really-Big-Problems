@@ -19,11 +19,13 @@ public class Botoes_Script : MonoBehaviour
     public AudioClip[] audiosBotoes;
     AudioSource _audioSorce;
     bool possoReinicar = true;
+    
     // Start is called before the first frame update
     void Start()
     {
         _audioSorce = GetComponent<AudioSource>();
         possoReinicar = true;
+        
     }
 
     // Update is called once per frame
@@ -33,6 +35,9 @@ public class Botoes_Script : MonoBehaviour
 
     void Update()
     {
+        
+
+
         //print(EventSystem.current.currentSelectedGameObject.name);
 
         /*
@@ -202,49 +207,65 @@ public class Botoes_Script : MonoBehaviour
 
     IEnumerator LoadSceneAsyncMenu(int sceneID)
     {
+        ControladorTelas.id = 6;
         
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneID);
 
-       // operation.allowSceneActivation = false;
+        //operation.allowSceneActivation = false;
 
-        ControladorTelas.id = 6;
-
+        
+        
+        
+        
         while (!operation.isDone)
         {
+            
             float progressValue = Mathf.Clamp01(operation.progress / 0.9f);
             Debug.Log(operation.progress);
             
 
             LoadingBarfill.value = progressValue;
 
+            //Mathf.Lerp(LoadingBarfill.value, progressValue, Time.deltaTime);
             yield return null;
-            /*
-            if(progressValue == 1)
-            {
-                yield return new WaitForSeconds(1);
-                operation.allowSceneActivation = true;
-            }
-            */
         }
+        
+        /*
+        while (LoadingBarfill.value < 1)
+        {
+            print(operation.progress);
+            yield return new WaitForSeconds(0.1f);
+            LoadingBarfill.value += 0.1f;
+        }
+
+        if(LoadingBarfill.value == 1)
+        {
+            yield return new WaitForSeconds(1f);
+            operation.allowSceneActivation = true;
+        }
+        */
     }
 
     IEnumerator LoadSceneAsyncFase(int sceneID)
     {
-
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneID);
-
-        //operation.allowSceneActivation = false;
-
         Vitoria.tirarTela = true;
         LoadingScreen.SetActive(true);
 
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneID);
+
+        
+
+        
+
         while (!operation.isDone)
         {
+            
             float progressValue = Mathf.Clamp01(operation.progress / 0.9f);
             Debug.Log(operation.progress);
 
-
             LoadingBarfill.value = progressValue;
+
+
 
             yield return null;
             /*

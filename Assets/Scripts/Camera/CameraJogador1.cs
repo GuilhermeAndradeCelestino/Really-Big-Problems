@@ -58,6 +58,12 @@ public class CameraJogador1 : MonoBehaviour
         TamanhoTelaPreta();
 
 
+        
+        
+    }
+
+    private void FixedUpdate()
+    {
         //Posiciona e rotaciona a camera na posição certa, faz ela seguir o jogador
 
         transform.position = Vector3.SmoothDamp(transform.position, target.position + offsetPosition, ref velocity, speed);
@@ -68,7 +74,7 @@ public class CameraJogador1 : MonoBehaviour
 
 
         //Checa qual a posição baseado na variavel posicaoJogador1 e muda o valor de offset
-        
+
         if (posicaoJogador1 == 1)
         {
             StartCoroutine(MudarPosicao(new Vector3(0f, 3.6f, -2.52f), new Vector3(45f, 0f, 0f)));
@@ -85,11 +91,13 @@ public class CameraJogador1 : MonoBehaviour
         {
             StartCoroutine(MudarPosicao(new Vector3(2.52f, 3.6f, 0f), new Vector3(45f, -90f, 0f)));
         }
-        
     }
 
     private void LateUpdate()
     {
+       
+        
+        
         CheckWall();
     }
 
