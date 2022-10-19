@@ -848,18 +848,24 @@ public class Player_1_Script : MonoBehaviour
 
     public void ChangeScene(InputAction.CallbackContext context)
     {
-        if (SceneManager.GetActiveScene().name == "cena 1" && context.started)
+
+        if (Botoes_Script.liberarCheat)
         {
-            SceneManager.LoadScene("cena 2");
+            if (SceneManager.GetActiveScene().name == "cena 1" && context.started)
+            {
+                SceneManager.LoadScene("cena 2", LoadSceneMode.Single);
+            }
+            else if (SceneManager.GetActiveScene().name == "cena 2" && context.started)
+            {
+                SceneManager.LoadScene("CENA 3", LoadSceneMode.Single);
+            }
+            else if (SceneManager.GetActiveScene().name == "CENA 3" && context.started)
+            {
+                SceneManager.LoadScene("cena 1", LoadSceneMode.Single);
+            }
         }
-        else if (SceneManager.GetActiveScene().name == "cena 2" && context.started)
-        {
-            SceneManager.LoadScene("CENA 3");
-        }
-        else if (SceneManager.GetActiveScene().name == "Cena 3" && context.started)
-        {
-            SceneManager.LoadScene("cena 1");
-        }
+
+        
     }
 
 }

@@ -13,7 +13,7 @@ public class Botoes_Script : MonoBehaviour
     public GameObject LoadingScreen;
     public Slider LoadingBarfill;
 
-    
+    public static bool liberarCheat = false;
 
     GameObject ultimoSelecionado;
     public AudioClip[] audiosBotoes;
@@ -139,7 +139,7 @@ public class Botoes_Script : MonoBehaviour
         yield return new WaitForSeconds(1);
         if(possoReinicar == true)
         {
-            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
             possoReinicar = false;
         }
         
@@ -209,7 +209,7 @@ public class Botoes_Script : MonoBehaviour
     {
         ControladorTelas.id = 6;
         
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneID);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneID, LoadSceneMode.Single);
 
         //operation.allowSceneActivation = false;
 
@@ -251,7 +251,7 @@ public class Botoes_Script : MonoBehaviour
         Vitoria.tirarTela = true;
         LoadingScreen.SetActive(true);
 
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneID);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneID, LoadSceneMode.Single);
 
         
 
@@ -275,6 +275,17 @@ public class Botoes_Script : MonoBehaviour
                 operation.allowSceneActivation = true;
             }
             */
+        }
+    }
+
+    public void LiberarCheat(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            print("fio;");
+            liberarCheat = true;
+            _audioSorce.clip = audiosBotoes[1];
+            _audioSorce.Play();
         }
     }
 }

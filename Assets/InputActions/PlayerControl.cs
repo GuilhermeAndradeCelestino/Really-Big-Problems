@@ -87,7 +87,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""id"": ""5e326f00-efe4-409a-8414-ddb8a2b61a3f"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""MultiTap(tapCount=10)"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -627,6 +627,15 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LiberarCheat"",
+                    ""type"": ""Button"",
+                    ""id"": ""d101c20f-998b-403f-87a8-544d3d2c2cd0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -827,6 +836,17 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""action"": ""ScrollWheel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""508029c2-aa0d-4b80-89a7-07636ec380da"",
+                    ""path"": ""<Keyboard>/f3"",
+                    ""interactions"": ""MultiTap(tapCount=5)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LiberarCheat"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -883,6 +903,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         m_UI_LeftClick = m_UI.FindAction("Left Click", throwIfNotFound: true);
         m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
         m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
+        m_UI_LiberarCheat = m_UI.FindAction("LiberarCheat", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1118,6 +1139,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_LeftClick;
     private readonly InputAction m_UI_Point;
     private readonly InputAction m_UI_ScrollWheel;
+    private readonly InputAction m_UI_LiberarCheat;
     public struct UIActions
     {
         private @PlayerControl m_Wrapper;
@@ -1128,6 +1150,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         public InputAction @LeftClick => m_Wrapper.m_UI_LeftClick;
         public InputAction @Point => m_Wrapper.m_UI_Point;
         public InputAction @ScrollWheel => m_Wrapper.m_UI_ScrollWheel;
+        public InputAction @LiberarCheat => m_Wrapper.m_UI_LiberarCheat;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1155,6 +1178,9 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 @ScrollWheel.started -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollWheel;
                 @ScrollWheel.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollWheel;
                 @ScrollWheel.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollWheel;
+                @LiberarCheat.started -= m_Wrapper.m_UIActionsCallbackInterface.OnLiberarCheat;
+                @LiberarCheat.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnLiberarCheat;
+                @LiberarCheat.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnLiberarCheat;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -1177,6 +1203,9 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 @ScrollWheel.started += instance.OnScrollWheel;
                 @ScrollWheel.performed += instance.OnScrollWheel;
                 @ScrollWheel.canceled += instance.OnScrollWheel;
+                @LiberarCheat.started += instance.OnLiberarCheat;
+                @LiberarCheat.performed += instance.OnLiberarCheat;
+                @LiberarCheat.canceled += instance.OnLiberarCheat;
             }
         }
     }
@@ -1228,5 +1257,6 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         void OnLeftClick(InputAction.CallbackContext context);
         void OnPoint(InputAction.CallbackContext context);
         void OnScrollWheel(InputAction.CallbackContext context);
+        void OnLiberarCheat(InputAction.CallbackContext context);
     }
 }

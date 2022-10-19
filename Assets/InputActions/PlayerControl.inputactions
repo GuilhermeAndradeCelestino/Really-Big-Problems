@@ -65,7 +65,7 @@
                     "id": "5e326f00-efe4-409a-8414-ddb8a2b61a3f",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "MultiTap(tapCount=10)",
                     "initialStateCheck": false
                 }
             ],
@@ -605,6 +605,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LiberarCheat",
+                    "type": "Button",
+                    "id": "d101c20f-998b-403f-87a8-544d3d2c2cd0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -803,6 +812,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ScrollWheel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "508029c2-aa0d-4b80-89a7-07636ec380da",
+                    "path": "<Keyboard>/f3",
+                    "interactions": "MultiTap(tapCount=5)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LiberarCheat",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

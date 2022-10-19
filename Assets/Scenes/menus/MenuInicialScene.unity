@@ -2436,7 +2436,7 @@ MonoBehaviour:
         - m_Target: {fileID: 1718183766}
           m_TargetAssemblyTypeName: Botoes_Script, Assembly-CSharp
           m_MethodName: VoltarMenuInicial
-          m_Mode: 1
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2516,7 +2516,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1718183766}
         m_TargetAssemblyTypeName: Botoes_Script, Assembly-CSharp
         m_MethodName: VoltarMenuInicial
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8488,7 +8488,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1718183766}
         m_TargetAssemblyTypeName: Botoes_Script, Assembly-CSharp
         m_MethodName: VoltarMenuInicial
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8571,7 +8571,7 @@ MonoBehaviour:
         - m_Target: {fileID: 1718183766}
           m_TargetAssemblyTypeName: Botoes_Script, Assembly-CSharp
           m_MethodName: VoltarMenuInicial
-          m_Mode: 1
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -18044,6 +18044,167 @@ Transform:
   - {fileID: 1562090049}
   m_Father: {fileID: 404647539}
   m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1018953550
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1018953552}
+  - component: {fileID: 1018953551}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1018953551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018953550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: b2568afdae6e90143aef6946db348e87, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 36718686-1187-41fb-8934-b204f98f36f8
+    m_ActionName: TwoPlayers/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d94daa44-fec5-4116-b554-7d3ca4da3762
+    m_ActionName: TwoPlayers/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 322f0635-e48d-4638-b082-6bd3f6a001ae
+    m_ActionName: TwoPlayers/Action[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 74088f1d-09dd-4999-bc59-1593c0ecaf47
+    m_ActionName: TwoPlayers/RotateCameraLeft[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d83ad2e7-3fc1-4eba-a68e-cf11cb177de5
+    m_ActionName: TwoPlayers/RotateCameraRight[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 58c84486-63cf-4fd4-b339-bf655a9c57cb
+    m_ActionName: TwoPlayers/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5e326f00-efe4-409a-8414-ddb8a2b61a3f
+    m_ActionName: TwoPlayers/NextLevel[/Keyboard/f3]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: aee3499b-7b00-49e8-879b-f3881365540c
+    m_ActionName: OnePlayer/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: afd90ec9-e510-42d7-94e6-14f46ee74b6d
+    m_ActionName: OnePlayer/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7705da60-98f2-43ce-bf29-f0df531e4f0d
+    m_ActionName: OnePlayer/Action[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c23fa004-6c42-4bd2-b1f9-6084893fcfac
+    m_ActionName: OnePlayer/RotateCameraLeft[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6a84f553-e2b6-4983-a3a8-6c056cb74590
+    m_ActionName: OnePlayer/RotateCameraRight[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eafbdd4c-1294-454d-bd81-6be0faa5a1ab
+    m_ActionName: OnePlayer/Change Character[/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b8bf6357-0583-4b74-8516-9de1bcd78adb
+    m_ActionName: OnePlayer/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 270dba90-9dde-4920-8a40-f9b307cd832e
+    m_ActionName: OnePlayer/NextLevel[/Keyboard/f3]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6136a774-9c72-41fd-a153-9a141b75af79
+    m_ActionName: UI/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ab5c7ce0-bb3f-42ff-8bab-c73c3810bf62
+    m_ActionName: UI/Submit[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 08ac95d4-97e9-441b-8c5e-28eb43b117f0
+    m_ActionName: UI/Cancel[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d3405171-c29a-4cec-91a6-0bcfb7a6a609
+    m_ActionName: UI/Left Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c9f02248-d05d-4ba1-9225-4459a44b1d77
+    m_ActionName: UI/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 988e3494-fd58-4aec-b2bf-18f29732929f
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1718183766}
+        m_TargetAssemblyTypeName: Botoes_Script, Assembly-CSharp
+        m_MethodName: LiberarCheat
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d101c20f-998b-403f-87a8-544d3d2c2cd0
+    m_ActionName: UI/LiberarCheat[/Keyboard/f3]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: UI
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!4 &1018953552
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018953550}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1235.4705, y: -1482.2981, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1020682200
 GameObject:
@@ -38104,7 +38265,7 @@ MonoBehaviour:
         - m_Target: {fileID: 1718183766}
           m_TargetAssemblyTypeName: Botoes_Script, Assembly-CSharp
           m_MethodName: VoltarMenuInicial
-          m_Mode: 1
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -38184,7 +38345,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1718183766}
         m_TargetAssemblyTypeName: Botoes_Script, Assembly-CSharp
         m_MethodName: VoltarMenuInicial
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -38611,7 +38772,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1718183766}
         m_TargetAssemblyTypeName: Botoes_Script, Assembly-CSharp
         m_MethodName: VoltarMenuInicial
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -38694,7 +38855,7 @@ MonoBehaviour:
         - m_Target: {fileID: 1718183766}
           m_TargetAssemblyTypeName: Botoes_Script, Assembly-CSharp
           m_MethodName: VoltarMenuInicial
-          m_Mode: 1
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -40517,6 +40678,14 @@ PrefabInstance:
       propertyPath: LoadingBarfill
       value: 
       objectReference: {fileID: 2094931684}
+    - target: {fileID: 795508847155965468, guid: 0d0f2f420a325a84698579aa2016add6, type: 3}
+      propertyPath: audiosBotoes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 795508847155965468, guid: 0d0f2f420a325a84698579aa2016add6, type: 3}
+      propertyPath: audiosBotoes.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: d8a973fea7554a044ab2ccd49cc2c9eb, type: 3}
     - target: {fileID: 795508847155965469, guid: 0d0f2f420a325a84698579aa2016add6, type: 3}
       propertyPath: m_RootOrder
       value: 3
